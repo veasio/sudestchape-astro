@@ -216,6 +216,13 @@ function initStickyHeader() {
     // Vérifier si le mode transparent est activé
     const isTransparentMode = headerWrapperEl.classList.contains('header-wrapper--transparent');
 
+    // Initialiser immédiatement selon la position de scroll actuelle (évite le flash au refresh)
+    headerWrapperEl.classList.add('no-transition');
+    handleStickyHeader();
+    requestAnimationFrame(() => {
+        headerWrapperEl.classList.remove('no-transition');
+    });
+
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(() => {

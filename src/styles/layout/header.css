@@ -13,6 +13,13 @@
     background: var(--color-white);
 }
 
+/* Bloquer les transitions pendant l'initialisation JS (évite le flash au chargement) */
+.header-wrapper.no-transition,
+.header-wrapper.no-transition .site-header,
+.header-wrapper.no-transition .top-bar {
+    transition: none !important;
+}
+
 /* Ombre au scroll (mode non-transparent) */
 .header-wrapper.is-scrolled {
     box-shadow: var(--shadow-sm);
