@@ -8,33 +8,33 @@
 // ---------------------------------------------------------------------------
 // Identité
 // ---------------------------------------------------------------------------
-export const SITE_NAME        = 'Sudest Chape';
+export const SITE_NAME        = 'Sud Est Chape';
 export const SITE_URL         = 'https://sudestchape.fr';
-export const SITE_TAGLINE     = 'Spécialiste de la chape fluide et traditionnelle dans le Sud-Est';
-export const SITE_DESCRIPTION = 'Sudest Chape, spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France. Devis gratuit, intervention rapide, qualité certifiée.';
+export const SITE_TAGLINE     = 'Applicateur de Chape Liquide Agréé | PACA |';
+export const SITE_DESCRIPTION = 'Applicateur Agréé de Chape liquide, autonivelante, planchers chauffant (chape anhydrite ou ciment) ou HPC, mise à niveau des sols, Isolation Phonique et Thermique. Chapiste sur Toulon, Var et PACA';
 export const SITE_LOGO        = '/images/logo.png';
 export const SITE_LOGO_LIGHT  = '/images/logo-light.png'; // logo blanc pour fond sombre
 export const SITE_FAVICON     = '/favicon.png';
 
-export const SITE_PHONE       = '+33491000000';
-export const SITE_PHONE_DISPLAY = '04 91 00 00 00';
+export const SITE_PHONE       = '+33494874041';
+export const SITE_PHONE_DISPLAY = '04 94 87 40 41';
 export const SITE_EMAIL       = 'contact@sudestchape.fr';
-export const SITE_ADDRESS     = '123 Avenue du Prado\n13008 Marseille';
-export const SITE_ADDRESS_HTML = '123 Avenue du Prado<br />13008 Marseille';
+export const SITE_ADDRESS     = '630 Chemin de Bassaquet\n83140 Six-Fours-les-Plages';
+export const SITE_ADDRESS_HTML = '630 Chemin de Bassaquet<br />83140 Six-Fours-les-Plages';
 
 // ---------------------------------------------------------------------------
 // Réseaux sociaux
 // ---------------------------------------------------------------------------
 export const SOCIAL_FACEBOOK  = 'https://www.facebook.com/sudestchape';
 export const SOCIAL_INSTAGRAM = 'https://www.instagram.com/sudestchape';
-export const SOCIAL_LINKEDIN  = 'https://www.linkedin.com/company/sudestchape';
+export const SOCIAL_LINKEDIN  = 'https://www.linkedin.com/company/sud-est-chape';
 export const SOCIAL_YOUTUBE   = '';
 export const SOCIAL_TIKTOK    = '';
 
 // ---------------------------------------------------------------------------
 // SEO
 // ---------------------------------------------------------------------------
-export const SEO_TITLE_SUFFIX      = '| Sudest Chape';
+export const SEO_TITLE_SUFFIX      = '| Sud Est Chape';
 export const SEO_DEFAULT_OG_IMAGE  = '/images/og-default.jpg';
 export const SEO_GOOGLE_VERIF      = ''; // meta google-site-verification
 export const SEO_BING_VERIF        = '';
@@ -43,8 +43,8 @@ export const SEO_BING_VERIF        = '';
 // Schema.org
 // ---------------------------------------------------------------------------
 export const SCHEMA_ORG_TYPE          = 'HomeAndConstructionBusiness';
-export const SCHEMA_ORG_NAME          = 'Sudest Chape';
-export const SCHEMA_ORG_LEGAL_NAME    = 'Sudest Chape SARL';
+export const SCHEMA_ORG_NAME          = 'Sud Est Chape';
+export const SCHEMA_ORG_LEGAL_NAME    = 'Sud Est Chape SARL';
 export const SCHEMA_ORG_FOUNDING_DATE = '2010';
 export const SCHEMA_ORG_AREA_SERVED   = ['Bouches-du-Rhône', 'Var', 'Alpes-Maritimes', 'Vaucluse', 'Gard', 'Hérault'];
 export const SCHEMA_ORG_PRICE_RANGE   = '$$';
@@ -52,7 +52,10 @@ export const SCHEMA_ORG_LATITUDE      = '43.2965';
 export const SCHEMA_ORG_LONGITUDE     = '5.3698';
 export const SCHEMA_ORG_OPENING_HOURS = 'Mo-Fr 08:00-18:00';
 export const SCHEMA_ORG_SAME_AS: string[] = [
-  // 'https://www.pagesjaunes.fr/...',
+  'https://www.societe.com/societe/sud-est-chape-539885251.html',
+  'https://www.pappers.fr/entreprise/sec-sud-est-chape-539885251',
+  'https://www.pagesjaunes.fr/pros/52008600',
+  'https://annuaire-entreprises.data.gouv.fr/entreprise/sud-est-chape-seca-sec-539885251'
 ];
 
 // ---------------------------------------------------------------------------
@@ -83,7 +86,7 @@ export const LINKEDIN_PIXEL_ENABLED = false;
 // ---------------------------------------------------------------------------
 // Apparence
 // ---------------------------------------------------------------------------
-export const COLOR_PRIMARY = '#CB6015';
+export const COLOR_PRIMARY = '#ED4830';
 export const COLOR_ACCENT  = '#F5E0CF';
 export const COLOR_CTA     = '#F27C22';
 export const COLOR_SUCCESS = '#4D7C0F';
@@ -92,13 +95,18 @@ export const COLOR_ERROR   = '#BE123C';
 export const FONT_FAMILY        = 'Inter';
 export const FONT_GOOGLE_URL    = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap`;
 
-export const HEADER_TRANSPARENT = true;
+export const HEADER_TRANSPARENT = false;
+
+export const TOPBAR_ENABLED     = true;
 export const TOPBAR_STICKY      = false;
+// Colonne droite de la top bar : 'phone' | 'social' | 'text'
+export const TOPBAR_RIGHT_TYPE  = 'phone' as 'phone' | 'social' | 'text';
+export const TOPBAR_RIGHT_TEXT  = ''; // utilisé si TOPBAR_RIGHT_TYPE = 'text'
 
 // ---------------------------------------------------------------------------
 // Top bar / Accroches promotionnelles
 // ---------------------------------------------------------------------------
-export const TOPBAR_LEFT_TEXT = 'Spécialiste chape fluide & traditionnelle — Sud-Est PACA';
+export const TOPBAR_LEFT_TEXT = 'Applicateur de Chape Liquide Agréé | PACA |';
 
 export const PROMO_ENABLED         = true;
 export const PROMO_AUTOPLAY        = true;
@@ -115,7 +123,7 @@ export const PROMO_MESSAGES = [
 // ---------------------------------------------------------------------------
 // Footer
 // ---------------------------------------------------------------------------
-export const FOOTER_COPYRIGHT          = `© ${new Date().getFullYear()} Sudest Chape. Tous droits réservés.`;
+export const FOOTER_COPYRIGHT          = `© ${new Date().getFullYear()} Sud Est Chape. Tous droits réservés.`;
 export const FOOTER_MENTIONS_URL       = '/mentions-legales';
 export const FOOTER_CGV_URL            = '';
 export const FOOTER_CONFIDENTIALITE_URL = '/politique-de-confidentialite';

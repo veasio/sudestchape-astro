@@ -5,7 +5,11 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import criticalCss from '../styles/critical.css?raw';
 import mainCssUrl from '../styles/main.css?url';
-import { FONT_GOOGLE_URL, MAUTIC_BASE_URL, MAUTIC_ENABLED, MAUTIC_TRACKING_ENABLED } from '../config';
+import {
+  FONT_GOOGLE_URL, FONT_FAMILY,
+  MAUTIC_BASE_URL, MAUTIC_ENABLED, MAUTIC_TRACKING_ENABLED,
+  COLOR_PRIMARY, COLOR_ACCENT, COLOR_CTA, COLOR_SUCCESS, COLOR_ERROR,
+} from '../config';
 
 interface Props {
   title: string;
@@ -45,6 +49,18 @@ const currentPath = Astro.url.pathname;
 
   {/* Critical CSS inline pour les Core Web Vitals */}
   <style set:html={criticalCss}></style>
+
+  {/* Surcharge des variables CSS depuis config.ts */}
+  <style define:vars={{ colorPrimary: COLOR_PRIMARY, colorAccent: COLOR_ACCENT, colorCta: COLOR_CTA, colorSuccess: COLOR_SUCCESS, colorError: COLOR_ERROR, fontFamily: FONT_FAMILY }}>
+    :root {
+      --color-primary: var(--colorPrimary);
+      --color-accent: var(--colorAccent);
+      --color-cta: var(--colorCta);
+      --color-success: var(--colorSuccess);
+      --color-error: var(--colorError);
+      --font-family: var(--fontFamily), sans-serif;
+    }
+  </style>
 
   {/* CSS principal (async) */}
   <link rel="preload" as="style" href={mainCssUrl} />

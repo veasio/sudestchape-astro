@@ -3,7 +3,7 @@
 // Source : partials/header.htm
 
 import Navigation from './Navigation.astro';
-import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
+import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY, HEADER_TRANSPARENT } from '../../config';
 
 interface Props {
   currentPath?: string;
@@ -33,7 +33,7 @@ const menuItems = [
 ---
 
 {/* Header principal */}
-<header class="site-header" role="banner" itemscope itemtype="https://schema.org/WPHeader">
+<header class={`site-header${HEADER_TRANSPARENT ? ' site-header--transparent' : ''}`} role="banner" itemscope itemtype="https://schema.org/WPHeader">
   <div class="site-header__inner container">
 
     {/* Logo */}
