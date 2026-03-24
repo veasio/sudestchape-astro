@@ -1,0 +1,150 @@
+---
+import Default from '../../layouts/Default.astro';
+import Faq from '../../components/ui/Faq.astro';
+import CtaRandom from '../../components/ui/CtaRandom.astro';
+import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
+
+const faqItems = [
+  {
+    question: "Quelle différence entre chape ciment et chape anhydrite ?",
+    answer: "La chape ciment est à base de Portland, robuste, adaptée aux milieux humides et extérieurs. La chape anhydrite est à base de sulfate de calcium, autonivelante, idéale pour planchers chauffants mais déconseillée dans les pièces humides. Pour un plancher chauffant en zone sèche, l'anhydrite est préférable. Pour une terrasse ou salle de bain, la chape ciment est obligatoire."
+  },
+  {
+    question: "La chape ciment est-elle compatible avec le plancher chauffant ?",
+    answer: "Oui, la chape ciment est compatible avec les planchers chauffants, avec quelques précautions. L'épaisseur minimale est de 65 mm sur les tubes (contre 40 mm pour l'anhydrite). Des joints de dilatation sont obligatoires. La montée en température doit être progressive. L'anhydrite reste cependant plus performante thermiquement pour cet usage."
+  },
+  {
+    question: "Quel délai avant de poser du carrelage sur chape ciment ?",
+    answer: "Il faut attendre que la chape ciment soit suffisamment sèche avant de poser du carrelage : minimum 28 jours pour une chape standard de 5 cm dans de bonnes conditions (20°C, 65% HR). Le taux d'humidité résiduel doit être inférieur à 3% (mesure CM). En cas d'utilisation d'un primaire d'accrochage, respecter le délai indiqué par le fabricant."
+  },
+  {
+    question: "Peut-on faire une chape ciment en extérieur ?",
+    answer: "Oui, la chape ciment est adaptée aux applications extérieures (terrasses, allées, garages). Elle résiste à l'humidité et aux cycles gel/dégel contrairement à la chape anhydrite. Pour les extérieurs, on recommande une épaisseur de 80 à 100 mm avec un treillis soudé et des joints de dilatation tous les 3 à 5 m."
+  },
+  {
+    question: "Quel est le coût d'une chape ciment au m² ?",
+    answer: "Le coût d'une chape ciment varie selon l'épaisseur, la surface et la préparation du support. Pour une estimation précise et gratuite, contactez-nous : notre technicien se déplace sur votre chantier pour un relevé de mesures et un devis détaillé sans engagement."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/chape-ciment#service`,
+      "name": "Pose de chape ciment",
+      "description": "Application de chape ciment pour particuliers et professionnels. Neuf, rénovation, milieux humides dans le Var, Bouches-du-Rhône et Alpes-Maritimes. Certifié CTB-P.",
+      "provider": {
+        "@type": "Organization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "telephone": SITE_PHONE,
+        "sameAs": SCHEMA_ORG_SAME_AS
+      },
+      "areaServed": ["Var", "Bouches-du-Rhône", "Alpes-Maritimes"],
+      "serviceType": "Chape ciment"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL },
+        { "@type": "ListItem", "position": 2, "name": "Nos services", "item": `${SITE_URL}/services` },
+        { "@type": "ListItem", "position": 3, "name": "Chape Ciment", "item": `${SITE_URL}/services/chape-ciment` }
+      ]
+    }
+  ]
+};
+---
+
+<Default
+  title="Chape Ciment – Pose et Application | Chapiste PACA | Sud Est Chape"
+  description="Application de chape ciment pour particuliers et professionnels dans le Var et PACA. Chapiste certifié CTB-P. Plancher chauffant, rénovation, neuf. Devis gratuit."
+  schema={schema}
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Chape Ciment">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-chape-ciment.webp"
+           alt="Pose de chape ciment robuste pour tous types de chantiers"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Nos services</p>
+        <h1 class="hero__title">Chape Ciment — Chapiste Certifié dans le Var et PACA</h1>
+        <p class="hero__description">
+          Pose de chape ciment robuste et polyvalente dans le Var, les Bouches-du-Rhône et les Alpes-Maritimes. Neuf, rénovation, milieux humides, terrasses — certifié CTB-P.
+        </p>
+        <a href="/devis" class="btn btn--cta btn--lg">
+          Devis gratuit sous 24h
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Contenu principal */}
+  <section class="section section--rounded section--white" aria-labelledby="ciment-intro-title">
+    <div class="container">
+      <div class="grid grid--2" style="align-items: start; gap: var(--spacing-12);">
+        <div>
+          <p class="section__overline">Expertise chape liquide</p>
+          <h2 class="section__title" id="ciment-intro-title" style="text-align:left;">La chape ciment : robuste et polyvalente pour tous les projets</h2>
+          <p>La chape ciment (ou chape ciment liquide) est à base de ciment Portland. Plus robuste que l'anhydrite, elle convient à tous les environnements y compris les pièces humides, les terrasses et les garages.</p>
+          <p>Contrairement à la chape anhydrite, la chape ciment résiste à l'humidité et peut être posée en extérieur. Elle est également compatible avec les planchers chauffants, avec une épaisseur minimale supérieure.</p>
+          <p>Certifié CTB-P, Sud Est Chape applique la chape ciment selon les normes DTU 26.2, aussi bien en construction neuve qu'en rénovation.</p>
+        </div>
+        <div>
+          <div class="card-feature" style="background: var(--color-accent-light);">
+            <h3 class="card-feature__title">Les atouts</h3>
+            <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+              <li>Résistance à l'humidité</li>
+              <li>Extérieur et milieux humides</li>
+              <li>Conforme DTU 26.2</li>
+              <li>Neuf et rénovation</li>
+              <li>Certifié CTB-P</li>
+              <li>Compatible plancher chauffant</li>
+              <li>Garages et locaux industriels</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Zone d'intervention */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-ciment-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Intervention rapide</p>
+        <h2 class="section__title" id="zone-ciment-title">
+          Chapiste ciment dans tout le Sud-Est
+        </h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Var (83)</h3>
+          <p class="card-feature__text">Toulon, Six-Fours-les-Plages, La Seyne-sur-Mer, Hyères, Fréjus, Saint-Raphaël, Sainte-Maxime, Saint-Tropez, Draguignan</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Bouches-du-Rhône (13)</h3>
+          <p class="card-feature__text">Marseille, Aix-en-Provence, Aubagne, La Ciotat, Martigues, Salon-de-Provence</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
+          <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq title="Tout savoir sur la chape ciment" items={faqItems} />
+  <TestimonialsCompact title="Ils nous ont fait confiance pour leur chantier" />
+  <CtaRandom />
+
+</Default>
