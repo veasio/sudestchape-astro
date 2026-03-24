@@ -114,29 +114,31 @@ export const PROMO_INTERVAL_MS     = 4000;
 export const PROMO_PAUSE_ON_HOVER  = true;
 
 export const PROMO_MESSAGES = [
-  { text: 'Devis gratuit sous 24h — Réponse rapide garantie',        icon: 'calendar', link: '/contact' },
-  { text: 'Intervention dans tout le Sud-Est PACA',                   icon: 'truck',    link: '' },
-  { text: '+15 ans d\'expérience en chape fluide et traditionnelle',   icon: 'star',     link: '/a-propos' },
-  { text: 'Certifié CTB-P — Travaux conformes aux normes DTU 26.2',   icon: 'shield',   link: '/services' },
+  { text: 'Devis gratuit - Réponse rapide garantie',        icon: 'calendar', link: '/contact' },
+  { text: 'Intervention dans tout le Sud-Est',                   icon: 'truck',    link: '' },
+  { text: '+15 ans d\'expérience en chape fluide',   icon: 'star',     link: '/a-propos' },
+  { text: 'Certifié CTB-P - Conformes normes DTU 26.2',   icon: 'shield',   link: '/services' },
 ];
 
 // ---------------------------------------------------------------------------
 // Navigation
 // ---------------------------------------------------------------------------
 export const NAV_ITEMS = [
-  { title: 'Accueil',      url: '/' },
   {
-    title: 'Services',
+    title: 'Nos Prestations & Solutions',
     url: '/services',
     items: [
-      { title: 'Chape fluide',          url: '/services/chape-fluide' },
-      { title: 'Chape traditionnelle',  url: '/services/chape-traditionnelle' },
-      { title: 'Plancher chauffant',    url: '/services/plancher-chauffant' },
+      { title: 'Chape Ciment',          url: '/services/chape-ciment' },
+      { title: 'Chape Anhydrite',  url: '/services/chape-anhydrite' },
+      { title: 'Chape de Réagréage / Ravoirage',    url: '/services/chape-réagréage-ravoirage' },
+	  { title: 'Isolation Phonique',    url: '/services/isolation-phonique' },
+	  { title: 'Isolation Thermique',    url: '/services/isolation-thermique' },
+	  { title: 'Mousse Polyuréthane Projetée',    url: '/services/mousse-polyurethane-projetee' },
     ],
   },
-  { title: 'Réalisations', url: '/realisations' },
-  { title: 'À propos',     url: '/a-propos' },
-  { title: 'Contact',      url: '/contact' },
+  { title: 'Qui Sommes Nous',     url: '/a-propos' },
+  { title: 'Nos Réalisations', url: '/realisations' },
+  { title: 'Contact & Devis',      url: '/contact' },
 ];
 
 // ---------------------------------------------------------------------------
