@@ -5,15 +5,15 @@ import { SITE_URL, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL, SITE_ADDRESS_HTML
 const schema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "Contact Sudest Chape",
-  "description": "Contactez Sudest Chape pour un devis gratuit de chape fluide ou traditionnelle.",
+  "name": "Contact Sud Est Chape",
+  "description": "Contactez Sud Est Chape pour un devis gratuit de chape fluide ou traditionnelle.",
   "url": `${SITE_URL}/contact`
 };
 ---
 
 <Default
-  title="Contact – Devis gratuit chape | Sudest Chape"
-  description="Contactez Sudest Chape pour un devis gratuit. Formulaire en ligne, téléphone, adresse. Intervention chape fluide et traditionnelle dans le Sud-Est."
+  title="Contact – Devis gratuit chape | Sud Est Chape"
+  description="Contactez Sud Est Chape pour un devis gratuit. Formulaire en ligne, téléphone, adresse. Intervention chape fluide et traditionnelle dans le Sud-Est."
   schema={schema}
 >
 
@@ -21,7 +21,7 @@ const schema = {
   <section class="hero hero--small" aria-label="Nous contacter">
     <div class="hero__background">
       <img src="/images/optimized/hero-contact.webp"
-           alt="Contactez Sudest Chape"
+           alt="Contactez Sud Est Chape"
            width="1920" height="600"
            loading="eager"
            fetchpriority="high" />
@@ -39,7 +39,7 @@ const schema = {
   </section>
 
   {/* Formulaire + Infos contact */}
-  <section class="section animate-on-scroll" aria-labelledby="contact-form-title">
+  <section class="section section--rounded section--white animate-on-scroll" aria-labelledby="contact-form-title">
     <div class="container">
       <h2 class="sr-only" id="contact-form-title">Formulaire de contact et coordonnées</h2>
 
@@ -161,13 +161,13 @@ const schema = {
   </section>
 
   {/* Zone d'intervention */}
-  <section class="section section--accent animate-on-scroll" aria-labelledby="map-title">
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="map-title">
     <div class="container">
       <h2 class="section__title text-center" id="map-title">Notre zone d'intervention</h2>
       <p class="section__description text-center" style="margin-inline:auto;">
         Nous intervenons dans 6 départements du Sud-Est de la France.
       </p>
-      <div class="contact-map" aria-label="Zone d'intervention Sudest Chape">
+      <div class="contact-map" aria-label="Zone d'intervention Sud Est Chape">
         <div class="contact-map__placeholder">
           <p>Carte interactive — à intégrer en production</p>
         </div>

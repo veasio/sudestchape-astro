@@ -2,23 +2,26 @@
 import Default from '../layouts/Default.astro';
 import TestimonialsCompact from '../components/ui/TestimonialsCompact.astro';
 import CtaRandom from '../components/ui/CtaRandom.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../config';
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Chape fluide et traditionnelle – Sudest Chape",
+  "name": `Chape fluide et traditionnelle – ${SITE_NAME}`,
   "description": "Pose de chape fluide autonivelante et chape ciment traditionnelle pour particuliers et professionnels dans le Sud-Est.",
   "provider": {
     "@type": "Organization",
-    "name": "Sudest Chape",
-    "url": "https://www.sudestchape.fr"
+    "name": SITE_NAME,
+    "url": SITE_URL,
+    "telephone": SITE_PHONE,
+    "sameAs": SCHEMA_ORG_SAME_AS
   },
   "areaServed": "Sud-Est France"
 };
 ---
 
 <Default
-  title="Nos services – Chape fluide et traditionnelle | Sudest Chape"
+  title="Nos services – Chape fluide et traditionnelle | Sud Est Chape"
   description="Découvrez nos services : chape fluide, chape traditionnelle, devis gratuit et qualité certifiée. Intervention dans tout le Sud-Est."
   schema={schema}
 >
@@ -27,7 +30,7 @@ const schema = {
   <section class="hero hero--small" aria-label="Nos services">
     <div class="hero__background">
       <img src="/images/optimized/hero-services.webp"
-           alt="Services de chape par Sudest Chape"
+           alt="Services de chape par Sud Est Chape"
            width="1920" height="600"
            loading="eager"
            fetchpriority="high" />
@@ -45,7 +48,7 @@ const schema = {
   </section>
 
   {/* Services détaillés */}
-  <section class="section animate-on-scroll" aria-labelledby="services-detail-title">
+  <section class="section section--rounded section--white animate-on-scroll" aria-labelledby="services-detail-title">
     <div class="container">
       <h2 class="sr-only" id="services-detail-title">Détail de nos services</h2>
 

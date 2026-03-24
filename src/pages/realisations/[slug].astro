@@ -27,20 +27,20 @@ const schema = {
   "image": `https://www.sudestchape.fr${r.image}`,
   "author": {
     "@type": "Organization",
-    "name": "Sudest Chape"
+    "name": "Sud Est Chape"
   }
 };
 ---
 
 <Default
-  title={`${r.title} | Sudest Chape`}
+  title={`${r.title} | Sud Est Chape`}
   description={r.description}
   ogImage={r.image}
   schema={schema}
 >
 
   {/* Image principale + header */}
-  <section class="section" aria-label="Réalisation">
+  <section class="section section--rounded section--white" aria-label="Réalisation">
     <div class="container">
       <div class="project-detail">
         <div class="project-detail__hero">
@@ -134,7 +134,7 @@ const schema = {
         <blockquote class="testimonial__quote" itemprop="reviewBody">
           Travail impeccable, équipe ponctuelle et professionnelle.
           La chape est parfaitement plane, idéale pour notre plancher chauffant.
-          Je recommande vivement Sudest Chape.
+          Je recommande vivement Sud Est Chape.
         </blockquote>
         <div class="testimonial__author">
           <div>

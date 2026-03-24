@@ -4,45 +4,44 @@ import HeroSlider from '../components/ui/HeroSlider.astro';
 import Stats from '../components/sections/Stats.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import CtaRandom from '../components/ui/CtaRandom.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SITE_EMAIL, SCHEMA_ORG_SAME_AS, SCHEMA_ORG_AREA_SERVED } from '../config';
 
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://www.sudestchape.fr/#organization",
-      "name": "Sudest Chape",
-      "url": "https://www.sudestchape.fr",
-      "logo": "https://www.sudestchape.fr/images/logo.png",
+      "@id": `${SITE_URL}/#organization`,
+      "name": SITE_NAME,
+      "url": SITE_URL,
+      "logo": `${SITE_URL}/images/logo.png`,
       "description": "Spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France depuis plus de 15 ans.",
-      "telephone": "+33491000000",
-      "email": "contact@sudestchape.fr",
+      "telephone": SITE_PHONE,
+      "email": SITE_EMAIL,
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Marseille",
-        "postalCode": "13000",
+        "streetAddress": "630 Chemin de Bassaquet",
+        "addressLocality": "Six-Fours-les-Plages",
+        "postalCode": "83140",
         "addressCountry": "FR"
       },
-      "areaServed": [
-        "Bouches-du-Rhône", "Var", "Alpes-Maritimes",
-        "Vaucluse", "Gard", "Hérault"
-      ],
-      "sameAs": []
+      "areaServed": SCHEMA_ORG_AREA_SERVED,
+      "sameAs": SCHEMA_ORG_SAME_AS
     },
     {
       "@type": "WebSite",
-      "@id": "https://www.sudestchape.fr/#website",
-      "url": "https://www.sudestchape.fr",
-      "name": "Sudest Chape",
-      "publisher": { "@id": "https://www.sudestchape.fr/#organization" }
+      "@id": `${SITE_URL}/#website`,
+      "url": SITE_URL,
+      "name": SITE_NAME,
+      "publisher": { "@id": `${SITE_URL}/#organization` }
     }
   ]
 };
 ---
 
 <Default
-  title="Sudest Chape – Chape fluide et traditionnelle dans le Sud-Est"
-  description="Sudest Chape, spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France. Devis gratuit, intervention rapide, qualité certifiée."
+  title="Sud Est Chape – Chape fluide et traditionnelle dans le Sud-Est"
+  description="Sud Est Chape, spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France. Devis gratuit, intervention rapide, qualité certifiée."
   schema={schema}
 >
 
@@ -355,7 +354,7 @@ const schema = {
   <section class="immersive-banner animate-on-scroll" aria-labelledby="promise-title">
     <div class="immersive-banner__background">
       <img src="/images/optimized/banner-chantier.webp"
-           alt="Équipe Sudest Chape en action sur un chantier"
+           alt="Équipe Sud Est Chape en action sur un chantier"
            width="1920" height="1080"
            loading="lazy" />
     </div>
@@ -406,7 +405,7 @@ const schema = {
     <div class="images-text__container">
       <div class="images-text__image">
         <img src="/images/optimized/pro-partenariat.webp"
-             alt="Partenariat professionnel avec Sudest Chape - équipe sur chantier"
+             alt="Partenariat professionnel avec Sud Est Chape - équipe sur chantier"
              width="800" height="600"
              loading="lazy" />
       </div>
