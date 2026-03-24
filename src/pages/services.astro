@@ -7,8 +7,8 @@ import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../config';
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": `Chape fluide et traditionnelle – ${SITE_NAME}`,
-  "description": "Pose de chape fluide autonivelante et chape ciment traditionnelle pour particuliers et professionnels dans le Sud-Est.",
+  "name": `Chape liquide – ${SITE_NAME}`,
+  "description": "Pose de chape liquide (anhydrite, ciment, ravoirage) et isolation phonique et thermique pour particuliers et professionnels dans le Sud-Est.",
   "provider": {
     "@type": "Organization",
     "name": SITE_NAME,
@@ -21,8 +21,8 @@ const schema = {
 ---
 
 <Default
-  title="Nos services – Chape fluide et traditionnelle | Sud Est Chape"
-  description="Découvrez nos services : chape fluide, chape traditionnelle, devis gratuit et qualité certifiée. Intervention dans tout le Sud-Est."
+  title="Nos Services Chape Liquide – Chapiste Agréé PACA | Sud Est Chape"
+  description="Chape anhydrite, ciment, ravoirage, isolation phonique et thermique, mousse polyuréthane. Applicateur agréé dans le Var, BdR et Alpes-Maritimes."
   schema={schema}
 >
 
@@ -38,10 +38,10 @@ const schema = {
     <div class="container">
       <div class="hero__content">
         <p class="hero__overline">Nos expertises</p>
-        <h1 class="hero__title">Des services adaptés à chaque projet</h1>
+        <h1 class="hero__title">Nos services de chape liquide dans le Sud-Est</h1>
         <p class="hero__description">
-          Chape fluide, chape traditionnelle, devis sur mesure :
-          nous intervenons pour les particuliers et les professionnels dans tout le Sud-Est.
+          Chape anhydrite, ciment, ravoirage, isolation phonique et thermique :
+          6 équipes agréées interviennent pour les particuliers et professionnels dans tout le Sud-Est.
         </p>
       </div>
     </div>
@@ -52,95 +52,119 @@ const schema = {
     <div class="container">
       <h2 class="sr-only" id="services-detail-title">Détail de nos services</h2>
 
-      <div class="grid grid--2">
-        {/* Chape fluide */}
-        <div class="card-service" id="chape-fluide" itemscope itemtype="https://schema.org/Service">
+      <div class="grid grid--3">
+        {/* Chape Anhydrite */}
+        <a href="/services/chape-anhydrite" class="card-service card-service--link" itemscope itemtype="https://schema.org/Service">
           <div class="card-service__icon" aria-hidden="true">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
           </div>
-          <h3 class="card-service__title" itemprop="name">Chape fluide</h3>
-          <p class="card-service__text" itemprop="description">
-            La chape fluide autonivelante garantit une planéité parfaite sur de grandes surfaces.
-            Idéale pour les planchers chauffants, elle assure une répartition homogène de la chaleur
-            et un séchage rapide. Compatible avec tous types de revêtements de sol.
-          </p>
+          <h2 class="card-service__title" itemprop="name">Chape Anhydrite</h2>
+          <p class="card-service__text" itemprop="description">Solution de référence pour les planchers chauffants. Autonivelante, planéité parfaite, séchage rapide. Agréé Lafarge, Cemex et Vicat.</p>
           <ul class="card-service__features">
             <li>Planéité &lt; 3 mm sous règle de 2 m</li>
-            <li>Compatible plancher chauffant</li>
-            <li>Mise en œuvre rapide (jusqu'à 200 m²/jour)</li>
-            <li>Séchage accéléré</li>
+            <li>Compatible plancher chauffant/rafraîchissant</li>
+            <li>Jusqu'à 1 000 m²/jour</li>
+            <li>Séchage en 24-48h</li>
           </ul>
-        </div>
+          <span class="card-service__cta">En savoir plus →</span>
+        </a>
 
-        {/* Chape traditionnelle */}
-        <div class="card-service" id="chape-traditionnelle" itemscope itemtype="https://schema.org/Service">
+        {/* Chape Ciment */}
+        <a href="/services/chape-ciment" class="card-service card-service--link" itemscope itemtype="https://schema.org/Service">
           <div class="card-service__icon" aria-hidden="true">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="3" y="3" width="18" height="18" rx="2"/>
               <path d="M3 9h18M9 21V9"/>
             </svg>
           </div>
-          <h3 class="card-service__title" itemprop="name">Chape traditionnelle</h3>
-          <p class="card-service__text" itemprop="description">
-            La chape ciment tirée à la règle est la solution éprouvée pour tous types de sols.
-            Robuste et polyvalente, elle s'adapte à toutes les configurations de chantier,
-            en neuf comme en rénovation.
-          </p>
+          <h2 class="card-service__title" itemprop="name">Chape Ciment</h2>
+          <p class="card-service__text" itemprop="description">Robuste et polyvalente, la chape ciment s'adapte à toutes les configurations. Neuf ou rénovation, intérieur ou extérieur, milieux humides.</p>
           <ul class="card-service__features">
-            <li>Adaptée neuf et rénovation</li>
-            <li>Épaisseur sur mesure</li>
+            <li>Neuf et rénovation</li>
+            <li>Milieux humides (salle de bain, terrasse)</li>
             <li>Résistance mécanique élevée</li>
-            <li>Conforme aux normes DTU 26.2</li>
+            <li>Conforme DTU 26.2</li>
           </ul>
-        </div>
+          <span class="card-service__cta">En savoir plus →</span>
+        </a>
 
-        {/* Devis & chiffrage */}
-        <div class="card-service" id="devis" itemscope itemtype="https://schema.org/Service">
+        {/* Ravoirage / Réagréage */}
+        <a href="/services/chape-reagreage-ravoirage" class="card-service card-service--link" itemscope itemtype="https://schema.org/Service">
           <div class="card-service__icon" aria-hidden="true">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
+              <path d="M3 17l4-8 4 5 3-3 5 6"/>
+              <line x1="3" y1="21" x2="21" y2="21"/>
             </svg>
           </div>
-          <h3 class="card-service__title" itemprop="name">Devis &amp; chiffrage</h3>
-          <p class="card-service__text" itemprop="description">
-            Recevez une estimation précise et transparente pour votre projet.
-            Notre technicien se déplace gratuitement sur votre chantier pour un relevé
-            de mesures et un devis détaillé, sans engagement.
-          </p>
+          <h2 class="card-service__title" itemprop="name">Ravoirage &amp; Réagréage</h2>
+          <p class="card-service__text" itemprop="description">Remise à niveau de sol avant pose de revêtement. Rattrapage de niveaux, comblement de dénivelés, préparation de chantier.</p>
           <ul class="card-service__features">
-            <li>Devis gratuit sous 48h</li>
-            <li>Visite technique offerte</li>
-            <li>Prix ferme et définitif</li>
-            <li>Sans engagement</li>
+            <li>Rattrapage de niveaux</li>
+            <li>Avant carrelage, parquet, résine</li>
+            <li>Rénovation et neuf</li>
+            <li>Compatible plancher chauffant</li>
           </ul>
-        </div>
+          <span class="card-service__cta">En savoir plus →</span>
+        </a>
 
-        {/* Qualité certifiée */}
-        <div class="card-service" id="qualite" itemscope itemtype="https://schema.org/Service">
+        {/* Isolation Phonique */}
+        <a href="/services/isolation-phonique" class="card-service card-service--link" itemscope itemtype="https://schema.org/Service">
           <div class="card-service__icon" aria-hidden="true">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
+              <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+              <path d="M15.54 8.46a5 5 0 010 7.07"/>
+              <path d="M19.07 4.93a10 10 0 010 14.14"/>
             </svg>
           </div>
-          <h3 class="card-service__title" itemprop="name">Qualité certifiée</h3>
-          <p class="card-service__text" itemprop="description">
-            Nous utilisons exclusivement des matériaux haut de gamme et nos équipes
-            sont formées aux dernières techniques. Chaque chantier est contrôlé
-            pour garantir un résultat conforme aux normes en vigueur.
-          </p>
+          <h2 class="card-service__title" itemprop="name">Isolation Phonique</h2>
+          <p class="card-service__text" itemprop="description">Réduction des bruits de choc et d'impact entre étages. Sous-couches acoustiques + chape liquide pour une conformité optimale.</p>
           <ul class="card-service__features">
-            <li>Matériaux certifiés NF</li>
-            <li>Équipes qualifiées et formées</li>
-            <li>Respect des normes DTU</li>
-            <li>Garantie décennale</li>
+            <li>Bruits de choc réduits</li>
+            <li>Norme NF DTU 26.2</li>
+            <li>Copropriété et collectif</li>
+            <li>Maisons individuelles</li>
           </ul>
-        </div>
+          <span class="card-service__cta">En savoir plus →</span>
+        </a>
+
+        {/* Isolation Thermique */}
+        <a href="/services/isolation-thermique" class="card-service card-service--link" itemscope itemtype="https://schema.org/Service">
+          <div class="card-service__icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <h2 class="card-service__title" itemprop="name">Isolation Thermique</h2>
+          <p class="card-service__text" itemprop="description">Réduction des déperditions thermiques par le sol. Compatible plancher chauffant, conforme RE 2020.</p>
+          <ul class="card-service__features">
+            <li>Économies d'énergie</li>
+            <li>Compatible plancher chauffant</li>
+            <li>Conforme RE 2020</li>
+            <li>Neuf et rénovation</li>
+          </ul>
+          <span class="card-service__cta">En savoir plus →</span>
+        </a>
+
+        {/* Mousse Polyuréthane */}
+        <a href="/services/mousse-polyurethane-projetee" class="card-service card-service--link" itemscope itemtype="https://schema.org/Service">
+          <div class="card-service__icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h2 class="card-service__title" itemprop="name">Mousse Polyuréthane Projetée</h2>
+          <p class="card-service__text" itemprop="description">Isolation par projection de mousse polyuréthane pour vides sanitaires, sous-sols et toitures-terrasses.</p>
+          <ul class="card-service__features">
+            <li>Vide sanitaire</li>
+            <li>Étanchéité à l'air</li>
+            <li>Isolation haute performance</li>
+            <li>Toiture-terrasse</li>
+          </ul>
+          <span class="card-service__cta">En savoir plus →</span>
+        </a>
       </div>
     </div>
   </section>
