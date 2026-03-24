@@ -1,0 +1,146 @@
+---
+import Default from '../../layouts/Default.astro';
+import Faq from '../../components/ui/Faq.astro';
+import CtaRandom from '../../components/ui/CtaRandom.astro';
+import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
+
+const faqItems = [
+  {
+    question: "Comment réduire les bruits de choc entre étages ?",
+    answer: "La solution la plus efficace pour réduire les bruits de choc (bruit de pas, chutes d'objets) est la pose d'une sous-couche acoustique sous chape. Cette sous-couche désolidarise le sol flottant de la structure du bâtiment. Combinée à une chape liquide, elle offre les meilleures performances acoustiques avec un résultat conforme aux normes NF DTU 26.2."
+  },
+  {
+    question: "Quelle épaisseur de chape pour une bonne isolation phonique ?",
+    answer: "Pour une isolation phonique optimale, la chape flottante doit avoir une épaisseur minimale de 40 mm sur la sous-couche acoustique. Cette épaisseur assure la masse nécessaire à l'absorption des vibrations. L'épaisseur totale (sous-couche + chape) est généralement de 45 à 60 mm selon les contraintes du plancher."
+  },
+  {
+    question: "L'isolation phonique est-elle obligatoire en rénovation ?",
+    answer: "Dans les logements collectifs en rénovation, l'isolation phonique n'est pas toujours obligatoire légalement, mais elle est fortement recommandée et peut être exigée par le règlement de copropriété. En construction neuve, la réglementation acoustique (NRA) impose des niveaux de performance précis. Nous vous conseillons sur les obligations applicables à votre projet."
+  },
+  {
+    question: "La chape acoustique est-elle compatible avec le plancher chauffant ?",
+    answer: "Oui, il est tout à fait possible de combiner isolation phonique et plancher chauffant. Certaines sous-couches acoustiques sont spécifiquement conçues pour cet usage, avec une résistance thermique (Rλ) faible pour ne pas dégrader les performances du plancher chauffant. Nous sélectionnons les produits adaptés à votre configuration."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/isolation-phonique#service`,
+      "name": "Isolation phonique sous chape",
+      "description": "Pose de chape acoustique flottante pour réduire les bruits de choc dans le Var, Bouches-du-Rhône et Alpes-Maritimes. Norme NF DTU 26.2.",
+      "provider": {
+        "@type": "Organization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "telephone": SITE_PHONE,
+        "sameAs": SCHEMA_ORG_SAME_AS
+      },
+      "areaServed": ["Var", "Bouches-du-Rhône", "Alpes-Maritimes"],
+      "serviceType": "Isolation phonique sous chape"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL },
+        { "@type": "ListItem", "position": 2, "name": "Nos services", "item": `${SITE_URL}/services` },
+        { "@type": "ListItem", "position": 3, "name": "Isolation Phonique", "item": `${SITE_URL}/services/isolation-phonique` }
+      ]
+    }
+  ]
+};
+---
+
+<Default
+  title="Isolation Phonique Sol – Chape Acoustique | Var & PACA | Sud Est Chape"
+  description="Isolation phonique sous chape pour réduire les bruits de choc et d'impact. Applicateur agréé dans le Var, Marseille et Alpes-Maritimes. Norme NF DTU 26.2. Devis gratuit."
+  schema={schema}
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Isolation Phonique Sous Chape">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-isolation-phonique.webp"
+           alt="Isolation phonique sous chape pour réduire les bruits de choc entre étages"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Nos services</p>
+        <h1 class="hero__title">Isolation Phonique Sous Chape — Spécialiste PACA</h1>
+        <p class="hero__description">
+          Réduction des bruits de choc et d'impact entre étages grâce à nos solutions de chape acoustique. 6 équipes agréées dans le Var, Bouches-du-Rhône et Alpes-Maritimes.
+        </p>
+        <a href="/devis" class="btn btn--cta btn--lg">
+          Devis gratuit sous 24h
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Contenu principal */}
+  <section class="section section--rounded section--white" aria-labelledby="phonique-intro-title">
+    <div class="container">
+      <div class="grid grid--2" style="align-items: start; gap: var(--spacing-12);">
+        <div>
+          <p class="section__overline">Confort acoustique</p>
+          <h2 class="section__title" id="phonique-intro-title" style="text-align:left;">L'isolation phonique sous chape : la solution définitive contre les bruits de choc</h2>
+          <p>Les bruits de choc (bruit de pas, chutes d'objets, roulements de chaises) sont parmi les nuisances les plus difficiles à supporter en copropriété. La solution la plus efficace est la pose d'une sous-couche acoustique désolidarisante sous chape flottante.</p>
+          <p>Cette technique, dite "sol flottant", crée une rupture de pont phonique entre le sol et la structure du bâtiment. Combinée à une chape liquide anhydrite ou ciment, elle offre des performances conformes à la norme NF DTU 26.2.</p>
+          <p>Sud Est Chape maîtrise ces techniques pour les chantiers de copropriété, d'hôtellerie, d'enseignement et les maisons individuelles.</p>
+        </div>
+        <div>
+          <div class="card-feature" style="background: var(--color-accent-light);">
+            <h3 class="card-feature__title">Les atouts</h3>
+            <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+              <li>Bruits de choc réduits significativement</li>
+              <li>Norme NF DTU 26.2</li>
+              <li>Copropriété et collectif</li>
+              <li>Hôtellerie et enseignement</li>
+              <li>Maisons individuelles</li>
+              <li>Compatible plancher chauffant</li>
+              <li>6 équipes spécialisées</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Zone d'intervention */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-phonique-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Intervention rapide</p>
+        <h2 class="section__title" id="zone-phonique-title">
+          Isolation phonique dans tout le Sud-Est
+        </h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Var (83)</h3>
+          <p class="card-feature__text">Toulon, Six-Fours-les-Plages, La Seyne-sur-Mer, Hyères, Fréjus, Saint-Raphaël, Sainte-Maxime, Saint-Tropez, Draguignan</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Bouches-du-Rhône (13)</h3>
+          <p class="card-feature__text">Marseille, Aix-en-Provence, Aubagne, La Ciotat, Martigues, Salon-de-Provence</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
+          <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq title="Questions sur l'isolation phonique sous chape" items={faqItems} />
+  <TestimonialsCompact title="Ils ont amélioré le confort acoustique de leur logement" />
+  <CtaRandom />
+
+</Default>
