@@ -1,0 +1,146 @@
+---
+import Default from '../../layouts/Default.astro';
+import Faq from '../../components/ui/Faq.astro';
+import CtaRandom from '../../components/ui/CtaRandom.astro';
+import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
+
+const faqItems = [
+  {
+    question: "La mousse polyuréthane projetée est-elle durable ?",
+    answer: "Oui, la mousse polyuréthane projetée a une durée de vie de 30 à 50 ans lorsqu'elle est correctement appliquée et protégée des UV. Elle ne se tasse pas dans le temps contrairement aux isolants en vrac. Sa résistance à l'humidité en fait un choix idéal pour les vides sanitaires et sous-sols."
+  },
+  {
+    question: "Peut-on couler une chape sur de la mousse polyuréthane ?",
+    answer: "Oui, il est possible de couler une chape sur de la mousse polyuréthane projetée, à condition que celle-ci soit suffisamment dense (≥ 40 kg/m³) pour supporter la charge de la chape sans se comprimer. Une densité insuffisante entraînerait une déformation de la chape. Nous sélectionnons systématiquement des mousses adaptées à la pose de chape."
+  },
+  {
+    question: "La mousse polyuréthane remplace-t-elle l'isolant sous chape ?",
+    answer: "La mousse polyuréthane projetée peut remplacer les isolants classiques (PSE, laine minérale) sous chape, avec certains avantages : pas de découpe, pas de joints, application parfaitement continue sans pont thermique. Elle s'applique en une seule opération et adhère au support. C'est la solution idéale pour les formes complexes et les vides sanitaires."
+  },
+  {
+    question: "Quel est le coût de la mousse polyuréthane projetée ?",
+    answer: "Le coût de la mousse polyuréthane projetée varie selon l'épaisseur, la surface et l'accessibilité du chantier. Pour une estimation précise et gratuite, contactez-nous. Notre technicien se déplace sur votre chantier pour évaluer la faisabilité et établir un devis détaillé sans engagement."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/mousse-polyurethane-projetee#service`,
+      "name": "Isolation par mousse polyuréthane projetée",
+      "description": "Application de mousse polyuréthane projetée pour isolation de sol, vide sanitaire et toiture-terrasse dans le Var, Bouches-du-Rhône et Alpes-Maritimes.",
+      "provider": {
+        "@type": "Organization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "telephone": SITE_PHONE,
+        "sameAs": SCHEMA_ORG_SAME_AS
+      },
+      "areaServed": ["Var", "Bouches-du-Rhône", "Alpes-Maritimes"],
+      "serviceType": "Mousse polyuréthane projetée"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL },
+        { "@type": "ListItem", "position": 2, "name": "Nos services", "item": `${SITE_URL}/services` },
+        { "@type": "ListItem", "position": 3, "name": "Mousse Polyuréthane Projetée", "item": `${SITE_URL}/services/mousse-polyurethane-projetee` }
+      ]
+    }
+  ]
+};
+---
+
+<Default
+  title="Mousse Polyuréthane Projetée – Isolation Sol | PACA | Sud Est Chape"
+  description="Application de mousse polyuréthane projetée pour isolation sol et vide sanitaire dans le Var et PACA. Entreprise agréée. Devis gratuit."
+  schema={schema}
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Mousse Polyuréthane Projetée">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-mousse-polyurethane.webp"
+           alt="Application de mousse polyuréthane projetée pour isolation de sol et vide sanitaire"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Nos services</p>
+        <h1 class="hero__title">Mousse Polyuréthane Projetée — Isolation Sol dans le Sud-Est</h1>
+        <p class="hero__description">
+          Isolation par projection de mousse polyuréthane pour vides sanitaires, sous-sols et toitures-terrasses dans le Var, Bouches-du-Rhône et Alpes-Maritimes.
+        </p>
+        <a href="/devis" class="btn btn--cta btn--lg">
+          Devis gratuit sous 24h
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Contenu principal */}
+  <section class="section section--rounded section--white" aria-labelledby="mousse-intro-title">
+    <div class="container">
+      <div class="grid grid--2" style="align-items: start; gap: var(--spacing-12);">
+        <div>
+          <p class="section__overline">Isolation haute performance</p>
+          <h2 class="section__title" id="mousse-intro-title" style="text-align:left;">La mousse polyuréthane projetée : l'isolation continue sans pont thermique</h2>
+          <p>La mousse polyuréthane projetée est une technique d'isolation à haute performance : le produit est appliqué en projection directe sur le support et se dilate pour former une couche continue, sans joint, sans pont thermique.</p>
+          <p>Idéale pour les vides sanitaires, les sous-sols, les toitures-terrasses et les surfaces irrégulières, elle adhère parfaitement à tous les supports et offre une étanchéité à l'air optimale.</p>
+          <p>Combinée à une chape liquide, elle forme un complexe sol isolation-chape d'une seule opération, particulièrement adapté aux bâtiments industriels et logistiques du Sud-Est.</p>
+        </div>
+        <div>
+          <div class="card-feature" style="background: var(--color-accent-light);">
+            <h3 class="card-feature__title">Les atouts</h3>
+            <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+              <li>Aucun pont thermique</li>
+              <li>Application sur formes complexes</li>
+              <li>Vide sanitaire et sous-sol</li>
+              <li>Étanchéité à l'air</li>
+              <li>Compatible chape liquide</li>
+              <li>Bâtiments industriels</li>
+              <li>Durée de vie 30-50 ans</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Zone d'intervention */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-mousse-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Intervention rapide</p>
+        <h2 class="section__title" id="zone-mousse-title">
+          Mousse polyuréthane projetée dans tout le Sud-Est
+        </h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Var (83)</h3>
+          <p class="card-feature__text">Toulon, Six-Fours-les-Plages, La Seyne-sur-Mer, Hyères, Fréjus, Saint-Raphaël, Sainte-Maxime, Saint-Tropez, Draguignan</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Bouches-du-Rhône (13)</h3>
+          <p class="card-feature__text">Marseille, Aix-en-Provence, Aubagne, La Ciotat, Martigues, Salon-de-Provence</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
+          <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq title="Questions sur la mousse polyuréthane projetée" items={faqItems} />
+  <TestimonialsCompact title="Ils ont choisi la mousse polyuréthane pour leur isolation" />
+  <CtaRandom />
+
+</Default>
