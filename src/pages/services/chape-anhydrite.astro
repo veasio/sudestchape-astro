@@ -1,0 +1,150 @@
+---
+import Default from '../../layouts/Default.astro';
+import Faq from '../../components/ui/Faq.astro';
+import CtaRandom from '../../components/ui/CtaRandom.astro';
+import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
+
+const faqItems = [
+  {
+    question: "Quelle épaisseur pour une chape anhydrite sur plancher chauffant ?",
+    answer: "L'épaisseur minimale d'une chape anhydrite sur plancher chauffant est de 40 mm au-dessus des tubes. Cette épaisseur garantit une diffusion homogène de la chaleur et une résistance mécanique suffisante. Pour des planchers rayonnants à eau, on recommande 45 à 55 mm pour optimiser les performances thermiques."
+  },
+  {
+    question: "Quel est le temps de séchage d'une chape anhydrite ?",
+    answer: "Une chape anhydrite est praticable à pied en 24 à 48h. Le séchage complet avant pose de revêtement prend environ 1 semaine par centimètre d'épaisseur dans de bonnes conditions (20°C, humidité < 65%). Une mesure d'humidité résiduelle (CM test) est recommandée avant tout revêtement sensible à l'humidité."
+  },
+  {
+    question: "Comment faire la mise en chauffe d'une chape anhydrite ?",
+    answer: "La mise en chauffe d'une chape anhydrite doit commencer au plus tôt 7 jours après la pose, une fois la chape suffisamment sèche. Démarrer à 25°C pendant 3 jours, puis monter progressivement jusqu'à la température d'utilisation sur 7 jours. Cette procédure est obligatoire pour éviter les fissures et préparer la chape à la dilatation thermique."
+  },
+  {
+    question: "Chape anhydrite ou chape ciment : laquelle choisir ?",
+    answer: "La chape anhydrite est préférée pour les planchers chauffants car elle conduit mieux la chaleur et se fissure moins. La chape ciment est recommandée dans les pièces humides (salle de bain, terrasse) car l'anhydrite y est déconseillée. Pour une construction neuve avec plancher chauffant, l'anhydrite est le choix optimal."
+  },
+  {
+    question: "La chape anhydrite est-elle compatible avec tous les revêtements ?",
+    answer: "La chape anhydrite est compatible avec carrelage, parquet (collé ou flottant), résine et moquette. Elle est incompatible avec les pièces humides. Avant la pose de carrelage, un primaire d'accrochage est nécessaire. Pour le parquet, une humidité résiduelle inférieure à 0,5% CM est requise."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/chape-anhydrite#service`,
+      "name": "Pose de chape anhydrite",
+      "description": "Application de chape anhydrite autonivelante pour plancher chauffant dans le Var, Bouches-du-Rhône et Alpes-Maritimes. Applicateur agréé Lafarge, Cemex et Vicat.",
+      "provider": {
+        "@type": "Organization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "telephone": SITE_PHONE,
+        "sameAs": SCHEMA_ORG_SAME_AS
+      },
+      "areaServed": ["Var", "Bouches-du-Rhône", "Alpes-Maritimes"],
+      "serviceType": "Chape anhydrite autonivelante"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL },
+        { "@type": "ListItem", "position": 2, "name": "Nos services", "item": `${SITE_URL}/services` },
+        { "@type": "ListItem", "position": 3, "name": "Chape Anhydrite", "item": `${SITE_URL}/services/chape-anhydrite` }
+      ]
+    }
+  ]
+};
+---
+
+<Default
+  title="Chape Anhydrite – Plancher Chauffant | Applicateur Agréé PACA | Sud Est Chape"
+  description="Pose de chape anhydrite autonivelante pour plancher chauffant dans le Var et PACA. Applicateur agréé Lafarge. Épaisseur, séchage, mise en chauffe. Devis gratuit."
+  schema={schema}
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Chape Anhydrite">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-chape-anhydrite.webp"
+           alt="Pose de chape anhydrite autonivelante pour plancher chauffant"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Nos services</p>
+        <h1 class="hero__title">Chape Anhydrite — Plancher Chauffant</h1>
+        <p class="hero__description">
+          Applicateur agréé de chape anhydrite autonivelante dans le Var, les Bouches-du-Rhône et les Alpes-Maritimes. La solution de référence pour vos planchers chauffants.
+        </p>
+        <a href="/devis" class="btn btn--cta btn--lg">
+          Devis gratuit sous 24h
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Contenu principal */}
+  <section class="section section--rounded section--white" aria-labelledby="anhydrite-intro-title">
+    <div class="container">
+      <div class="grid grid--2" style="align-items: start; gap: var(--spacing-12);">
+        <div>
+          <p class="section__overline">Expertise chape liquide</p>
+          <h2 class="section__title" id="anhydrite-intro-title" style="text-align:left;">La chape anhydrite : pourquoi c'est la meilleure solution pour votre plancher chauffant</h2>
+          <p>La chape anhydrite (ou chape fluide au sulfate de calcium) est aujourd'hui la référence pour tous les planchers chauffants. Autonivelante, elle se répand naturellement pour former une surface parfaitement plane sans intervention manuelle.</p>
+          <p>Grâce à sa conductivité thermique supérieure à celle du ciment, elle optimise les performances de votre plancher chauffant et réduit la consommation d'énergie.</p>
+          <p>Sud Est Chape est applicateur agréé par les principaux fabricants (Lafarge, Cemex, Vicat) — garantie de qualité des matériaux et de mise en œuvre conforme aux normes DTU 26.2.</p>
+        </div>
+        <div>
+          <div class="card-feature" style="background: var(--color-accent-light);">
+            <h3 class="card-feature__title">Les atouts</h3>
+            <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+              <li>Planéité parfaite &lt; 3 mm sous règle de 2 m</li>
+              <li>Jusqu'à 1 000 m² coulés par jour</li>
+              <li>Compatible plancher chauffant et rafraîchissant</li>
+              <li>Praticable en 24-48h</li>
+              <li>Moins de fissures que le ciment</li>
+              <li>Meilleure conductivité thermique</li>
+              <li>Agréé Lafarge, Cemex, Vicat</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Zone d'intervention */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-anhydrite-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Intervention rapide</p>
+        <h2 class="section__title" id="zone-anhydrite-title">
+          Applicateur chape anhydrite dans tout le Sud-Est
+        </h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Var (83)</h3>
+          <p class="card-feature__text">Toulon, Six-Fours-les-Plages, La Seyne-sur-Mer, Hyères, Fréjus, Saint-Raphaël, Sainte-Maxime, Saint-Tropez, Draguignan</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Bouches-du-Rhône (13)</h3>
+          <p class="card-feature__text">Marseille, Aix-en-Provence, Aubagne, La Ciotat, Martigues, Salon-de-Provence</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
+          <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq title="Tout savoir sur la chape anhydrite" items={faqItems} />
+  <TestimonialsCompact title="Ils nous ont fait confiance pour leur plancher chauffant" />
+  <CtaRandom />
+
+</Default>
