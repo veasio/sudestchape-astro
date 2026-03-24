@@ -1,0 +1,146 @@
+---
+import Default from '../../layouts/Default.astro';
+import Faq from '../../components/ui/Faq.astro';
+import CtaRandom from '../../components/ui/CtaRandom.astro';
+import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
+
+const faqItems = [
+  {
+    question: "Quelle différence entre ravoirage et réagréage ?",
+    answer: "Le ravoirage est une couche de forme épaisse (3 à 15 cm) qui permet de rattraper des niveaux importants, d'enrober des réseaux (tubes, câbles) ou de créer une pente. Le réagréage est une fine couche (2 à 10 mm) destinée à lisser et parfaire une surface avant pose de revêtement. On fait d'abord le ravoirage si nécessaire, puis le réagréage en finition."
+  },
+  {
+    question: "Quand faut-il faire un ravoirage ?",
+    answer: "Un ravoirage est nécessaire quand le sol présente des dénivelés supérieurs à 20 mm, lors de la rénovation d'un ancien plancher, pour enrober un plancher chauffant, ou pour créer une pente d'écoulement (douche à l'italienne, terrasse). C'est aussi utilisé pour rehausser un niveau ou combler un vide technique."
+  },
+  {
+    question: "Peut-on faire un ravoirage sur plancher chauffant ?",
+    answer: "Oui, le ravoirage sur plancher chauffant est une technique courante. Elle permet d'enrober les tubes du plancher chauffant tout en remettant le sol à niveau. Dans ce cas, on utilise une chape liquide (anhydrite ou ciment) pour une mise en œuvre optimale. L'épaisseur au-dessus des tubes doit respecter les préconisations du fabricant (minimum 40 mm pour l'anhydrite)."
+  },
+  {
+    question: "Combien de temps faut-il pour sécher après un ravoirage ?",
+    answer: "Le temps de séchage d'un ravoirage dépend du produit utilisé et de l'épaisseur. Pour une chape ciment de 5 cm, comptez 4 semaines dans de bonnes conditions. Pour une chape anhydrite, le séchage est plus rapide : 1 semaine par cm d'épaisseur. Dans tous les cas, une mesure d'humidité résiduelle est recommandée avant pose du revêtement."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/chape-reagreage-ravoirage#service`,
+      "name": "Ravoirage et réagréage de sol",
+      "description": "Remise à niveau de sol par ravoirage ou réagréage dans le Var, Bouches-du-Rhône et Alpes-Maritimes. Rattrapage de niveaux, préparation avant revêtement.",
+      "provider": {
+        "@type": "Organization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "telephone": SITE_PHONE,
+        "sameAs": SCHEMA_ORG_SAME_AS
+      },
+      "areaServed": ["Var", "Bouches-du-Rhône", "Alpes-Maritimes"],
+      "serviceType": "Ravoirage et réagréage"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL },
+        { "@type": "ListItem", "position": 2, "name": "Nos services", "item": `${SITE_URL}/services` },
+        { "@type": "ListItem", "position": 3, "name": "Ravoirage & Réagréage", "item": `${SITE_URL}/services/chape-reagreage-ravoirage` }
+      ]
+    }
+  ]
+};
+---
+
+<Default
+  title="Ravoirage et Réagréage Sol – Mise à Niveau | Sud Est Chape PACA"
+  description="Remise à niveau de sol par ravoirage ou réagréage dans le Var, BdR et Alpes-Maritimes. Chapiste agréé. Rattrapage de niveaux, rénovation. Devis gratuit."
+  schema={schema}
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Ravoirage et Réagréage">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-ravoirage-reagreage.webp"
+           alt="Ravoirage et réagréage pour remise à niveau de sol"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Nos services</p>
+        <h1 class="hero__title">Ravoirage &amp; Réagréage — Remise à Niveau de Sol dans le Sud-Est</h1>
+        <p class="hero__description">
+          Remise à niveau de sol, rattrapage de dénivelés, préparation avant revêtement. 6 équipes disponibles dans le Var, Bouches-du-Rhône et Alpes-Maritimes.
+        </p>
+        <a href="/devis" class="btn btn--cta btn--lg">
+          Devis gratuit sous 24h
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Contenu principal */}
+  <section class="section section--rounded section--white" aria-labelledby="ravoirage-intro-title">
+    <div class="container">
+      <div class="grid grid--2" style="align-items: start; gap: var(--spacing-12);">
+        <div>
+          <p class="section__overline">Expertise sol</p>
+          <h2 class="section__title" id="ravoirage-intro-title" style="text-align:left;">Ravoirage et réagréage : la remise à niveau professionnelle de vos sols</h2>
+          <p>Le ravoirage est une couche de forme épaisse (3 à 15 cm) permettant de rattraper des niveaux importants, d'enrober des réseaux (tubes, câbles) ou de créer une pente d'écoulement. Le réagréage est une couche de finition plus fine (2 à 10 mm) qui parfait la surface avant la pose d'un revêtement.</p>
+          <p>Ces deux techniques sont complémentaires et souvent réalisées ensemble lors de chantiers de rénovation ou de construction.</p>
+          <p>Sud Est Chape intervient pour les particuliers comme pour les professionnels (promoteurs, architectes, entreprises générales) dans tout le Sud-Est avec 6 équipes disponibles.</p>
+        </div>
+        <div>
+          <div class="card-feature" style="background: var(--color-accent-light);">
+            <h3 class="card-feature__title">Les atouts</h3>
+            <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+              <li>Rattrapage de niveaux jusqu'à 15 cm</li>
+              <li>Avant carrelage, parquet ou résine</li>
+              <li>Compatible plancher chauffant</li>
+              <li>Rénovation et neuf</li>
+              <li>Promoteurs et architectes</li>
+              <li>Chantiers industriels et logistiques</li>
+              <li>6 équipes disponibles</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Zone d'intervention */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-ravoirage-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Intervention rapide</p>
+        <h2 class="section__title" id="zone-ravoirage-title">
+          Ravoirage et réagréage dans tout le Sud-Est
+        </h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Var (83)</h3>
+          <p class="card-feature__text">Toulon, Six-Fours-les-Plages, La Seyne-sur-Mer, Hyères, Fréjus, Saint-Raphaël, Sainte-Maxime, Saint-Tropez, Draguignan</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Bouches-du-Rhône (13)</h3>
+          <p class="card-feature__text">Marseille, Aix-en-Provence, Aubagne, La Ciotat, Martigues, Salon-de-Provence</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
+          <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq title="Questions sur le ravoirage et le réagréage" items={faqItems} />
+  <TestimonialsCompact title="Ils nous ont fait confiance pour la remise à niveau de leur sol" />
+  <CtaRandom />
+
+</Default>
