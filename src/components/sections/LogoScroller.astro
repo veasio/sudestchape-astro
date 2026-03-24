@@ -1,0 +1,63 @@
+---
+interface Props {
+  overline?: string;
+  title?: string;
+  ariaLabel?: string;
+}
+
+const {
+  overline = 'Certifications & partenaires',
+  title = 'Ils nous font confiance',
+  ariaLabel = 'Nos partenaires et certifications',
+} = Astro.props;
+
+const logos = [
+  { src: '/images/logos/logo-qualibat.png', alt: 'Qualibat - Certification qualification bâtiment' },
+  { src: '/images/logos/logo-rge.png', alt: "RGE - Reconnu Garant de l'Environnement" },
+  { src: '/images/logos/logo-nf.png', alt: 'NF - Norme Française' },
+  { src: '/images/logos/logo-capeb.png', alt: "CAPEB - Confédération de l'Artisanat et des Petites Entreprises du Bâtiment" },
+  { src: '/images/logos/logo-ffb.png', alt: 'FFB - Fédération Française du Bâtiment' },
+  { src: '/images/logos/logo-garantie-decennale.png', alt: 'Garantie décennale' },
+  { src: '/images/logos/logo-lafarge.png', alt: 'Lafarge - Fournisseur partenaire' },
+  { src: '/images/logos/logo-weber.png', alt: 'Weber - Fournisseur partenaire' },
+];
+---
+
+<section class="logo-scroller" aria-label={ariaLabel}>
+  <div class="logo-scroller__header">
+    <p class="logo-scroller__overline">{overline}</p>
+    <h2 class="logo-scroller__title">{title}</h2>
+  </div>
+
+  <div class="logo-scroller__track">
+    {/* Première liste */}
+    <div class="logo-scroller__list">
+      {logos.map((logo) => (
+        <div class="logo-scroller__item">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            width="120"
+            height="60"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+
+    {/* Duplication pour boucle infinie CSS */}
+    <div class="logo-scroller__list" aria-hidden="true">
+      {logos.map((logo) => (
+        <div class="logo-scroller__item">
+          <img
+            src={logo.src}
+            alt=""
+            width="120"
+            height="60"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

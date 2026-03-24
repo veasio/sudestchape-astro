@@ -1,0 +1,98 @@
+---
+interface Props {
+  variant?: 'devis' | 'telephone' | 'realisations' | '';
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  secondaryLabel?: string;
+  secondaryUrl?: string;
+  bg?: 'accent' | 'white' | 'dark';
+  titleId?: string;
+  sitePhone?: string;
+}
+
+const {
+  variant = '',
+  title: titleProp,
+  description: descriptionProp,
+  ctaLabel: ctaLabelProp,
+  ctaUrl: ctaUrlProp,
+  secondaryLabel: secondaryLabelProp,
+  secondaryUrl: secondaryUrlProp,
+  bg = 'accent',
+  titleId: titleIdProp,
+  sitePhone = '',
+} = Astro.props;
+
+// Valeurs selon le variant
+let title: string;
+let description: string;
+let ctaLabel: string;
+let ctaUrl: string;
+let secondaryLabel: string;
+let secondaryUrl: string;
+let titleId: string;
+
+if (variant === 'devis') {
+  title = titleProp ?? 'Un projet de chape ? Parlons-en.';
+  description = descriptionProp ?? 'Obtenez votre devis gratuit en moins de 48h. Intervention dans tout le Sud-Est de la France.';
+  ctaLabel = ctaLabelProp ?? 'Demander un devis gratuit';
+  ctaUrl = ctaUrlProp ?? '/contact';
+  secondaryLabel = secondaryLabelProp ?? '';
+  secondaryUrl = secondaryUrlProp ?? '/contact';
+  titleId = titleIdProp ?? 'cta-devis-title';
+} else if (variant === 'telephone') {
+  title = titleProp ?? "Besoin d'un conseil ? Appelez-nous.";
+  description = descriptionProp ?? 'Notre équipe est disponible pour répondre à toutes vos questions et vous accompagner dans votre projet de chape.';
+  ctaLabel = ctaLabelProp ?? (sitePhone || 'Nous appeler');
+  ctaUrl = ctaUrlProp ?? (sitePhone ? `tel:${sitePhone.replace(/[\s.\-]/g, '')}` : 'tel:');
+  secondaryLabel = secondaryLabelProp ?? 'Formulaire de contact';
+  secondaryUrl = secondaryUrlProp ?? '/contact';
+  titleId = titleIdProp ?? 'cta-telephone-title';
+} else if (variant === 'realisations') {
+  title = titleProp ?? 'Découvrez nos dernières réalisations';
+  description = descriptionProp ?? 'Plus de 500 chantiers réalisés dans tout le Sud-Est. Consultez nos projets pour voir la qualité de notre travail.';
+  ctaLabel = ctaLabelProp ?? 'Voir nos réalisations';
+  ctaUrl = ctaUrlProp ?? '/realisations';
+  secondaryLabel = secondaryLabelProp ?? 'Demander un devis';
+  secondaryUrl = secondaryUrlProp ?? '/contact';
+  titleId = titleIdProp ?? 'cta-realisations-title';
+} else {
+  title = titleProp ?? 'Prêt à démarrer votre projet ?';
+  description = descriptionProp ?? '';
+  ctaLabel = ctaLabelProp ?? 'Nous contacter';
+  ctaUrl = ctaUrlProp ?? '/contact';
+  secondaryLabel = secondaryLabelProp ?? '';
+  secondaryUrl = secondaryUrlProp ?? '/contact';
+  titleId = titleIdProp ?? 'cta-title';
+}
+---
+
+<section class={`section section--${bg} animate-on-scroll`} aria-labelledby={titleId}>
+  <div class="container text-center">
+    <h2 class="section__title" id={titleId}>{title}</h2>
+    {description && (
+      <p class="section__description" style="margin-inline:auto;">{description}</p>
+    )}
+    <div class="hero__actions mt-8" style="justify-content:center;">
+      {variant === 'telephone' && sitePhone ? (
+        <a href={`tel:${sitePhone.replace(/[\s.\-]/g, '')}`} class="btn btn--primary btn--lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          {sitePhone}
+        </a>
+      ) : (
+        <a href={ctaUrl} class="btn btn--primary btn--lg">
+          {ctaLabel}
+        </a>
+      )}
+      {secondaryLabel && (
+        <a href={secondaryUrl} class="btn btn--outline btn--lg">
+          {secondaryLabel}
+        </a>
+      )}
+    </div>
+  </div>
+</section>

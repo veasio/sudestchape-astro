@@ -1,0 +1,72 @@
+---
+interface Props {
+  overline?: string;
+  title?: string;
+  titleId?: string;
+  bg?: 'accent' | 'white' | 'gray';
+  e1Title?: string;
+  e1Text?: string;
+  e2Title?: string;
+  e2Text?: string;
+  e3Title?: string;
+  e3Text?: string;
+}
+
+const {
+  overline = 'Notre philosophie',
+  title = 'Nos engagements qualité',
+  titleId = 'engagements-title',
+  bg = 'accent',
+  e1Title = 'Respect des délais',
+  e1Text = 'Chaque chantier est planifié avec précision. Nous nous engageons à respecter les délais convenus pour ne jamais retarder votre projet.',
+  e2Title = 'Garantie décennale',
+  e2Text = "Tous nos travaux sont couverts par notre assurance décennale. Votre tranquillité d'esprit est notre priorité.",
+  e3Title = 'Matériaux certifiés',
+  e3Text = 'Nous utilisons exclusivement des matériaux NF et certifiés, issus de nos partenaires de confiance Lafarge et Weber.',
+} = Astro.props;
+---
+
+<section class={`section section--${bg} section--rounded animate-on-scroll`} aria-labelledby={titleId}>
+  <div class="container">
+    <div class="section__header">
+      <p class="section__overline">{overline}</p>
+      <h2 class="section__title" id={titleId}>{title}</h2>
+    </div>
+
+    <div class="engagements">
+      <div class="engagement">
+        <div class="engagement__icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <h3 class="engagement__title">{e1Title}</h3>
+        <p class="engagement__text">{e1Text}</p>
+      </div>
+
+      <div class="engagement">
+        <div class="engagement__icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="engagement__title">{e2Title}</h3>
+        <p class="engagement__text">{e2Text}</p>
+      </div>
+
+      <div class="engagement">
+        <div class="engagement__icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h3 class="engagement__title">{e3Title}</h3>
+        <p class="engagement__text">{e3Text}</p>
+      </div>
+    </div>
+  </div>
+</section>

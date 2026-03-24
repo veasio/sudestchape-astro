@@ -1,0 +1,61 @@
+---
+interface Props {
+  overline?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  variant?: 'small' | 'medium';
+  cta1Label?: string;
+  cta1Url?: string;
+  cta2Label?: string;
+  cta2Url?: string;
+  ariaLabel?: string;
+}
+
+const {
+  overline = '',
+  title,
+  description = '',
+  image = '/images/optimized/hero-services.webp',
+  imageAlt = '',
+  variant = 'small',
+  cta1Label = '',
+  cta1Url = '/contact',
+  cta2Label = '',
+  cta2Url = '/',
+  ariaLabel = title,
+} = Astro.props;
+---
+
+<section class={`hero hero--${variant}`} aria-label={ariaLabel}>
+  <div class="hero__background">
+    <img
+      src={image}
+      alt={imageAlt}
+      width="1920"
+      height="600"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="container">
+    <div class="hero__content">
+      {overline && <p class="hero__overline">{overline}</p>}
+      <h1 class="hero__title">{title}</h1>
+      {description && <p class="hero__description">{description}</p>}
+      {cta1Label && (
+        <div class="hero__actions">
+          <a href={cta1Url} class="btn btn--cta btn--lg">
+            {cta1Label}
+          </a>
+          {cta2Label && (
+            <a href={cta2Url} class="btn btn--white btn--lg">
+              {cta2Label}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

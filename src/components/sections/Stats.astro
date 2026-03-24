@@ -1,0 +1,87 @@
+---
+interface Props {
+  titleId?: string;
+  stat1Count?: number;
+  stat1Suffix?: string;
+  stat1Label?: string;
+  stat2Count?: number;
+  stat2Suffix?: string;
+  stat2Label?: string;
+  stat3Count?: number;
+  stat3Suffix?: string;
+  stat3Label?: string;
+  stat4Count?: number;
+  stat4Suffix?: string;
+  stat4Label?: string;
+}
+
+const {
+  titleId = 'stats-title',
+  stat1Count = 500,
+  stat1Suffix = '+',
+  stat1Label = 'Chantiers réalisés',
+  stat2Count = 15,
+  stat2Suffix = ' ans',
+  stat2Label = "D'expérience",
+  stat3Count = 98,
+  stat3Suffix = '%',
+  stat3Label = 'Clients satisfaits',
+  stat4Count = 48,
+  stat4Suffix = 'h',
+  stat4Label = 'Délai de devis',
+} = Astro.props;
+---
+
+<section class="stats" aria-labelledby={titleId}>
+  <div class="container">
+    <h2 class="sr-only" id={titleId}>Nos chiffres clés</h2>
+    <div class="stats__grid">
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <p class="stats__value" data-count={stat1Count} data-suffix={stat1Suffix}>0</p>
+        <p class="stats__label">{stat1Label}</p>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <p class="stats__value" data-count={stat2Count} data-suffix={stat2Suffix}>0</p>
+        <p class="stats__label">{stat2Label}</p>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <p class="stats__value" data-count={stat3Count} data-suffix={stat3Suffix}>0</p>
+        <p class="stats__label">{stat3Label}</p>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <p class="stats__value" data-count={stat4Count} data-suffix={stat4Suffix}>0</p>
+        <p class="stats__label">{stat4Label}</p>
+      </div>
+    </div>
+  </div>
+</section>

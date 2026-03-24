@@ -1,0 +1,103 @@
+---
+interface Props {
+  variant?: 'image-left' | 'image-right';
+  overline?: string;
+  title: string;
+  titleId?: string;
+  text?: string;
+  image: string;
+  imageAlt?: string;
+  listItem1?: string;
+  listItem2?: string;
+  listItem3?: string;
+  listItem4?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  ctaStyle?: 'primary' | 'outline' | 'white';
+}
+
+const {
+  variant = 'image-left',
+  overline = '',
+  title,
+  titleId = 'text-image-title',
+  text = '',
+  image,
+  imageAlt = '',
+  listItem1 = '',
+  listItem2 = '',
+  listItem3 = '',
+  listItem4 = '',
+  ctaLabel = '',
+  ctaUrl = '/contact',
+  ctaStyle = 'primary',
+} = Astro.props;
+---
+
+<section
+  class={`images-text${variant === 'image-right' ? ' images-text--reverse' : ''} animate-on-scroll`}
+  aria-labelledby={titleId}
+>
+  <div class="images-text__container">
+    <div class="images-text__image">
+      <img
+        src={image}
+        alt={imageAlt}
+        width="800"
+        height="600"
+        loading="lazy"
+      />
+    </div>
+    <div class="images-text__content">
+      {overline && <p class="images-text__overline">{overline}</p>}
+      <h2 class="images-text__title" id={titleId}>{title}</h2>
+      {text && <p class="images-text__text" set:html={text} />}
+      {listItem1 && (
+        <ul class="images-text__list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            {listItem1}
+          </li>
+          {listItem2 && (
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              {listItem2}
+            </li>
+          )}
+          {listItem3 && (
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              {listItem3}
+            </li>
+          )}
+          {listItem4 && (
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              {listItem4}
+            </li>
+          )}
+        </ul>
+      )}
+      {ctaLabel && (
+        <a href={ctaUrl} class={`btn btn--${ctaStyle} btn--lg`}>
+          {ctaLabel}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      )}
+    </div>
+  </div>
+</section>

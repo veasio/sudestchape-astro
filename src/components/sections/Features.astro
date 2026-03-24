@@ -1,0 +1,112 @@
+---
+interface Props {
+  overline?: string;
+  title?: string;
+  titleId?: string;
+  cols?: '4' | '3' | '2';
+  bg?: 'accent' | 'white' | 'gray';
+  f1Title?: string;
+  f1Text?: string;
+  f1IconPath?: string;
+  f2Title?: string;
+  f2Text?: string;
+  f2IconPath?: string;
+  f3Title?: string;
+  f3Text?: string;
+  f3IconPath?: string;
+  f4Title?: string;
+  f4Text?: string;
+  f4IconPath?: string;
+}
+
+const {
+  overline = 'Pourquoi nous choisir',
+  title = "L'excellence au service de vos projets",
+  titleId = 'features-title',
+  cols = '4',
+  bg = 'accent',
+  f1Title = 'Expertise technique',
+  f1Text = 'Maîtrise des techniques de chape fluide et traditionnelle depuis 15 ans.',
+  f1IconPath = '',
+  f2Title = 'Réactivité',
+  f2Text = 'Devis sous 48h et intervention planifiée selon vos contraintes.',
+  f2IconPath = '',
+  f3Title = 'Qualité certifiée',
+  f3Text = 'Matériaux NF, normes DTU respectées et garantie décennale.',
+  f3IconPath = '',
+  f4Title = 'Fiabilité',
+  f4Text = '98% de clients satisfaits et partenaires fidèles depuis des années.',
+  f4IconPath = '',
+} = Astro.props;
+---
+
+<section class={`section section--${bg} section--rounded animate-on-scroll`} aria-labelledby={titleId}>
+  <div class="container">
+    <div class="section__header">
+      <p class="section__overline">{overline}</p>
+      <h2 class="section__title" id={titleId}>{title}</h2>
+    </div>
+
+    <div class={`grid grid--${cols}`}>
+      <div class="card-feature">
+        <div class="card-feature__icon" aria-hidden="true">
+          {f1IconPath ? (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d={f1IconPath}/></svg>
+          ) : (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          )}
+        </div>
+        <h3 class="card-feature__title">{f1Title}</h3>
+        <p class="card-feature__text">{f1Text}</p>
+      </div>
+
+      <div class="card-feature">
+        <div class="card-feature__icon" aria-hidden="true">
+          {f2IconPath ? (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d={f2IconPath}/></svg>
+          ) : (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          )}
+        </div>
+        <h3 class="card-feature__title">{f2Title}</h3>
+        <p class="card-feature__text">{f2Text}</p>
+      </div>
+
+      <div class="card-feature">
+        <div class="card-feature__icon" aria-hidden="true">
+          {f3IconPath ? (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d={f3IconPath}/></svg>
+          ) : (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          )}
+        </div>
+        <h3 class="card-feature__title">{f3Title}</h3>
+        <p class="card-feature__text">{f3Text}</p>
+      </div>
+
+      {cols !== '3' && (
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            {f4IconPath ? (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d={f4IconPath}/></svg>
+            ) : (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            )}
+          </div>
+          <h3 class="card-feature__title">{f4Title}</h3>
+          <p class="card-feature__text">{f4Text}</p>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

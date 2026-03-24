@@ -1,0 +1,42 @@
+---
+interface Props {
+  image?: string;
+  imageAlt?: string;
+  titleHtml?: string;
+  titleId?: string;
+  text?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+}
+
+const {
+  image = '/images/optimized/banner-chantier.webp',
+  imageAlt = '',
+  titleHtml = '<span class="immersive-banner__highlight">200 m²</span> coulés par jour.<br>Séchage en <span class="immersive-banner__highlight">48h</span>.',
+  titleId = 'immersive-banner-title',
+  text = '',
+  ctaLabel = '',
+  ctaUrl = '/services',
+} = Astro.props;
+---
+
+<section class="immersive-banner animate-on-scroll" aria-labelledby={titleId}>
+  <div class="immersive-banner__background">
+    <img
+      src={image}
+      alt={imageAlt}
+      width="1920"
+      height="1080"
+      loading="lazy"
+    />
+  </div>
+  <div class="immersive-banner__content">
+    <h2 class="immersive-banner__title" id={titleId} set:html={titleHtml} />
+    {text && <p class="immersive-banner__text">{text}</p>}
+    {ctaLabel && (
+      <a href={ctaUrl} class="btn btn--cta btn--lg">
+        {ctaLabel}
+      </a>
+    )}
+  </div>
+</section>

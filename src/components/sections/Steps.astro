@@ -1,0 +1,68 @@
+---
+interface Props {
+  overline?: string;
+  title?: string;
+  titleId?: string;
+  bg?: 'white' | 'gray' | 'accent';
+  step1Title?: string;
+  step1Text?: string;
+  step2Title?: string;
+  step2Text?: string;
+  step3Title?: string;
+  step3Text?: string;
+  step4Title?: string;
+  step4Text?: string;
+}
+
+const {
+  overline = 'Simple et rapide',
+  title = 'Comment ça marche ?',
+  titleId = 'steps-title',
+  bg = 'white',
+  step1Title = 'Prise de contact',
+  step1Text = 'Appelez-nous ou remplissez le formulaire de devis en ligne. Nous vous répondons sous 24h.',
+  step2Title = 'Visite technique',
+  step2Text = 'Un technicien se déplace gratuitement pour évaluer votre chantier et établir un devis précis.',
+  step3Title = 'Réalisation',
+  step3Text = 'Notre équipe intervient à la date convenue. Chantier propre, finition soignée, dans les délais.',
+  step4Title = '',
+  step4Text = '',
+} = Astro.props;
+---
+
+<section class={`section section--${bg} section--rounded animate-on-scroll`} aria-labelledby={titleId}>
+  <div class="container">
+    <div class="section__header">
+      <p class="section__overline">{overline}</p>
+      <h2 class="section__title" id={titleId}>{title}</h2>
+    </div>
+
+    <div class="steps">
+      <div class="steps__item">
+        <div class="steps__number" aria-hidden="true"></div>
+        <h3 class="steps__title">{step1Title}</h3>
+        <p class="steps__text">{step1Text}</p>
+      </div>
+
+      <div class="steps__item">
+        <div class="steps__number" aria-hidden="true"></div>
+        <h3 class="steps__title">{step2Title}</h3>
+        <p class="steps__text">{step2Text}</p>
+      </div>
+
+      <div class="steps__item">
+        <div class="steps__number" aria-hidden="true"></div>
+        <h3 class="steps__title">{step3Title}</h3>
+        <p class="steps__text">{step3Text}</p>
+      </div>
+
+      {step4Title && (
+        <div class="steps__item">
+          <div class="steps__number" aria-hidden="true"></div>
+          <h3 class="steps__title">{step4Title}</h3>
+          <p class="steps__text">{step4Text}</p>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

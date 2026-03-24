@@ -1,0 +1,166 @@
+---
+interface Props {
+  overline?: string;
+  title?: string;
+  titleId?: string;
+  sectionId?: string;
+  bg?: 'white' | 'gray' | 'accent';
+}
+
+const {
+  overline = 'Nos expertises',
+  title = 'Des solutions adaptées à chaque projet',
+  titleId = 'services-grid-title',
+  sectionId = 'services',
+  bg = 'white',
+} = Astro.props;
+
+const arrowSvg = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+---
+
+<section id={sectionId} class={`section section--rounded section--${bg} animate-on-scroll`} aria-labelledby={titleId}>
+  <div class="container">
+    <div class="section__header">
+      <p class="section__overline">{overline}</p>
+      <h2 class="section__title" id={titleId}>{title}</h2>
+    </div>
+
+    <div class="grid-collage">
+      {/* Chape fluide - Grande carte */}
+      <div class="grid-collage__item grid-collage__item--large">
+        <div class="grid-collage__media">
+          <img
+            src="/images/optimized/service-chape-fluide.webp"
+            alt="Chape fluide autonivelante"
+            class="grid-collage__img--default"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+          <img
+            src="/images/optimized/service-chape-fluide-hover.webp"
+            alt=""
+            class="grid-collage__img--hover"
+            width="800"
+            height="600"
+            loading="lazy"
+            aria-hidden="true"
+          />
+        </div>
+        <a href="/services#chape-fluide">
+          <div class="grid-collage__content">
+            <h3 class="grid-collage__title">Chape fluide</h3>
+            <p class="grid-collage__subtitle">Planéité parfaite pour plancher chauffant</p>
+          </div>
+          <span class="grid-collage__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      {/* Chape traditionnelle */}
+      <div class="grid-collage__item">
+        <div class="grid-collage__media">
+          <img
+            src="/images/optimized/service-chape-traditionnelle.webp"
+            alt="Chape traditionnelle ciment"
+            class="grid-collage__img--default"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <img
+            src="/images/optimized/service-chape-traditionnelle-hover.webp"
+            alt=""
+            class="grid-collage__img--hover"
+            width="600"
+            height="400"
+            loading="lazy"
+            aria-hidden="true"
+          />
+        </div>
+        <a href="/services#chape-traditionnelle">
+          <div class="grid-collage__content">
+            <h3 class="grid-collage__title">Chape traditionnelle</h3>
+            <p class="grid-collage__subtitle">Robuste et polyvalente</p>
+          </div>
+          <span class="grid-collage__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      {/* Devis gratuit */}
+      <div class="grid-collage__item">
+        <div class="grid-collage__media">
+          <img
+            src="/images/optimized/service-devis.webp"
+            alt="Devis gratuit sous 48h"
+            class="grid-collage__img--default"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+          <img
+            src="/images/optimized/service-devis-hover.webp"
+            alt=""
+            class="grid-collage__img--hover"
+            width="600"
+            height="400"
+            loading="lazy"
+            aria-hidden="true"
+          />
+        </div>
+        <a href="/contact">
+          <div class="grid-collage__content">
+            <h3 class="grid-collage__title">Devis gratuit</h3>
+            <p class="grid-collage__subtitle">Réponse sous 48h</p>
+          </div>
+          <span class="grid-collage__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      {/* Réalisations - Large */}
+      <div class="grid-collage__item grid-collage__item--wide">
+        <div class="grid-collage__media">
+          <img
+            src="/images/optimized/service-realisations.webp"
+            alt="Nos réalisations de chape"
+            class="grid-collage__img--default"
+            width="800"
+            height="400"
+            loading="lazy"
+          />
+          <img
+            src="/images/optimized/service-realisations-hover.webp"
+            alt=""
+            class="grid-collage__img--hover"
+            width="800"
+            height="400"
+            loading="lazy"
+            aria-hidden="true"
+          />
+        </div>
+        <a href="/realisations">
+          <div class="grid-collage__content">
+            <h3 class="grid-collage__title">Nos réalisations</h3>
+            <p class="grid-collage__subtitle">500+ chantiers dans le Sud-Est</p>
+          </div>
+          <span class="grid-collage__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,125 @@
+---
+interface Props {
+  variant?: 'carousel' | 'compact';
+  overline?: string;
+  title?: string;
+  titleId?: string;
+  bg?: 'white' | 'gray' | 'accent';
+}
+
+const {
+  variant = 'carousel',
+  overline = 'Ils nous font confiance',
+  title = 'Ce que disent nos clients',
+  titleId = 'testimonials-title',
+  bg = 'white',
+} = Astro.props;
+
+const slides = [
+  [
+    { quote: 'Travail impeccable, équipe ponctuelle et professionnelle. La chape est parfaitement plane, idéale pour notre plancher chauffant.', name: 'Marc D.', role: 'Particulier – Aix-en-Provence' },
+    { quote: 'Nous faisons appel à Sudest Chape pour tous nos chantiers. Fiabilité, qualité et prix compétitifs. Un vrai partenaire.', name: 'Sophie L.', role: 'Entreprise de construction – Marseille' },
+    { quote: 'Réactivité exemplaire et résultat au top. La chape fluide a été coulée en une journée. Je recommande vivement.', name: 'Philippe R.', role: 'Particulier – Toulon' },
+  ],
+  [
+    { quote: 'Excellente prestation pour notre maison neuve. L\'équipe a été très professionnelle et le rendu est parfait. Merci pour votre sérieux.', name: 'Laurent M.', role: 'Particulier – Nice' },
+    { quote: 'Deuxième collaboration avec Sudest Chape. Toujours la même qualité, les mêmes délais respectés. Une entreprise de confiance.', name: 'Catherine B.', role: 'Architecte – Cannes' },
+    { quote: 'Chantier de 400m² réalisé en temps record. Qualité irréprochable et équipe très sympathique. Je recommande à 100%.', name: 'Jean-Pierre V.', role: 'Promoteur immobilier – Montpellier' },
+  ],
+  [
+    { quote: 'Super réactivité pour un chantier urgent. Ils ont pu intervenir en moins d\'une semaine. Résultat parfait, merci !', name: 'Nathalie C.', role: 'Particulier – Avignon' },
+    { quote: 'Nous travaillons avec Sudest Chape depuis 5 ans. Jamais déçus, toujours un travail soigné et des équipes respectueuses.', name: 'Groupe Batimo', role: 'Entreprise générale – Marseille' },
+    { quote: 'Rapport qualité-prix imbattable. La chape traditionnelle de notre garage est nickel. Équipe efficace et propre.', name: 'François G.', role: 'Particulier – Hyères' },
+  ],
+  [
+    { quote: 'Intervention rapide pour la rénovation de notre appartement. Planéité parfaite pour la pose du parquet. Très satisfait.', name: 'Stéphane H.', role: 'Particulier – Fréjus' },
+    { quote: 'Professionnalisme et expertise au rendez-vous. Le conseil technique en amont nous a permis de faire les bons choix.', name: 'Marie-Claire T.', role: "Maître d'ouvrage – Nîmes" },
+    { quote: 'Troisième chantier avec cette équipe. La régularité dans la qualité est remarquable. Partenaire fiable pour nos projets.', name: 'Cabinet Archi+', role: "Cabinet d'architecture – Aix-en-Provence" },
+  ],
+];
+---
+
+{variant === 'compact' ? (
+  <section class={`section section--${bg} section--rounded animate-on-scroll`} aria-labelledby={titleId}>
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">{overline}</p>
+        <h2 class="section__title" id={titleId}>{title}</h2>
+      </div>
+      <div class="testimonials-carousel__grid">
+        {slides[0].map((t) => (
+          <div class="testimonial" itemscope itemtype="https://schema.org/Review">
+            <div class="testimonial__rating" aria-label="5 étoiles sur 5">
+              {[...Array(5)].map(() => (
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              ))}
+            </div>
+            <blockquote class="testimonial__quote" itemprop="reviewBody">{t.quote}</blockquote>
+            <div class="testimonial__author">
+              <div>
+                <p class="testimonial__name" itemprop="author">{t.name}</p>
+                <p class="testimonial__role">{t.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+) : (
+  <section class={`section section--${bg} section--rounded animate-on-scroll`} aria-labelledby={titleId}>
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">{overline}</p>
+        <h2 class="section__title" id={titleId}>{title}</h2>
+      </div>
+
+      <div
+        class="testimonials-carousel testimonials-carousel--multi"
+        role="region"
+        aria-roledescription="carrousel"
+        aria-label="Témoignages clients"
+      >
+        <div class="testimonials-carousel__live" aria-live="polite" aria-atomic="true"></div>
+
+        <div class="testimonials-carousel__track">
+          {slides.map((slide, slideIndex) => (
+            <div
+              class={`testimonials-carousel__slide${slideIndex === 0 ? ' is-active' : ''}`}
+              aria-hidden={slideIndex !== 0 ? 'true' : 'false'}
+            >
+              <div class="testimonials-carousel__grid">
+                {slide.map((t) => (
+                  <div class="testimonial" itemscope itemtype="https://schema.org/Review">
+                    <div class="testimonial__rating" aria-label="5 étoiles sur 5">
+                      {[...Array(5)].map(() => (
+                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      ))}
+                    </div>
+                    <blockquote class="testimonial__quote" itemprop="reviewBody">{t.quote}</blockquote>
+                    <div class="testimonial__author">
+                      <div>
+                        <p class="testimonial__name" itemprop="author">{t.name}</p>
+                        <p class="testimonial__role">{t.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="testimonials-carousel__nav">
+          <button type="button" class="testimonials-carousel__prev" aria-label="Témoignages précédents">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="testimonials-carousel__dots" role="tablist" aria-label="Sélectionner un groupe de témoignages"></div>
+          <button type="button" class="testimonials-carousel__next" aria-label="Témoignages suivants">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
