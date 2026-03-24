@@ -1,0 +1,172 @@
+---
+// Header principal
+// Source : partials/header.htm
+
+import Navigation from './Navigation.astro';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const siteName = 'Sudest Chape';
+const sitePhone = '04 91 00 00 00';
+const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
+
+const menuItems = [
+  { title: 'Accueil', url: '/' },
+  {
+    title: 'Services',
+    url: '/services',
+    items: [
+      { title: 'Chape fluide', url: '/services/chape-fluide' },
+      { title: 'Chape traditionnelle', url: '/services/chape-traditionnelle' },
+      { title: 'Plancher chauffant', url: '/services/plancher-chauffant' },
+    ],
+  },
+  { title: 'Réalisations', url: '/realisations' },
+  { title: 'À propos', url: '/a-propos' },
+  { title: 'Contact', url: '/contact' },
+];
+---
+
+{/* Header principal */}
+<header class="site-header" role="banner" itemscope itemtype="https://schema.org/WPHeader">
+  <div class="site-header__inner container">
+
+    {/* Logo */}
+    <div class="site-header__logo">
+      <a href="/"
+         aria-label={`${siteName} - Retour à l'accueil`}
+         itemprop="url">
+        <img src="/images/logo.svg"
+             alt={siteName}
+             class="site-header__logo-dark"
+             width="200" height="50"
+             itemprop="logo"
+             loading="eager" />
+        <img src="/images/logo-white.svg"
+             alt=""
+             class="site-header__logo-light"
+             width="200" height="50"
+             loading="eager"
+             aria-hidden="true" />
+      </a>
+    </div>
+
+    {/* Navigation principale (desktop) */}
+    <Navigation currentPath={currentPath} />
+
+    {/* Actions header : CTA + hamburger mobile */}
+    <div class="site-header__actions">
+      {/* CTA principal */}
+      <a href="/contact"
+         class="site-header__cta btn btn--primary"
+         aria-label="Demander un devis">
+        <span class="site-header__cta-text">Devis gratuit</span>
+      </a>
+
+      {/* Téléphone (visible desktop) */}
+      <a href={`tel:${sitePhoneRaw}`}
+         class="site-header__phone"
+         aria-label={`Appeler le ${sitePhone}`}>
+        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        <span class="site-header__phone-number">{sitePhone}</span>
+      </a>
+
+      {/* Bouton hamburger (mobile) */}
+      <button type="button"
+              class="site-header__menu-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-navigation"
+              aria-label="Ouvrir le menu de navigation">
+        <span class="site-header__menu-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+{/* Drawer navigation mobile */}
+<div id="mobile-navigation"
+     class="mobile-nav"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Menu de navigation"
+     hidden>
+  <div class="mobile-nav__overlay" aria-hidden="true"></div>
+  <div class="mobile-nav__drawer">
+    <div class="mobile-nav__header">
+      <button type="button"
+              class="mobile-nav__close"
+              aria-label="Fermer le menu de navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    {/* Menu mobile */}
+    <nav aria-label="Navigation mobile">
+      <ul class="mobile-nav__list" role="list">
+        {menuItems.map((item) => {
+          const isActive = currentPath === item.url;
+          const isChildActive = item.items?.some(child => currentPath === child.url) ?? false;
+          return (
+            <li class={`mobile-nav__item${item.items ? ' has-submenu' : ''}${isActive || isChildActive ? ' is-active' : ''}`}>
+              <a href={item.url}
+                 class="mobile-nav__link"
+                 aria-current={isActive ? 'page' : undefined}
+                 aria-expanded={item.items ? 'false' : undefined}>
+                {item.title}
+                {item.items && (
+                  <button type="button"
+                          class="mobile-nav__toggle"
+                          aria-label={`Ouvrir le sous-menu ${item.title}`}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                  </button>
+                )}
+              </a>
+              {item.items && (
+                <ul class="mobile-nav__submenu" role="list">
+                  {item.items.map((child) => (
+                    <li class="mobile-nav__subitem">
+                      <a href={child.url}
+                         class="mobile-nav__sublink"
+                         aria-current={currentPath === child.url ? 'page' : undefined}>
+                        {child.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    {/* Footer mobile : téléphone + CTA */}
+    <div class="mobile-nav__footer">
+      <a href={`tel:${sitePhoneRaw}`} class="mobile-nav__phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        {sitePhone}
+      </a>
+      <a href="/contact" class="btn btn--primary btn--full">
+        Devis gratuit
+      </a>
+    </div>
+  </div>
+</div>

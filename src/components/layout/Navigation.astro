@@ -1,0 +1,65 @@
+---
+// Navigation principale (desktop)
+// Source : partials/navigation.htm
+
+interface NavItem {
+  title: string;
+  url: string;
+  items?: { title: string; url: string }[];
+}
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const menuItems: NavItem[] = [
+  { title: 'Accueil', url: '/' },
+  {
+    title: 'Services',
+    url: '/services',
+    items: [
+      { title: 'Chape fluide', url: '/services/chape-fluide' },
+      { title: 'Chape traditionnelle', url: '/services/chape-traditionnelle' },
+      { title: 'Plancher chauffant', url: '/services/plancher-chauffant' },
+    ],
+  },
+  { title: 'Réalisations', url: '/realisations' },
+  { title: 'À propos', url: '/a-propos' },
+  { title: 'Contact', url: '/contact' },
+];
+---
+
+<nav class="main-nav" role="navigation" aria-label="Navigation principale">
+  <ul class="main-nav__list" role="list">
+    {menuItems.map((item) => {
+      const isActive = currentPath === item.url;
+      const isChildActive = item.items?.some(child => currentPath === child.url) ?? false;
+      return (
+        <li class={`main-nav__item${isActive || isChildActive ? ' is-active' : ''}`}>
+          <a href={item.url}
+             class="main-nav__link"
+             aria-current={isActive ? 'page' : undefined}
+             aria-expanded={item.items ? 'false' : undefined}
+             aria-haspopup={item.items ? 'true' : undefined}>
+            {item.title}
+          </a>
+          {item.items && (
+            <ul class="main-nav__submenu" role="list">
+              {item.items.map((child) => (
+                <li class="main-nav__subitem">
+                  <a href={child.url}
+                     class="main-nav__sublink"
+                     aria-current={currentPath === child.url ? 'page' : undefined}>
+                    {child.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+</nav>

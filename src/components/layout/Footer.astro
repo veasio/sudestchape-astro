@@ -1,0 +1,124 @@
+---
+// Footer principal
+// Source : partials/footer.htm
+
+import MauticForm from '../ui/MauticForm.astro';
+
+const siteName = 'Sudest Chape';
+const siteDescription = 'Spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France. Particuliers et professionnels, nous intervenons dans toute la région PACA.';
+const sitePhone = '04 91 00 00 00';
+const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
+const siteEmail = 'contact@sudestchape.fr';
+const siteAddress = '123 Avenue du Prado\n13008 Marseille';
+
+const socialFacebook = 'https://www.facebook.com/sudestchape';
+const socialInstagram = 'https://www.instagram.com/sudestchape';
+const socialLinkedin = 'https://www.linkedin.com/company/sudestchape';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+  <div class="site-footer__inner container">
+
+    {/* Colonnes du footer */}
+    <div class="site-footer__columns">
+
+      {/* Colonne 1 : À propos */}
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">{siteName}</h2>
+        <p class="site-footer__description">{siteDescription}</p>
+
+        {/* Réseaux sociaux */}
+        <ul class="site-footer__social" role="list" aria-label="Réseaux sociaux">
+          <li>
+            <a href={socialFacebook}
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Facebook (nouvelle fenêtre)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href={socialInstagram}
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Instagram (nouvelle fenêtre)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href={socialLinkedin}
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="LinkedIn (nouvelle fenêtre)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Colonne 2 : Liens rapides */}
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Navigation</h2>
+        <ul class="site-footer__links" role="list">
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/realisations">Réalisations</a></li>
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      {/* Colonne 3 : Contact */}
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Contact</h2>
+        <address class="site-footer__contact" itemscope itemtype="https://schema.org/PostalAddress">
+          <p itemprop="streetAddress">
+            123 Avenue du Prado<br />13008 Marseille
+          </p>
+          <p>
+            <a href={`tel:${sitePhoneRaw}`} itemprop="telephone">
+              {sitePhone}
+            </a>
+          </p>
+          <p>
+            <a href={`mailto:${siteEmail}`} itemprop="email">
+              {siteEmail}
+            </a>
+          </p>
+        </address>
+      </div>
+
+      {/* Colonne 4 : Newsletter Mautic */}
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Newsletter</h2>
+        <p class="site-footer__newsletter-desc">
+          Recevez nos actualités et conseils.
+        </p>
+        <MauticForm formId="3" formStyle="inline" />
+      </div>
+
+    </div>
+
+    {/* Barre de copyright */}
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        &copy; {currentYear} {siteName}. Tous droits réservés.
+      </p>
+      <ul class="site-footer__legal" role="list">
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+        <li><a href="/politique-de-confidentialite">Politique de confidentialité</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
