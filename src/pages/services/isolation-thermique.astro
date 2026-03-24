@@ -1,0 +1,146 @@
+---
+import Default from '../../layouts/Default.astro';
+import Faq from '../../components/ui/Faq.astro';
+import CtaRandom from '../../components/ui/CtaRandom.astro';
+import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
+
+const faqItems = [
+  {
+    question: "Quel isolant mettre sous une chape liquide ?",
+    answer: "Les isolants les plus utilisés sous chape liquide sont le polystyrène expansé (PSE), le polyuréthane (PU) et la laine minérale. Le choix dépend de la résistance thermique recherchée (R), de la compressibilité (le sol doit supporter la charge), et de la compatibilité avec l'éventuel plancher chauffant. Nous vous recommandons le produit adapté à votre projet et aux normes RE 2020."
+  },
+  {
+    question: "La chape liquide est-elle isolante ?",
+    answer: "La chape liquide seule n'est pas un isolant thermique efficace. En revanche, combinée à un isolant (polystyrène, polyuréthane), elle forme un complexe sol isolant très performant. L'isolant se pose sur le plancher porteur, puis la chape liquide est coulée par-dessus. Cette solution est conforme aux exigences de la réglementation thermique RE 2020."
+  },
+  {
+    question: "Isolation thermique et plancher chauffant : comment ça fonctionne ?",
+    answer: "Dans un système plancher chauffant, l'isolant se place SOUS les tubes pour diriger la chaleur vers le haut (la pièce à chauffer) et non vers le bas (plancher porteur). L'isolant doit avoir une résistance thermique R ≥ 1,2 m².K/W en rénovation et R ≥ 2 m².K/W en construction neuve selon la RE 2020. La chape anhydrite est ensuite coulée au-dessus des tubes."
+  },
+  {
+    question: "Peut-on améliorer l'isolation thermique d'un sol existant ?",
+    answer: "Oui, la rénovation thermique d'un sol existant est possible. La solution la plus courante est la dépose du revêtement existant, pose d'un isolant mince haute performance, puis coulage d'une chape liquide. Cette intervention augmente légèrement la hauteur du plancher fini (généralement 5 à 10 cm). Une autre option est l'injection de mousse polyuréthane dans le vide sanitaire si vous en disposez."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/isolation-thermique#service`,
+      "name": "Isolation thermique de sol",
+      "description": "Pose de complexe sol isolant thermique pour particuliers et professionnels dans le Var, Bouches-du-Rhône et Alpes-Maritimes. Conforme RE 2020, certifié CTB-P.",
+      "provider": {
+        "@type": "Organization",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "telephone": SITE_PHONE,
+        "sameAs": SCHEMA_ORG_SAME_AS
+      },
+      "areaServed": ["Var", "Bouches-du-Rhône", "Alpes-Maritimes"],
+      "serviceType": "Isolation thermique de sol"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL },
+        { "@type": "ListItem", "position": 2, "name": "Nos services", "item": `${SITE_URL}/services` },
+        { "@type": "ListItem", "position": 3, "name": "Isolation Thermique", "item": `${SITE_URL}/services/isolation-thermique` }
+      ]
+    }
+  ]
+};
+---
+
+<Default
+  title="Isolation Thermique Sol – Chape Isolante | Var & PACA | Sud Est Chape"
+  description="Isolation thermique de sol par chape isolante dans le Var et PACA. Réduction des déperditions, plancher chauffant, RE 2020. Certifié CTB-P. Devis gratuit."
+  schema={schema}
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Isolation Thermique de Sol">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-isolation-thermique.webp"
+           alt="Isolation thermique de sol par complexe isolant et chape liquide"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Nos services</p>
+        <h1 class="hero__title">Isolation Thermique de Sol — Applicateur Agréé dans le Sud-Est</h1>
+        <p class="hero__description">
+          Réduction des déperditions thermiques par le sol, compatible plancher chauffant, conforme RE 2020. 6 équipes certifiées CTB-P dans le Var, Bouches-du-Rhône et Alpes-Maritimes.
+        </p>
+        <a href="/devis" class="btn btn--cta btn--lg">
+          Devis gratuit sous 24h
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Contenu principal */}
+  <section class="section section--rounded section--white" aria-labelledby="thermique-intro-title">
+    <div class="container">
+      <div class="grid grid--2" style="align-items: start; gap: var(--spacing-12);">
+        <div>
+          <p class="section__overline">Performance thermique</p>
+          <h2 class="section__title" id="thermique-intro-title" style="text-align:left;">L'isolation thermique de sol : économies d'énergie et conformité RE 2020</h2>
+          <p>L'isolation thermique du sol est un levier majeur pour réduire la consommation énergétique d'un bâtiment. En construction neuve comme en rénovation, la réglementation thermique RE 2020 impose des niveaux d'isolation précis qui passent par le sol.</p>
+          <p>La technique consiste à poser un isolant (polystyrène expansé, polyuréthane ou laine minérale) sur le plancher porteur, puis à couler une chape liquide par-dessus. Le résultat est un complexe sol parfaitement plan, isolant et conforme aux normes.</p>
+          <p>Pour les planchers chauffants, l'isolant se place impérativement sous les tubes pour diriger la chaleur vers la pièce et non vers le plancher porteur.</p>
+        </div>
+        <div>
+          <div class="card-feature" style="background: var(--color-accent-light);">
+            <h3 class="card-feature__title">Les atouts</h3>
+            <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+              <li>Économies d'énergie mesurables</li>
+              <li>Conforme RE 2020</li>
+              <li>Compatible plancher chauffant</li>
+              <li>Neuf et rénovation</li>
+              <li>Certifié CTB-P</li>
+              <li>Polystyrène, PU ou laine minérale</li>
+              <li>Résultats garantis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Zone d'intervention */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-thermique-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Intervention rapide</p>
+        <h2 class="section__title" id="zone-thermique-title">
+          Isolation thermique de sol dans tout le Sud-Est
+        </h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Var (83)</h3>
+          <p class="card-feature__text">Toulon, Six-Fours-les-Plages, La Seyne-sur-Mer, Hyères, Fréjus, Saint-Raphaël, Sainte-Maxime, Saint-Tropez, Draguignan</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Bouches-du-Rhône (13)</h3>
+          <p class="card-feature__text">Marseille, Aix-en-Provence, Aubagne, La Ciotat, Martigues, Salon-de-Provence</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
+          <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq title="Questions sur l'isolation thermique de sol" items={faqItems} />
+  <TestimonialsCompact title="Ils ont amélioré la performance thermique de leur logement" />
+  <CtaRandom />
+
+</Default>
