@@ -20,9 +20,9 @@
 /type_chape/chapes-pour-plancher-chauffant /services/chape-anhydrite 301
 /specialiste-chape-liquide/ /a-propos 301
 /specialiste-chape-liquide /a-propos 301
+/nos-realisations-chapes-fluides/:slug /realisations/:slug 301
 /nos-realisations-chapes-fluides/ /realisations 301
 /nos-realisations-chapes-fluides /realisations 301
-/nos-realisations-chapes-fluides/:slug /realisations/:slug 301
 /realisations-chapes-fluides/ /realisations 301
 /realisations-chapes-fluides /realisations 301
 /informations-devis-chape-liquide/ /devis 301
