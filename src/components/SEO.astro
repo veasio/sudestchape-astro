@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+  schema?: object;
+}
+const {
+  title,
+  description,
+  ogImage = '/images/og-default.jpg',
+  noindex = false,
+  schema,
+} = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(ogImage, Astro.site)} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

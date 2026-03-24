@@ -1,0 +1,143 @@
+---
+import SEO from '../components/SEO.astro';
+import criticalCss from '../styles/critical.css?raw';
+import mainCssUrl from '../styles/main.css?url';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+  schema?: object;
+}
+const props = Astro.props;
+---
+<!doctype html>
+<html lang="fr" dir="ltr" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <SEO {...props} />
+
+  {/* Favicon */}
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+
+  {/* Preconnect */}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://m.sudestchape.fr" />
+
+  {/* Google Fonts Inter (async) */}
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" />
+  </noscript>
+
+  {/* Critical CSS inline */}
+  <style set:html={criticalCss}></style>
+
+  {/* Styles spécifiques au layout minimal */}
+  <style>
+    /* Header minimal : logo centré */
+    .minimal-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-4) var(--page-padding);
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+    .minimal-header__logo img {
+      height: 2.5rem;
+      width: auto;
+    }
+
+    /* Footer minimal */
+    .minimal-footer {
+      text-align: center;
+      padding: var(--spacing-6) var(--page-padding);
+      border-top: 1px solid var(--color-gray-200);
+      font-size: var(--fs-sm);
+      color: var(--color-gray-500);
+    }
+    .minimal-footer a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    .minimal-footer a:hover { text-decoration: underline; }
+  </style>
+
+  {/* CSS principal (async) */}
+  <link rel="preload" as="style" href={mainCssUrl} />
+  <link rel="stylesheet" href={mainCssUrl} media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href={mainCssUrl} />
+  </noscript>
+
+  {/* CSS formulaires Mautic */}
+  <link rel="stylesheet" href="/styles/mautic-forms.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="/styles/mautic-forms.css" />
+  </noscript>
+
+  {/* Mautic tracking (mtc.js) */}
+  <script is:inline>
+  (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
+    w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),
+    m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://m.sudestchape.fr/mtc.js','mt');
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    var utmFields = {};
+    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(key){
+      var val = params.get(key);
+      if (val) utmFields[key] = val;
+    });
+    if (Object.keys(utmFields).length > 0) {
+      mt('send', 'pageview', utmFields);
+    } else {
+      mt('send', 'pageview');
+    }
+  })();
+  </script>
+</head>
+
+<body class="layout-minimal" itemscope itemtype="https://schema.org/WebPage">
+
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  {/* Header minimal : logo uniquement */}
+  <header class="minimal-header" role="banner">
+    <a href="/"
+       class="minimal-header__logo"
+       aria-label="sudestchape - Retour à l'accueil">
+      <img src="/images/logo.svg"
+           alt="sudestchape"
+           width="200"
+           height="50"
+           loading="eager" />
+    </a>
+  </header>
+
+  {/* Contenu principal */}
+  <main id="main-content" role="main" itemprop="mainContentOfPage">
+    <slot />
+  </main>
+
+  {/* Footer minimal */}
+  <footer class="minimal-footer" role="contentinfo">
+    <p>
+      &copy; {new Date().getFullYear()} sudestchape. Tous droits réservés.
+      &mdash; <a href="/politique-de-confidentialite">Politique de confidentialité</a>
+    </p>
+    <p>
+      <a href="/">Retour au site</a>
+    </p>
+  </footer>
+
+  <script src="/scripts/app.js" type="module"></script>
+</body>
+</html>
