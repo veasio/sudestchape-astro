@@ -12,8 +12,8 @@ export const SITE_NAME        = 'Sud Est Chape';
 export const SITE_URL         = 'https://sudestchape.fr';
 export const SITE_TAGLINE     = 'Applicateur de Chape Liquide Agréé | PACA |';
 export const SITE_DESCRIPTION = 'Applicateur Agréé de Chape liquide, autonivelante, planchers chauffant (chape anhydrite ou ciment) ou HPC, mise à niveau des sols, Isolation Phonique et Thermique. Chapiste sur Toulon, Var et PACA';
-export const SITE_LOGO        = '/images/logo.png';
-export const SITE_LOGO_LIGHT  = '/images/logo-light.png'; // logo blanc pour fond sombre
+export const SITE_LOGO        = '/images/logo.svg';
+export const SITE_LOGO_LIGHT  = '/images/logo-light.svg'; // logo blanc pour fond sombre
 export const SITE_FAVICON     = '/favicon.png';
 
 export const SITE_PHONE       = '+33494874041';

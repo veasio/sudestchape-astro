@@ -3,7 +3,7 @@
 // Source : partials/header.htm
 
 import Navigation from './Navigation.astro';
-import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY, NAV_ITEMS, HEADER_TRANSPARENT } from '../../config';
+import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY, NAV_ITEMS, HEADER_TRANSPARENT, SITE_LOGO, SITE_LOGO_LIGHT } from '../../config';
 
 interface Props {
   currentPath?: string;
@@ -23,13 +23,13 @@ const menuItems = NAV_ITEMS;
       <a href="/"
          aria-label={`${SITE_NAME} - Retour à l'accueil`}
          itemprop="url">
-        <img src="/images/logo.svg"
+        <img src={SITE_LOGO}
              alt={SITE_NAME}
              class="site-header__logo-dark"
              width="200" height="50"
              itemprop="logo"
              loading="eager" />
-        <img src="/images/logo-white.svg"
+        <img src={SITE_LOGO_LIGHT}
              alt=""
              class="site-header__logo-light"
              width="200" height="50"
