@@ -130,7 +130,7 @@ export const NAV_ITEMS = [
     items: [
       { title: 'Chape Ciment',          url: '/services/chape-ciment' },
       { title: 'Chape Anhydrite',  url: '/services/chape-anhydrite' },
-      { title: 'Chape de Réagréage / Ravoirage',    url: '/services/chape-réagréage-ravoirage' },
+      { title: 'Chape de Réagréage / Ravoirage',    url: '/services/chape-reagreage-ravoirage' },
 	  { title: 'Isolation Phonique',    url: '/services/isolation-phonique' },
 	  { title: 'Isolation Thermique',    url: '/services/isolation-thermique' },
 	  { title: 'Mousse Polyuréthane Projetée',    url: '/services/mousse-polyurethane-projetee' },
