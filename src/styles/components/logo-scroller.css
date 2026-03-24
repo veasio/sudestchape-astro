@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Logo Scroller - sudestchape
+   BEM : .logo-scroller
+   Défilement infini horizontal de logos partenaires/certifications
+   ========================================================================== */
+
+.logo-scroller {
+    padding-block: var(--spacing-12);
+    background: var(--color-accent-light);
+    overflow: hidden;
+}
+
+.logo-scroller__header {
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+}
+
+.logo-scroller__overline {
+    font-size: var(--fs-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.logo-scroller__title {
+    font-size: var(--fs-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+}
+
+/* Container du défilement */
+.logo-scroller__track {
+    display: flex;
+    width: max-content;
+    animation: logo-scroll 30s linear infinite;
+}
+
+/* Pause au hover */
+.logo-scroller:hover .logo-scroller__track {
+    animation-play-state: paused;
+}
+
+/* Liste de logos (dupliquée pour boucle infinie) */
+.logo-scroller__list {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12);
+    padding-inline: var(--spacing-6);
+}
+
+@media (min-width: 768px) {
+    .logo-scroller__list {
+        gap: var(--spacing-16);
+        padding-inline: var(--spacing-8);
+    }
+}
+
+@media (min-width: 1024px) {
+    .logo-scroller__list {
+        gap: var(--spacing-20);
+        padding-inline: var(--spacing-12);
+    }
+}
+
+/* Item logo */
+.logo-scroller__item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    filter: grayscale(100%);
+}
+
+.logo-scroller__item:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.logo-scroller__item img {
+    max-height: 3rem;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .logo-scroller__item img {
+        max-height: 3.5rem;
+        max-width: 140px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .logo-scroller__item img {
+        max-height: 4rem;
+        max-width: 160px;
+    }
+}
+
+/* Animation de défilement */
+@keyframes logo-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Variante : fond sombre */
+.logo-scroller--dark {
+    background: var(--color-gray-900);
+}
+
+.logo-scroller--dark .logo-scroller__title {
+    color: var(--color-white);
+}
+
+.logo-scroller--dark .logo-scroller__item {
+    filter: grayscale(100%) brightness(0) invert(1);
+    opacity: 0.5;
+}
+
+.logo-scroller--dark .logo-scroller__item:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Variante : fond blanc */
+.logo-scroller--white {
+    background: var(--color-white);
+}
+
+/* Variante : défilement inversé (vers la droite) */
+.logo-scroller--reverse .logo-scroller__track {
+    animation-direction: reverse;
+}
+
+/* Variante : défilement plus lent */
+.logo-scroller--slow .logo-scroller__track {
+    animation-duration: 45s;
+}
+
+/* Variante : défilement plus rapide */
+.logo-scroller--fast .logo-scroller__track {
+    animation-duration: 20s;
+}
+
+/* Préférence mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+    .logo-scroller__track {
+        animation: none;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .logo-scroller__list:nth-child(2) {
+        display: none;
+    }
+
+    .logo-scroller__item {
+        opacity: 0.7;
+        filter: grayscale(50%);
+    }
+}

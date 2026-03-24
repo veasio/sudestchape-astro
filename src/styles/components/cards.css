@@ -1,0 +1,611 @@
+/* ==========================================================================
+   Cartes - sudestchape
+   BEM : .card
+   ========================================================================== */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-width) solid rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+}
+
+.card:hover {
+    border-color: var(--color-primary);
+}
+
+/* ------------------------------------------------------------------
+   Image
+   ------------------------------------------------------------------ */
+.card__image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+}
+
+.card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.card:hover .card__image img {
+    transform: scale(1.03);
+}
+
+.card__badge {
+    position: absolute;
+    top: var(--spacing-3);
+    left: var(--spacing-3);
+    padding: var(--spacing-1) var(--spacing-3);
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: var(--fs-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    border-radius: var(--border-radius-sm);
+}
+
+/* ------------------------------------------------------------------
+   Contenu
+   ------------------------------------------------------------------ */
+.card__body {
+    padding: var(--spacing-5);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--spacing-3);
+}
+
+.card__overline {
+    font-size: var(--fs-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-primary);
+}
+
+.card__title {
+    font-size: var(--fs-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-gray-900);
+}
+
+.card__title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card__title a:hover {
+    color: var(--color-primary);
+}
+
+.card__text {
+    font-size: var(--fs-sm);
+    color: var(--color-gray-500);
+    line-height: var(--line-height-relaxed);
+}
+
+.card__footer {
+    margin-top: auto;
+    padding-top: var(--spacing-3);
+}
+
+/* ------------------------------------------------------------------
+   Variantes
+   ------------------------------------------------------------------ */
+
+/* Horizontal (image à gauche) */
+@media (min-width: 768px) {
+    .card--horizontal {
+        flex-direction: row;
+    }
+
+    .card--horizontal .card__image {
+        width: 40%;
+        flex-shrink: 0;
+        aspect-ratio: auto;
+    }
+}
+
+/* Sans bordure */
+.card--flat {
+    border: none;
+    border-radius: 0;
+}
+
+.card--flat:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+/* Fond accent */
+.card--accent {
+    background: var(--color-accent-light);
+    border-color: var(--color-accent);
+}
+
+/* ------------------------------------------------------------------
+   Carte fonctionnalité / service (icône + texte)
+   ------------------------------------------------------------------ */
+.card-feature {
+    text-align: center;
+    padding: var(--spacing-8) var(--spacing-5);
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-width) solid rgb(0 0 0 / 0.1);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card-feature:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.card-feature__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto var(--spacing-4);
+    background: var(--color-accent-light);
+    border-radius: var(--border-radius-full);
+    color: var(--color-primary);
+    transition: background var(--transition-base), color var(--transition-base), transform var(--transition-base);
+}
+
+.card-feature:hover .card-feature__icon {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+.card-feature__icon svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+.card-feature__title {
+    font-size: var(--fs-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-2);
+    position: relative;
+    display: inline-block;
+}
+
+/* Soulignement animé du titre */
+.card-feature__title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.4s ease;
+}
+
+.card-feature:hover .card-feature__title::after {
+    width: 100%;
+}
+
+.card-feature__text {
+    font-size: var(--fs-sm);
+    color: var(--color-gray-500);
+    line-height: var(--line-height-relaxed);
+}
+
+/* Préférence mouvement réduit pour card-feature */
+@media (prefers-reduced-motion: reduce) {
+    .card-feature,
+    .card-feature__icon,
+    .card-feature__title::after {
+        transition: none;
+        transform: none;
+    }
+    .card-feature:hover {
+        transform: none;
+    }
+    .card-feature:hover .card-feature__icon {
+        transform: none;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Carte service (page services)
+   ------------------------------------------------------------------ */
+.card-service {
+    padding: var(--spacing-8);
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-width) solid var(--color-gray-200);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-service:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-service__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: var(--spacing-5);
+    background: var(--color-accent-light);
+    border-radius: var(--border-radius-full);
+    color: var(--color-primary);
+    transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.card-service:hover .card-service__icon {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.05);
+}
+
+.card-service__title {
+    font-size: var(--fs-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-3);
+    position: relative;
+    display: inline-block;
+}
+
+/* Soulignement animé du titre */
+.card-service__title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.4s ease;
+}
+
+.card-service:hover .card-service__title::after {
+    width: 100%;
+}
+
+.card-service__text {
+    font-size: var(--fs-base);
+    color: var(--color-gray-600);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-4);
+}
+
+.card-service__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-service__features li {
+    position: relative;
+    padding-left: var(--spacing-6);
+    margin-bottom: var(--spacing-2);
+    font-size: var(--fs-sm);
+    color: var(--color-gray-600);
+}
+
+.card-service__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 1rem;
+    height: 1rem;
+    background: var(--color-success);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+}
+
+/* ------------------------------------------------------------------
+   Carte projet / réalisation
+   ------------------------------------------------------------------ */
+.card-project {
+    display: block;
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    background: var(--color-gray-900);
+    text-decoration: none;
+    color: var(--color-white);
+}
+
+.card-project__image {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+}
+
+.card-project__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card-project:hover .card-project__image img {
+    transform: scale(1.08);
+}
+
+/* Overlay gradient */
+.card-project::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.8) 0%, rgb(0 0 0 / 0.2) 50%, rgb(0 0 0 / 0) 100%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Overlay coloré au survol */
+.card-project::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-primary);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    mix-blend-mode: multiply;
+}
+
+.card-project:hover::before {
+    opacity: 0.5;
+}
+
+.card-project:hover::after {
+    opacity: 0.35;
+}
+
+.card-project__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-5);
+    z-index: 2;
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+}
+
+.card-project:hover .card-project__content {
+    transform: translateY(-0.5rem);
+}
+
+.card-project__title {
+    font-size: var(--fs-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-1);
+    color: var(--color-white);
+    display: inline-block;
+    position: relative;
+}
+
+/* Soulignement animé du titre */
+.card-project__title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width 0.4s ease;
+}
+
+.card-project:hover .card-project__title::after {
+    width: 100%;
+}
+
+.card-project__location {
+    font-size: var(--fs-sm);
+    color: var(--color-gray-300);
+    margin-bottom: var(--spacing-1);
+    transition: color 0.3s ease;
+}
+
+.card-project:hover .card-project__location {
+    color: var(--color-white);
+}
+
+.card-project__type {
+    font-size: var(--fs-xs);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Préférence mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+    .card-service__icon,
+    .card-service__title::after,
+    .card-project__image img,
+    .card-project::before,
+    .card-project::after,
+    .card-project__content,
+    .card-project__title::after,
+    .card-project__location {
+        transition: none;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Page détail projet / réalisation
+   ------------------------------------------------------------------ */
+.project-detail {
+    max-width: 1000px;
+    margin-inline: auto;
+}
+
+.project-detail__hero {
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-8);
+}
+
+.project-detail__hero img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+}
+
+.project-detail__header {
+    margin-bottom: var(--spacing-8);
+    padding-bottom: var(--spacing-6);
+    border-bottom: var(--border-width) solid var(--color-gray-200);
+}
+
+.project-detail__title {
+    font-size: var(--fs-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-2);
+}
+
+.project-detail__location {
+    font-size: var(--fs-lg);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.project-detail__body {
+    display: grid;
+    gap: var(--spacing-8);
+    margin-bottom: var(--spacing-12);
+}
+
+@media (min-width: 768px) {
+    .project-detail__body {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.project-detail__description h2 {
+    font-size: var(--fs-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-4);
+}
+
+.project-detail__description p {
+    font-size: var(--fs-base);
+    color: var(--color-gray-600);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-4);
+}
+
+.project-detail__description p:last-child {
+    margin-bottom: 0;
+}
+
+.project-detail__specs {
+    background: var(--color-accent-light);
+    padding: var(--spacing-6);
+    border-radius: var(--border-radius-lg);
+    height: fit-content;
+}
+
+.project-detail__specs h2 {
+    font-size: var(--fs-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-4);
+}
+
+/* Liste des caractéristiques techniques */
+.specs-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.specs-list__item {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+    padding-bottom: var(--spacing-3);
+    border-bottom: 1px solid var(--color-accent-dark);
+}
+
+.specs-list__item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.specs-list__item dt {
+    font-size: var(--fs-sm);
+    color: var(--color-gray-500);
+}
+
+.specs-list__item dd {
+    font-size: var(--fs-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+    text-align: right;
+}
+
+/* Galerie photos */
+.project-detail__gallery {
+    margin-top: var(--spacing-8);
+}
+
+.project-detail__gallery h2 {
+    font-size: var(--fs-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-6);
+}
+
+.project-detail__photo {
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    margin: 0;
+}
+
+.project-detail__photo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.project-detail__photo:hover img {
+    transform: scale(1.03);
+}
+
+.project-detail__photo figcaption {
+    padding: var(--spacing-3);
+    font-size: var(--fs-sm);
+    color: var(--color-gray-600);
+    text-align: center;
+    background: var(--color-gray-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-detail__photo img {
+        transition: none;
+    }
+}

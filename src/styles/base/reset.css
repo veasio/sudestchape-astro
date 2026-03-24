@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Reset CSS - sudestchape
+   Reset minimal moderne (inspiré Josh Comeau + Andy Bell)
+   ========================================================================== */
+
+/* Box model prévisible */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Suppression des marges par défaut */
+* {
+    margin: 0;
+}
+
+/* Configuration du document */
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    tab-size: 4;
+}
+
+/* Body */
+body {
+    font-family: var(--font-family);
+    font-size: var(--fs-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    color: var(--color-gray-900);
+    background-color: var(--color-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+}
+
+/* Médias responsive par défaut */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Images : hauteur auto pour préserver le ratio */
+img,
+picture {
+    height: auto;
+}
+
+/* Héritage de la police sur les contrôles */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+/* Textarea : empêcher le redimensionnement horizontal */
+textarea {
+    resize: vertical;
+}
+
+/* Retour à la ligne forcé sur les textes longs */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/* Titres : pas de style par défaut (stylés dans typography.css) */
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* Listes : reset si pas de rôle explicite */
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+    padding: 0;
+}
+
+/* Liens */
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/* Boutons */
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Focus visible global (accessibilité) */
+:focus-visible {
+    outline: 3px solid var(--color-cta);
+    outline-offset: 2px;
+}
+
+/* Suppression du outline sur les éléments non-focus-visible */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Réduction des animations si préférence utilisateur */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Suppression du highlight bleu sur mobile (tap) */
+html {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Contenus cachés nativement */
+[hidden] {
+    display: none !important;
+}

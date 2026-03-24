@@ -1,0 +1,491 @@
+/* ==========================================================================
+   Hero - sudestchape
+   BEM : .hero
+   ========================================================================== */
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
+    padding: var(--spacing-16) 0;
+    overflow: hidden;
+    background: var(--color-gray-900);
+    color: var(--color-white);
+}
+
+/* ------------------------------------------------------------------
+   Hero Wrapper (fond coloré pour les coins arrondis)
+   ------------------------------------------------------------------ */
+.hero-wrapper {
+    background: var(--color-white);
+    transition: background var(--transition-base);
+}
+
+/* Mode transparent activé : fond coloré visible derrière les coins arrondis */
+.hero-wrapper--transparent-mode {
+    background: var(--color-cta);
+}
+
+/* Après scroll : fond devient blanc pour révéler les coins arrondis */
+.hero-wrapper--transparent-mode.hero-wrapper--scrolled {
+    background: var(--color-white);
+}
+
+/* Hero pleine page avec arrondi permanent */
+/* Mode sticky (défaut) : hauteur = viewport - header */
+.hero--full {
+    min-height: 450px;
+    height: calc(100vh - var(--header-height) - var(--topbar-height));
+    height: calc(100dvh - var(--header-height) - var(--topbar-height)); /* Override si supporté */
+    padding: 0;
+    border-radius: var(--border-radius-hero) var(--border-radius-hero) 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Mode transparent (header fixed) : hero occupe tout le viewport */
+.hero-wrapper--transparent-mode .hero--full {
+    height: 100vh;
+    height: 100dvh;
+}
+
+@media (min-width: 768px) {
+    .hero--full {
+        min-height: 480px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero--full {
+        min-height: 520px;
+    }
+}
+
+/* Support navigateurs anciens : JavaScript fallback via CSS custom property */
+@supports not (height: 100dvh) {
+    .hero--full {
+        height: calc((var(--vh, 1vh) * 100) - var(--header-height) - var(--topbar-height));
+    }
+
+    .hero-wrapper--transparent-mode .hero--full {
+        height: calc(var(--vh, 1vh) * 100);
+    }
+}
+
+/* ------------------------------------------------------------------
+   Hero petit (pages intérieures)
+   Compense le header fixed avec padding-top
+   ------------------------------------------------------------------ */
+.hero--small {
+    min-height: 40vh;
+    padding-top: calc(var(--header-height) + var(--topbar-height) + var(--spacing-12));
+    padding-bottom: var(--spacing-12);
+}
+
+@media (min-width: 768px) {
+    .hero--small {
+        min-height: 45vh;
+        padding-top: calc(var(--header-height) + var(--topbar-height) + var(--spacing-16));
+        padding-bottom: var(--spacing-16);
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero--small {
+        min-height: 50vh;
+        padding-top: calc(var(--header-height) + var(--topbar-height) + var(--spacing-20));
+        padding-bottom: var(--spacing-20);
+    }
+}
+
+/* Styles du texte pour hero--small */
+.hero--small .hero__title {
+    color: var(--color-white);
+    text-shadow: 0 2px 8px rgb(0 0 0 / 0.5), 0 4px 16px rgb(0 0 0 / 0.3);
+}
+
+.hero--small .hero__overline {
+    color: var(--color-accent);
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+}
+
+.hero--small .hero__description {
+    color: var(--color-gray-200);
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.3);
+}
+
+@media (min-width: 768px) {
+    .hero:not(.hero--full):not(.hero--small) {
+        min-height: 70vh;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero:not(.hero--full):not(.hero--small) {
+        min-height: 80vh;
+        padding: var(--spacing-24) 0;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Image de fond
+   ------------------------------------------------------------------ */
+.hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero__background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay gradient */
+.hero__background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgb(0 0 0 / 0.7) 0%,
+        rgb(0 0 0 / 0.4) 60%,
+        rgb(0 0 0 / 0.2) 100%
+    );
+}
+
+/* ------------------------------------------------------------------
+   Contenu
+   ------------------------------------------------------------------ */
+.hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+}
+
+.hero__overline {
+    font-size: var(--fs-sm);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-4);
+}
+
+.hero__title {
+    font-size: var(--fs-4xl);
+    font-weight: var(--font-weight-black);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--spacing-4);
+}
+
+@media (min-width: 1024px) {
+    .hero__title {
+        font-size: var(--fs-5xl);
+    }
+}
+
+.hero__description {
+    font-size: var(--fs-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-gray-300);
+    margin-bottom: var(--spacing-8);
+    max-width: 520px;
+}
+
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+}
+
+/* ------------------------------------------------------------------
+   Variante : centré
+   ------------------------------------------------------------------ */
+.hero--center {
+    text-align: center;
+}
+
+.hero--center .hero__content {
+    margin-inline: auto;
+    max-width: 800px;
+}
+
+.hero--center .hero__description {
+    margin-inline: auto;
+}
+
+.hero--center .hero__actions {
+    justify-content: center;
+}
+
+.hero--center .hero__background::after {
+    background: rgb(0 0 0 / 0.55);
+}
+
+/* ------------------------------------------------------------------
+   Variante : accent (fond couleur)
+   ------------------------------------------------------------------ */
+.hero--accent {
+    background: var(--color-accent-light);
+    color: var(--color-gray-900);
+}
+
+.hero--accent .hero__description {
+    color: var(--color-gray-600);
+}
+
+.hero--accent .hero__overline {
+    color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Hero Slider
+   BEM : .hero-slider
+   ========================================================================== */
+
+.hero-slider {
+    position: relative;
+    min-height: 450px;
+    height: calc(100vh - var(--header-height) - var(--topbar-height));
+    height: calc(100dvh - var(--header-height) - var(--topbar-height)); /* Override si supporté */
+}
+
+/* Mode transparent (header fixed) : hero slider occupe tout le viewport */
+.hero-wrapper--transparent-mode .hero-slider {
+    height: 100vh;
+    height: 100dvh;
+}
+
+@media (min-width: 768px) {
+    .hero-slider {
+        min-height: 480px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-slider {
+        min-height: 520px;
+    }
+}
+
+@supports not (height: 100dvh) {
+    .hero-slider {
+        height: calc((var(--vh, 1vh) * 100) - var(--header-height) - var(--topbar-height));
+    }
+
+    .hero-wrapper--transparent-mode .hero-slider {
+        height: calc(var(--vh, 1vh) * 100);
+    }
+}
+
+/* Tous les slides : position absolue, couvrent tout le hero */
+.hero-slider__slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: var(--spacing-8);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    z-index: 0;
+}
+
+/* Slide actif : visible */
+.hero-slider__slide--active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+/* L'image de fond couvre tout le slide */
+.hero-slider__slide .hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-slider__slide .hero__background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Overlay sur l'image pour lisibilité du texte */
+.hero-slider__slide .hero__background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgb(0 0 0 / 0.65) 0%,
+        rgb(0 0 0 / 0.4) 50%,
+        rgb(0 0 0 / 0.2) 100%
+    );
+    z-index: 1;
+}
+
+/* Contenu du slide au-dessus de l'overlay */
+.hero-slider__slide .container {
+    position: relative;
+    z-index: 2;
+    /* Padding pour ne pas empiéter sur les flèches */
+    padding-left: calc(var(--page-padding) + 4rem);
+    padding-right: calc(var(--page-padding) + 4rem);
+}
+
+/* Contenu du slide */
+.hero-slider__slide .hero__content {
+    max-width: 600px;
+}
+
+@media (min-width: 1024px) {
+    .hero-slider__slide .container {
+        padding-left: calc(var(--page-padding) + 5rem);
+        padding-right: calc(var(--page-padding) + 5rem);
+    }
+
+    .hero-slider__slide .hero__content {
+        max-width: 640px;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Variante : contenu à droite
+   ------------------------------------------------------------------ */
+.hero-slider__slide--content-right .container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-slider__slide--content-right .hero__background::after {
+    background: linear-gradient(
+        to left,
+        rgb(0 0 0 / 0.65) 0%,
+        rgb(0 0 0 / 0.4) 50%,
+        rgb(0 0 0 / 0.2) 100%
+    );
+}
+
+.hero-slider__slide--content-right .hero__content {
+    text-align: right;
+}
+
+/* Aligner les éléments avec max-width vers la droite */
+.hero-slider__slide--content-right .hero__overline,
+.hero-slider__slide--content-right .hero__description {
+    margin-left: auto;
+}
+
+.hero-slider__slide--content-right .hero__actions {
+    justify-content: flex-end;
+}
+
+/* Texte lisible avec ombre et couleur forcée */
+.hero-slider__slide .hero__title {
+    color: var(--color-white);
+    text-shadow: 0 2px 8px rgb(0 0 0 / 0.5), 0 4px 16px rgb(0 0 0 / 0.3);
+}
+
+.hero-slider__slide .hero__overline {
+    color: var(--color-accent);
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+}
+
+.hero-slider__slide .hero__description {
+    color: var(--color-gray-200);
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-slider__slide {
+        transition: none;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Flèches
+   ------------------------------------------------------------------ */
+.hero-slider__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: rgb(255 255 255 / 0.2);
+    backdrop-filter: blur(4px);
+    border-radius: var(--border-radius-full);
+    color: var(--color-white);
+    cursor: pointer;
+    transition: background var(--transition-base);
+}
+
+.hero-slider__arrow:hover {
+    background: rgb(255 255 255 / 0.4);
+}
+
+.hero-slider__arrow--prev {
+    left: var(--spacing-4);
+}
+
+.hero-slider__arrow--next {
+    right: var(--spacing-4);
+}
+
+@media (min-width: 1024px) {
+    .hero-slider__arrow {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .hero-slider__arrow--prev {
+        left: var(--spacing-8);
+    }
+
+    .hero-slider__arrow--next {
+        right: var(--spacing-8);
+    }
+}
+
+/* ------------------------------------------------------------------
+   Dots
+   ------------------------------------------------------------------ */
+.hero-slider__dots {
+    position: absolute;
+    bottom: var(--spacing-6);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.hero-slider__dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: var(--border-radius-full);
+    background: rgb(255 255 255 / 0.4);
+    cursor: pointer;
+    transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.hero-slider__dot--active {
+    background: var(--color-white);
+    transform: scale(1.25);
+}
+
+.hero-slider__dot:hover {
+    background: rgb(255 255 255 / 0.7);
+}

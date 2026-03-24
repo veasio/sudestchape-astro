@@ -1,0 +1,478 @@
+/* ==========================================================================
+   Grilles et layout - sudestchape
+   BEM : .container, .grid, .section
+   ========================================================================== */
+
+/* ------------------------------------------------------------------
+   Container
+   ------------------------------------------------------------------ */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--page-padding);
+}
+
+.container--sm {
+    max-width: var(--max-width-sm);
+}
+
+.container--lg {
+    max-width: var(--max-width-lg);
+}
+
+.container--full {
+    max-width: none;
+}
+
+/* ------------------------------------------------------------------
+   Sections
+   ------------------------------------------------------------------ */
+.section {
+    padding-block: var(--section-spacing);
+}
+
+.section--sm {
+    padding-block: var(--spacing-8);
+}
+
+@media (min-width: 768px) {
+    .section--sm {
+        padding-block: var(--spacing-12);
+    }
+}
+
+.section--accent {
+    background: var(--color-accent-light);
+}
+
+.section--dark {
+    background: var(--color-gray-900);
+    color: var(--color-gray-100);
+}
+
+.section--white {
+    background: var(--color-white);
+}
+
+.section--gray {
+    background: var(--color-gray-100);
+}
+
+.section__header {
+    text-align: center;
+    max-width: 720px;
+    margin-inline: auto;
+    margin-bottom: var(--spacing-10);
+}
+
+@media (min-width: 768px) {
+    .section__header {
+        margin-bottom: var(--spacing-16);
+    }
+}
+
+.section__overline {
+    font-size: var(--fs-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-3);
+}
+
+.section__title {
+    font-size: var(--fs-3xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-4);
+}
+
+.section__description {
+    font-size: var(--fs-lg);
+    color: var(--color-gray-500);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ------------------------------------------------------------------
+   Sections arrondies (système modulaire)
+   Utiliser : --rounded-top, --rounded-bottom, --rounded-both
+   Optionnel : --overlap pour remonter sur la section précédente
+   ------------------------------------------------------------------ */
+
+/* Coins arrondis en haut uniquement */
+.section--rounded,
+.section--rounded-top {
+    border-radius: var(--border-radius-section) var(--border-radius-section) 0 0;
+    margin-top: calc(var(--border-radius-section) * -1);
+    position: relative;
+}
+
+/* Coins arrondis en bas uniquement */
+.section--rounded-bottom {
+    border-radius: 0 0 var(--border-radius-section) var(--border-radius-section);
+}
+
+/* Coins arrondis partout */
+.section--rounded-both,
+.section--rounded-full {
+    border-radius: var(--border-radius-section);
+    margin-top: calc(var(--border-radius-section) * -1);
+    position: relative;
+}
+
+/* Section qui remonte sur la précédente (effet overlap) */
+.section--overlap {
+    margin-top: calc(var(--spacing-6) * -1);
+    position: relative;
+    z-index: 2;
+}
+
+@media (min-width: 768px) {
+    .section--overlap {
+        margin-top: calc(var(--spacing-10) * -1);
+    }
+}
+
+@media (min-width: 1024px) {
+    .section--overlap {
+        margin-top: calc(var(--spacing-16) * -1);
+    }
+}
+
+/* Section sans padding top (après hero par exemple) */
+.section--no-padding-top {
+    padding-top: 0;
+}
+
+/* Section sans padding bottom */
+.section--no-padding-bottom {
+    padding-bottom: 0;
+}
+
+/* ------------------------------------------------------------------
+   Grid system
+   ------------------------------------------------------------------ */
+.grid {
+    display: grid;
+    gap: var(--spacing-6);
+}
+
+/* Colonnes */
+.grid--2 {
+    grid-template-columns: 1fr;
+}
+
+.grid--3 {
+    grid-template-columns: 1fr;
+}
+
+.grid--4 {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .grid--2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid--3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid--4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid--3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid--4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid {
+        gap: var(--spacing-8);
+    }
+}
+
+/* Variantes d'espacement */
+.grid--tight {
+    gap: var(--spacing-4);
+}
+
+.grid--loose {
+    gap: var(--spacing-12);
+}
+
+/* ------------------------------------------------------------------
+   Flex utilitaires de layout
+   ------------------------------------------------------------------ */
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex--between {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex--column {
+    flex-direction: column;
+}
+
+.flex--wrap {
+    flex-wrap: wrap;
+}
+
+.flex--gap-sm {
+    gap: var(--spacing-2);
+}
+
+.flex--gap {
+    gap: var(--spacing-4);
+}
+
+.flex--gap-lg {
+    gap: var(--spacing-8);
+}
+
+/* ------------------------------------------------------------------
+   Grille collage / Bento grid (style plastno)
+   ------------------------------------------------------------------ */
+.grid-collage {
+    display: grid;
+    gap: var(--spacing-4);
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(200px, auto);
+}
+
+@media (min-width: 768px) {
+    .grid-collage {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(280px, auto);
+        gap: var(--spacing-5);
+    }
+
+    .grid-collage__item--large {
+        grid-row: span 2;
+    }
+
+    .grid-collage__item--wide {
+        grid-column: span 2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-collage {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: minmax(320px, auto);
+        gap: var(--spacing-6);
+    }
+
+    .grid-collage__item--large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .grid-collage__item--tall {
+        grid-row: span 2;
+    }
+
+    .grid-collage__item--wide {
+        grid-column: span 2;
+    }
+}
+
+/* Item de la grille collage */
+.grid-collage__item {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    background: var(--color-gray-900);
+}
+
+.grid-collage__item a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    padding: var(--spacing-6);
+    text-decoration: none;
+    color: var(--color-white);
+    position: relative;
+    z-index: 2;
+}
+
+/* Images : principale et secondaire (swap au hover) */
+.grid-collage__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.grid-collage__item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Image secondaire (hover) - cachée par défaut */
+.grid-collage__img--hover {
+    opacity: 0;
+}
+
+/* Au survol : zoom et swap d'image */
+.grid-collage__item:hover .grid-collage__img--default {
+    transform: scale(1.08);
+}
+
+/* Swap uniquement si l'image hover existe */
+.grid-collage__item:hover .grid-collage__img--default:not(:only-child) {
+    opacity: 0;
+}
+
+.grid-collage__item:hover .grid-collage__img--hover {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+/* Overlay gradient par défaut */
+.grid-collage__item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.2) 50%, rgb(0 0 0 / 0) 100%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Overlay coloré au survol (couleur primaire) */
+.grid-collage__item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-primary);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    mix-blend-mode: multiply;
+}
+
+.grid-collage__item:hover::before {
+    opacity: 0.3;
+}
+
+.grid-collage__item:hover::after {
+    opacity: 0.4;
+}
+
+/* Contenu texte */
+.grid-collage__content {
+    position: relative;
+    z-index: 2;
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+}
+
+.grid-collage__item:hover .grid-collage__content {
+    transform: translateY(-0.5rem);
+}
+
+.grid-collage__title {
+    font-size: var(--fs-xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-2);
+    color: var(--color-white);
+    display: inline-block;
+    position: relative;
+}
+
+/* Soulignement animé du titre */
+.grid-collage__title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width 0.4s ease;
+}
+
+.grid-collage__item:hover .grid-collage__title::after {
+    width: 100%;
+}
+
+.grid-collage__subtitle {
+    font-size: var(--fs-sm);
+    color: var(--color-gray-300);
+    opacity: 0.9;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.grid-collage__item:hover .grid-collage__subtitle {
+    opacity: 1;
+    color: var(--color-white);
+}
+
+/* Flèche/indicateur au survol */
+.grid-collage__arrow {
+    position: absolute;
+    bottom: var(--spacing-6);
+    right: var(--spacing-6);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-white);
+    color: var(--color-primary);
+    border-radius: var(--border-radius-full);
+    z-index: 2;
+    opacity: 0;
+    transform: translateX(-1rem);
+    transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease;
+}
+
+.grid-collage__arrow svg {
+    transition: transform 0.4s ease;
+}
+
+.grid-collage__item:hover .grid-collage__arrow {
+    opacity: 1;
+    transform: translateX(0);
+    background: var(--color-accent);
+}
+
+/* Rotation de la flèche au hover */
+.grid-collage__item:hover .grid-collage__arrow svg {
+    transform: rotate(-45deg);
+}
+
+/* Préférence mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+    .grid-collage__item img,
+    .grid-collage__item::before,
+    .grid-collage__item::after,
+    .grid-collage__content,
+    .grid-collage__title::after,
+    .grid-collage__subtitle,
+    .grid-collage__arrow,
+    .grid-collage__arrow svg {
+        transition: none;
+    }
+}

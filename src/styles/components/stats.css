@@ -1,0 +1,460 @@
+/* ==========================================================================
+   Stats / Compteurs - sudestchape
+   BEM : .stats
+   Section de chiffres clés avec animations
+   Approche : visible par défaut, animations en progressive enhancement
+   ========================================================================== */
+
+.stats {
+    padding-block: var(--spacing-8);
+    background: var(--color-gray-900);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 480px) {
+    .stats {
+        padding-block: var(--spacing-10);
+    }
+}
+
+@media (min-width: 768px) {
+    .stats {
+        padding-block: var(--spacing-16);
+    }
+}
+
+@media (min-width: 1024px) {
+    .stats {
+        padding-block: var(--spacing-20);
+    }
+}
+
+/* Fond avec motif subtil */
+.stats::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 50%, var(--color-primary) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, var(--color-cta) 0%, transparent 50%);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Grille des compteurs */
+.stats__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2) var(--spacing-3);
+    position: relative;
+    z-index: 1;
+}
+
+@media (min-width: 480px) {
+    .stats__grid {
+        gap: var(--spacing-4);
+    }
+}
+
+@media (min-width: 768px) {
+    .stats__grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-6);
+    }
+}
+
+/* Item compteur */
+.stats__item {
+    text-align: center;
+    padding: var(--spacing-2);
+    position: relative;
+}
+
+@media (min-width: 480px) {
+    .stats__item {
+        padding: var(--spacing-3);
+    }
+}
+
+@media (min-width: 768px) {
+    .stats__item {
+        padding: var(--spacing-6);
+    }
+}
+
+/* Séparateur vertical entre items (desktop) */
+@media (min-width: 768px) {
+    .stats__item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 60%;
+        background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            var(--color-gray-700) 20%,
+            var(--color-gray-700) 80%,
+            transparent 100%
+        );
+    }
+}
+
+/* Icône optionnelle - cachée sur très petits écrans */
+.stats__icon {
+    display: none; /* Caché par défaut sur mobile */
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto var(--spacing-2);
+    background: var(--color-primary);
+    border-radius: 50%;
+    color: var(--color-white);
+    opacity: 1; /* Fallback explicite */
+    transform: none; /* Fallback explicite */
+}
+
+@media (min-width: 480px) {
+    .stats__icon {
+        display: flex;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .stats__icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-bottom: var(--spacing-4);
+    }
+}
+
+.stats__icon svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+@media (min-width: 480px) {
+    .stats__icon svg {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .stats__icon svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+/* Valeur du compteur - TOUJOURS visible par défaut */
+.stats__value {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-black);
+    color: var(--color-white);
+    line-height: 1;
+    margin-bottom: var(--spacing-1);
+    position: relative;
+    display: inline-block;
+    opacity: 1; /* Fallback explicite */
+    transform: translateZ(0); /* Force GPU acceleration, prevent blur */
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 480px) {
+    .stats__value {
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
+    }
+}
+
+@media (min-width: 768px) {
+    .stats__value {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: var(--spacing-2);
+    }
+}
+
+/* Suffixe (%, +, ans, h, etc.) */
+.stats__suffix {
+    font-size: 0.5em;
+    color: var(--color-accent);
+    margin-left: 0.05em;
+}
+
+@media (min-width: 768px) {
+    .stats__suffix {
+        font-size: 0.6em;
+        margin-left: 0.1em;
+    }
+}
+
+/* Label sous le compteur - TOUJOURS visible par défaut */
+.stats__label {
+    font-size: 0.625rem; /* 10px */
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    opacity: 1; /* Fallback explicite */
+    transform: none; /* Fallback explicite */
+}
+
+@media (min-width: 480px) {
+    .stats__label {
+        font-size: var(--fs-xs);
+        letter-spacing: 0.05em;
+    }
+}
+
+@media (min-width: 768px) {
+    .stats__label {
+        font-size: var(--fs-sm);
+        letter-spacing: 0.1em;
+    }
+}
+
+/* ==========================================================================
+   ANIMATIONS - Progressive enhancement
+   Les éléments sont TOUJOURS visibles par défaut
+   Les animations ne s'appliquent que quand JS ajoute .stats--animated
+   ========================================================================== */
+
+/* Transitions pour animations fluides */
+.stats__icon {
+    transition: background 0.3s ease;
+}
+
+/* Quand JS est actif et a préparé les animations */
+.stats--animated .stats__icon {
+    opacity: 0;
+    transform: scale(0.5) translateZ(0);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s ease;
+    will-change: opacity, transform;
+}
+
+.stats--animated .stats__value[data-count] {
+    opacity: 0;
+    transform: translateY(20px) translateZ(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
+}
+
+.stats--animated .stats__label {
+    opacity: 0;
+    transform: translateY(10px) translateZ(0);
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+    will-change: opacity, transform;
+}
+
+/* Après animation - éléments visibles */
+.stats--animated .stats__item.is-visible .stats__icon {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+}
+
+.stats--animated .stats__item.is-visible .stats__value {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+}
+
+.stats--animated .stats__item.is-visible .stats__label {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+}
+
+/* Animation de brillance sur le nombre */
+.stats__value::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    animation: none;
+}
+
+.stats__item.is-visible .stats__value::after {
+    animation: shine 1.5s ease-out 0.5s;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Variante avec fond accent */
+.stats--accent {
+    background: var(--color-accent-light);
+}
+
+.stats--accent::before {
+    display: none;
+}
+
+.stats--accent .stats__value {
+    color: var(--color-gray-900);
+}
+
+.stats--accent .stats__suffix {
+    color: var(--color-primary);
+}
+
+.stats--accent .stats__label {
+    color: var(--color-gray-600);
+}
+
+.stats--accent .stats__item:not(:last-child)::after {
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--color-accent-dark) 20%,
+        var(--color-accent-dark) 80%,
+        transparent 100%
+    );
+}
+
+/* Variante avec icônes */
+.stats--with-icons .stats__item {
+    padding-top: var(--spacing-4);
+}
+
+/* Hover effect sur les items */
+.stats__item {
+    transition: transform var(--transition-base);
+}
+
+.stats__item:hover {
+    transform: scale(1.02);
+}
+
+.stats__item:hover .stats__icon {
+    background: var(--color-cta);
+    transform: scale(1.1);
+}
+
+/* ==========================================================================
+   MOBILE : Design optimisé avec animations
+   ========================================================================== */
+@media (max-width: 767px) {
+    .stats {
+        padding-block: var(--spacing-6);
+    }
+
+    .stats__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-3);
+    }
+
+    .stats__item {
+        padding: var(--spacing-4);
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: var(--border-radius);
+    }
+
+    /* Valeurs plus grandes et lisibles sur mobile */
+    .stats__value {
+        font-size: 2.25rem;
+        font-weight: 900;
+        margin-bottom: var(--spacing-2);
+        color: var(--color-white);
+        line-height: 1;
+    }
+
+    .stats__suffix {
+        font-size: 0.55em;
+        color: var(--color-accent);
+    }
+
+    /* Labels plus lisibles */
+    .stats__label {
+        font-size: 0.75rem;
+        color: var(--color-gray-300);
+        line-height: 1.4;
+        letter-spacing: 0.03em;
+    }
+
+    /* Icônes cachées sur mobile pour gagner de l'espace */
+    .stats__icon {
+        display: none;
+    }
+
+    /* Animation de comptage fonctionne sur mobile */
+    .stats--animated .stats__value[data-count] {
+        opacity: 0;
+        transform: translateY(15px) translateZ(0);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        will-change: opacity, transform;
+        backface-visibility: hidden;
+    }
+
+    .stats--animated .stats__label {
+        opacity: 0;
+        transform: translateY(8px) translateZ(0);
+        transition: opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s;
+        will-change: opacity, transform;
+    }
+
+    .stats--animated .stats__item.is-visible .stats__value {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+    }
+
+    .stats--animated .stats__item.is-visible .stats__label {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+    }
+
+    /* Effet shine sur mobile aussi */
+    .stats__item.is-visible .stats__value::after {
+        animation: shine 1.5s ease-out 0.6s;
+    }
+
+    /* Pas de hover effect sur mobile (touch) */
+    .stats__item:hover {
+        transform: none;
+    }
+}
+
+/* Préférence mouvement réduit - Tout visible, pas d'animations */
+@media (prefers-reduced-motion: reduce) {
+    .stats--animated .stats__icon,
+    .stats--animated .stats__value,
+    .stats--animated .stats__value[data-count],
+    .stats--animated .stats__label {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .stats__value::after {
+        animation: none !important;
+    }
+
+    .stats__item:hover {
+        transform: none;
+    }
+
+    .stats__item:hover .stats__icon {
+        transform: none;
+    }
+}

@@ -1,0 +1,40 @@
+/* ==========================================================================
+   CSS Principal - sudestchape
+   Point d'entrée | Chargé en async (non bloquant)
+   Convention : BEM | Approche : Mobile-first
+   ========================================================================== */
+
+/* ------------------------------------------------------------------
+   1. Base
+   ------------------------------------------------------------------ */
+@import url('base/variables.css');
+@import url('base/reset.css');
+@import url('base/typography.css');
+
+/* ------------------------------------------------------------------
+   2. Layout
+   ------------------------------------------------------------------ */
+@import url('layout/grid.css');
+@import url('layout/header.css');
+@import url('layout/navigation.css');
+@import url('layout/footer.css');
+
+/* ------------------------------------------------------------------
+   3. Composants
+   ------------------------------------------------------------------ */
+@import url('components/buttons.css');
+@import url('components/cards.css');
+@import url('components/forms.css');
+@import url('components/breadcrumb.css');
+@import url('components/hero.css');
+@import url('components/testimonials.css');
+@import url('components/steps.css');
+@import url('components/logo-scroller.css');
+@import url('components/stats.css');
+@import url('components/sections-home.css');
+
+/* ------------------------------------------------------------------
+   4. Utilitaires
+   ------------------------------------------------------------------ */
+@import url('utilities/spacing.css');
+@import url('utilities/responsive.css');

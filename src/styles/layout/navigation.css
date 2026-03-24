@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Navigation principale (desktop) - sudestchape
+   BEM : .main-nav
+   ========================================================================== */
+
+.main-nav {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .main-nav {
+        display: block;
+    }
+}
+
+.main-nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    list-style: none;
+    padding: 0;
+}
+
+/* ------------------------------------------------------------------
+   Item de navigation
+   ------------------------------------------------------------------ */
+.main-nav__item {
+    position: relative;
+}
+
+.main-nav__link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--fs-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-700);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: color var(--transition-base),
+                background var(--transition-base);
+}
+
+.main-nav__link:hover {
+    color: var(--color-primary);
+    background: var(--color-accent-light);
+}
+
+.main-nav__item.is-active > .main-nav__link,
+.main-nav__link[aria-current="page"] {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+/* ------------------------------------------------------------------
+   Sous-menu (dropdown) - Effet glassmorphism
+   ------------------------------------------------------------------ */
+.main-nav__submenu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 200px;
+    padding: var(--spacing-3);
+    background: rgb(255 255 255 / 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 0.6);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px rgb(0 0 0 / 0.1), 0 2px 8px rgb(0 0 0 / 0.05);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease,
+                visibility 0.2s ease,
+                transform 0.2s ease;
+    z-index: var(--z-dropdown);
+}
+
+/* Ouverture au hover ou focus-within */
+.main-nav__item:hover > .main-nav__submenu,
+.main-nav__item:focus-within > .main-nav__submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Items du sous-menu */
+.main-nav__subitem {
+    margin: 0;
+}
+
+.main-nav__subitem + .main-nav__subitem {
+    margin-top: var(--spacing-1);
+}
+
+.main-nav__sublink {
+    display: block;
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--fs-xs);
+    color: var(--color-gray-600);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.main-nav__sublink:hover {
+    color: var(--color-primary);
+    background: var(--color-gray-100);
+}
+
+/* Arrondi uniquement sur premier et dernier item pour suivre le contour */
+.main-nav__subitem:first-child .main-nav__sublink {
+    border-radius: calc(var(--border-radius) - var(--spacing-3)) calc(var(--border-radius) - var(--spacing-3)) 0 0;
+}
+
+.main-nav__subitem:last-child .main-nav__sublink {
+    border-radius: 0 0 calc(var(--border-radius) - var(--spacing-3)) calc(var(--border-radius) - var(--spacing-3));
+}
+
+.main-nav__subitem:only-child .main-nav__sublink {
+    border-radius: calc(var(--border-radius) - var(--spacing-3));
+}
+
+.main-nav__sublink[aria-current="page"] {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+    background: var(--color-accent-light);
+}
+
+/* Flèche indicateur sous-menu */
+.main-nav__link[aria-haspopup="true"]::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    margin-top: -2px;
+    transition: transform var(--transition-base);
+}
+
+.main-nav__item:hover > .main-nav__link[aria-haspopup="true"]::after {
+    transform: rotate(-135deg);
+}
