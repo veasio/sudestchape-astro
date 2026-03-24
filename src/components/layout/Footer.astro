@@ -4,7 +4,7 @@
 
 import MauticForm from '../ui/MauticForm.astro';
 import {
-  SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL, SITE_ADDRESS_HTML,
+  SITE_NAME, SITE_DESCRIPTION, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL, SITE_ADDRESS_HTML,
   SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM, SOCIAL_LINKEDIN, SOCIAL_YOUTUBE, SOCIAL_TIKTOK,
   FOOTER_COPYRIGHT, FOOTER_MENTIONS_URL, FOOTER_CGV_URL, FOOTER_CONFIDENTIALITE_URL,
   MAUTIC_FORM_NEWSLETTER_ID,
@@ -29,7 +29,7 @@ const socialLinkedin = SOCIAL_LINKEDIN;
       {/* Colonne 1 : À propos */}
       <div class="site-footer__col">
         <h2 class="site-footer__heading">{siteName}</h2>
-        <p class="site-footer__description">{siteDescription}</p>
+        <p class="site-footer__description">{SITE_DESCRIPTION}</p>
 
         {/* Réseaux sociaux */}
         <ul class="site-footer__social" role="list" aria-label="Réseaux sociaux">
