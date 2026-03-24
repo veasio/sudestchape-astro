@@ -581,6 +581,7 @@ ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
     border-radius: var(--border-radius-section) var(--border-radius-section) 0 0;
     margin-top: calc(var(--border-radius-section) * -1);
     position: relative;
+    z-index: 2;
 }
 .section--white {
     background: var(--color-white);
