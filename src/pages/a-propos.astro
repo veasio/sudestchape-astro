@@ -1,0 +1,176 @@
+---
+import Default from '../layouts/Default.astro';
+import Stats from '../components/sections/Stats.astro';
+import TestimonialsCompact from '../components/ui/TestimonialsCompact.astro';
+import CtaRandom from '../components/ui/CtaRandom.astro';
+---
+
+<Default
+  title="À propos de Sudest Chape – Notre histoire et nos valeurs"
+  description="Découvrez Sudest Chape : 15 ans d'expérience en chape fluide et traditionnelle dans le Sud-Est. Équipe qualifiée, qualité certifiée."
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="À propos de Sudest Chape">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-a-propos.webp"
+           alt="L'équipe Sudest Chape sur un chantier"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Qui sommes-nous</p>
+        <h1 class="hero__title">À propos de Sudest Chape</h1>
+        <p class="hero__description">
+          Une équipe passionnée, des compétences reconnues
+          et un engagement qualité sans compromis.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Histoire / Présentation */}
+  <section class="section animate-on-scroll" aria-labelledby="histoire-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Notre histoire</p>
+        <h2 class="section__title" id="histoire-title">
+          Plus de 15 ans au service de vos projets
+        </h2>
+      </div>
+
+      <div class="grid grid--2">
+        <div>
+          <p>
+            Fondée il y a plus de 15 ans, Sudest Chape est née de la passion
+            pour le métier de chapiste et de la volonté d'offrir un service
+            irréprochable aux particuliers et professionnels du Sud-Est.
+          </p>
+          <p>
+            Au fil des années, nous avons développé une expertise reconnue
+            en chape fluide et traditionnelle, intervenant sur tous types
+            de chantiers : maisons individuelles, résidences collectives,
+            locaux commerciaux et bâtiments industriels.
+          </p>
+          <p>
+            Notre engagement : qualité, réactivité et transparence
+            à chaque étape de votre projet.
+          </p>
+        </div>
+        <div>
+          <img src="/images/optimized/about-equipe.webp"
+               alt="L'équipe Sudest Chape en intervention"
+               width="600" height="400"
+               loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Valeurs */}
+  <section class="section section--accent animate-on-scroll" aria-labelledby="valeurs-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Ce qui nous anime</p>
+        <h2 class="section__title" id="valeurs-title">Nos valeurs</h2>
+      </div>
+
+      <div class="grid grid--4">
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3 class="card-feature__title">Qualité</h3>
+          <p class="card-feature__text">Matériaux certifiés, techniques maîtrisées et contrôle rigoureux de chaque chantier.</p>
+        </div>
+
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3 class="card-feature__title">Réactivité</h3>
+          <p class="card-feature__text">Devis sous 48h, intervention planifiée et respect des délais annoncés.</p>
+        </div>
+
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+              <path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <h3 class="card-feature__title">Proximité</h3>
+          <p class="card-feature__text">Un interlocuteur unique, à l'écoute de vos besoins du début à la fin.</p>
+        </div>
+
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="card-feature__title">Fiabilité</h3>
+          <p class="card-feature__text">Garantie décennale, assurance professionnelle et respect des normes DTU.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Chiffres clés */}
+  <Stats
+    stat1Count={500} stat1Suffix="+" stat1Label="Chantiers réalisés"
+    stat2Count={15} stat2Suffix=" ans" stat2Label="D'expérience"
+    stat3Count={98} stat3Suffix="%" stat3Label="Clients satisfaits"
+    stat4Count={6} stat4Suffix="" stat4Label="Départements couverts"
+    titleId="about-stats-title"
+  />
+
+  {/* Certifications */}
+  <section class="section animate-on-scroll" aria-labelledby="certifications-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Nos engagements</p>
+        <h2 class="section__title" id="certifications-title">Certifications et garanties</h2>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Garantie décennale</h3>
+          <p class="card-feature__text">
+            Tous nos travaux sont couverts par une garantie décennale
+            pour votre tranquillité d'esprit.
+          </p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Normes DTU</h3>
+          <p class="card-feature__text">
+            Nos chapes sont réalisées dans le strict respect
+            des Documents Techniques Unifiés (DTU 26.2).
+          </p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Assurance RC Pro</h3>
+          <p class="card-feature__text">
+            Responsabilité civile professionnelle pour une couverture
+            complète de tous nos chantiers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Témoignages */}
+  <TestimonialsCompact title="La confiance de nos clients" />
+
+  {/* CTA aléatoire */}
+  <CtaRandom />
+
+</Default>

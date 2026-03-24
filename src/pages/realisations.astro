@@ -1,0 +1,96 @@
+---
+import Default from '../layouts/Default.astro';
+import TestimonialsCompact from '../components/ui/TestimonialsCompact.astro';
+import CtaRandom from '../components/ui/CtaRandom.astro';
+import { realisations } from '../data/realisations';
+---
+
+<Default
+  title="Nos réalisations – Chantiers de chape | Sudest Chape"
+  description="Découvrez nos réalisations de chape fluide et traditionnelle dans le Sud-Est. Photos de chantiers, témoignages clients et résultats."
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Nos réalisations">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-realisations.webp"
+           alt="Réalisations de chape par Sudest Chape"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Portfolio</p>
+        <h1 class="hero__title">Nos réalisations</h1>
+        <p class="hero__description">
+          Particuliers, professionnels, logements neufs ou rénovation :
+          découvrez nos chantiers récents dans tout le Sud-Est.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Grille réalisations depuis les données TypeScript */}
+  <section class="section animate-on-scroll" aria-labelledby="realisations-title">
+    <div class="container">
+      <h2 class="sr-only" id="realisations-title">Liste de nos réalisations</h2>
+
+      <div class="grid grid--3">
+        {realisations.map((r) => (
+          <a href={`/realisations/${r.slug}`} class="card-project">
+            <div class="card-project__image">
+              <img src={r.image}
+                   alt={r.title}
+                   width="600" height="400"
+                   loading="lazy" />
+            </div>
+            <div class="card-project__content">
+              <h3 class="card-project__title">{r.title}</h3>
+              {r.location && <p class="card-project__location">{r.location}</p>}
+              {r.surface && (
+                <p class="card-project__type">{r.category} – {r.surface}</p>
+              )}
+            </div>
+          </a>
+        ))}
+
+        {/* Réalisations supplémentaires statiques (issues de la page October CMS) */}
+        <a href="/realisations" class="card-project">
+          <div class="card-project__image">
+            <img src="/images/optimized/realisation-5.webp"
+                 alt="Rénovation chape traditionnelle à Avignon"
+                 width="600" height="400"
+                 loading="lazy" />
+          </div>
+          <div class="card-project__content">
+            <h3 class="card-project__title">Rénovation appartement</h3>
+            <p class="card-project__location">Avignon (84)</p>
+            <p class="card-project__type">Chape traditionnelle – 95 m²</p>
+          </div>
+        </a>
+
+        <a href="/realisations" class="card-project">
+          <div class="card-project__image">
+            <img src="/images/optimized/realisation-6.webp"
+                 alt="Chape fluide dans un local commercial à Montpellier"
+                 width="600" height="400"
+                 loading="lazy" />
+          </div>
+          <div class="card-project__content">
+            <h3 class="card-project__title">Local commercial</h3>
+            <p class="card-project__location">Montpellier (34)</p>
+            <p class="card-project__type">Chape fluide – 250 m²</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Témoignages */}
+  <TestimonialsCompact title="Nos clients témoignent" />
+
+  {/* CTA aléatoire */}
+  <CtaRandom />
+
+</Default>

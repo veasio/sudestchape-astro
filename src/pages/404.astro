@@ -1,0 +1,19 @@
+---
+import Error from '../layouts/Error.astro';
+---
+
+<Error
+  title="Page non trouvée"
+  errorCode="404"
+  description="La page que vous recherchez n'existe pas, a été déplacée ou n'est plus disponible."
+>
+  <nav class="mt-10" aria-label="Pages suggérées" style="text-align:left;max-width:360px;margin-inline:auto;">
+    <p class="font-bold mb-4">Vous cherchez peut-être :</p>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.5rem;">
+      <li><a href="/" class="text-link">Accueil</a></li>
+      <li><a href="/services" class="text-link">Nos services</a></li>
+      <li><a href="/realisations" class="text-link">Réalisations</a></li>
+      <li><a href="/contact" class="text-link">Contact &amp; devis</a></li>
+    </ul>
+  </nav>
+</Error>

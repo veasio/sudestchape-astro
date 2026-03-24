@@ -1,17 +1,488 @@
 ---
+import Default from '../layouts/Default.astro';
+import HeroSlider from '../components/ui/HeroSlider.astro';
+import Stats from '../components/sections/Stats.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import CtaRandom from '../components/ui/CtaRandom.astro';
 
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.sudestchape.fr/#organization",
+      "name": "Sudest Chape",
+      "url": "https://www.sudestchape.fr",
+      "logo": "https://www.sudestchape.fr/images/logo.png",
+      "description": "Spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France depuis plus de 15 ans.",
+      "telephone": "+33491000000",
+      "email": "contact@sudestchape.fr",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Marseille",
+        "postalCode": "13000",
+        "addressCountry": "FR"
+      },
+      "areaServed": [
+        "Bouches-du-Rhône", "Var", "Alpes-Maritimes",
+        "Vaucluse", "Gard", "Hérault"
+      ],
+      "sameAs": []
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.sudestchape.fr/#website",
+      "url": "https://www.sudestchape.fr",
+      "name": "Sudest Chape",
+      "publisher": { "@id": "https://www.sudestchape.fr/#organization" }
+    }
+  ]
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Default
+  title="Sudest Chape – Chape fluide et traditionnelle dans le Sud-Est"
+  description="Sudest Chape, spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France. Devis gratuit, intervention rapide, qualité certifiée."
+  schema={schema}
+>
+
+  {/* Hero Slider */}
+  <HeroSlider />
+
+  {/* Grille collage services */}
+  <section id="services" class="section section--rounded section--white animate-on-scroll" aria-labelledby="services-grid-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Nos expertises</p>
+        <h2 class="section__title" id="services-grid-title">
+          Des solutions adaptées à chaque projet
+        </h2>
+      </div>
+
+      <div class="grid-collage">
+        {/* Chape fluide - Grande carte */}
+        <div class="grid-collage__item grid-collage__item--large">
+          <div class="grid-collage__media">
+            <img src="/images/optimized/service-chape-fluide.webp"
+                 alt="Chape fluide autonivelante"
+                 class="grid-collage__img--default"
+                 width="800" height="600"
+                 loading="lazy" />
+            <img src="/images/optimized/service-chape-fluide-hover.webp"
+                 alt=""
+                 class="grid-collage__img--hover"
+                 width="800" height="600"
+                 loading="lazy"
+                 aria-hidden="true" />
+          </div>
+          <a href="/services#chape-fluide">
+            <div class="grid-collage__content">
+              <h3 class="grid-collage__title">Chape fluide</h3>
+              <p class="grid-collage__subtitle">Planéité parfaite pour plancher chauffant</p>
+            </div>
+            <span class="grid-collage__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        {/* Chape traditionnelle */}
+        <div class="grid-collage__item">
+          <div class="grid-collage__media">
+            <img src="/images/optimized/service-chape-traditionnelle.webp"
+                 alt="Chape traditionnelle ciment"
+                 class="grid-collage__img--default"
+                 width="600" height="400"
+                 loading="lazy" />
+            <img src="/images/optimized/service-chape-traditionnelle-hover.webp"
+                 alt=""
+                 class="grid-collage__img--hover"
+                 width="600" height="400"
+                 loading="lazy"
+                 aria-hidden="true" />
+          </div>
+          <a href="/services#chape-traditionnelle">
+            <div class="grid-collage__content">
+              <h3 class="grid-collage__title">Chape traditionnelle</h3>
+              <p class="grid-collage__subtitle">Robuste et polyvalente</p>
+            </div>
+            <span class="grid-collage__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        {/* Devis gratuit */}
+        <div class="grid-collage__item">
+          <div class="grid-collage__media">
+            <img src="/images/optimized/service-devis.webp"
+                 alt="Devis gratuit sous 48h"
+                 class="grid-collage__img--default"
+                 width="600" height="400"
+                 loading="lazy" />
+            <img src="/images/optimized/service-devis-hover.webp"
+                 alt=""
+                 class="grid-collage__img--hover"
+                 width="600" height="400"
+                 loading="lazy"
+                 aria-hidden="true" />
+          </div>
+          <a href="/contact">
+            <div class="grid-collage__content">
+              <h3 class="grid-collage__title">Devis gratuit</h3>
+              <p class="grid-collage__subtitle">Réponse sous 48h</p>
+            </div>
+            <span class="grid-collage__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        {/* Réalisations - Large */}
+        <div class="grid-collage__item grid-collage__item--wide">
+          <div class="grid-collage__media">
+            <img src="/images/optimized/service-realisations.webp"
+                 alt="Nos réalisations de chape"
+                 class="grid-collage__img--default"
+                 width="800" height="400"
+                 loading="lazy" />
+            <img src="/images/optimized/service-realisations-hover.webp"
+                 alt=""
+                 class="grid-collage__img--hover"
+                 width="800" height="400"
+                 loading="lazy"
+                 aria-hidden="true" />
+          </div>
+          <a href="/realisations">
+            <div class="grid-collage__content">
+              <h3 class="grid-collage__title">Nos réalisations</h3>
+              <p class="grid-collage__subtitle">500+ chantiers dans le Sud-Est</p>
+            </div>
+            <span class="grid-collage__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Feed réalisations (slider horizontal) */}
+  <section class="section section--gray section--rounded animate-on-scroll" aria-labelledby="realisations-feed-title">
+    <div class="container">
+      <div class="realisations-feed">
+        <div class="realisations-feed__header">
+          <div class="realisations-feed__title-group">
+            <div class="realisations-feed__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="realisations-feed__title" id="realisations-feed-title">Nos dernières réalisations</h2>
+              <p class="realisations-feed__subtitle">Découvrez nos chantiers récents dans le Sud-Est</p>
+            </div>
+          </div>
+          <a href="/realisations" class="btn btn--primary">
+            Voir tout
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="realisations-feed__track">
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-1.webp" alt="Chape fluide villa contemporaine Aix-en-Provence" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Villa contemporaine</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Aix-en-Provence • 180 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation villa contemporaine"></a>
+          </div>
+
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-2.webp" alt="Chape traditionnelle entrepôt Marseille" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Entrepôt logistique</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Marseille • 850 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation entrepôt logistique"></a>
+          </div>
+
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-3.webp" alt="Plancher chauffant appartement Nice" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Appartement rénové</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Nice • 95 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation appartement rénové"></a>
+          </div>
+
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-4.webp" alt="Chape fluide résidence collective Toulon" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Résidence collective</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Toulon • 1 200 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation résidence collective"></a>
+          </div>
+
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-5.webp" alt="Maison individuelle plancher chauffant Cannes" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Maison individuelle</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Cannes • 220 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation maison individuelle"></a>
+          </div>
+
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-6.webp" alt="Local commercial chape Avignon" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Local commercial</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Avignon • 350 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation local commercial"></a>
+          </div>
+
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-7.webp" alt="Chape garage Montpellier" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Garage automobile</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Montpellier • 480 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation garage automobile"></a>
+          </div>
+
+          <div class="realisations-feed__item">
+            <img src="/images/optimized/realisation-8.webp" alt="Bureaux entreprise Marseille" width="400" height="400" loading="lazy" />
+            <div class="realisations-feed__overlay">
+              <p class="realisations-feed__item-title">Bureaux d'entreprise</p>
+              <p class="realisations-feed__item-location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Marseille • 620 m²
+              </p>
+            </div>
+            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation bureaux d'entreprise"></a>
+          </div>
+        </div>
+
+        <button type="button" class="realisations-feed__nav realisations-feed__nav--prev" aria-label="Voir les réalisations précédentes" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <button type="button" class="realisations-feed__nav realisations-feed__nav--next" aria-label="Voir les réalisations suivantes">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  {/* Features 4 colonnes */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="features-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Pourquoi nous choisir</p>
+        <h2 class="section__title" id="features-title">
+          L'excellence au service de vos projets
+        </h2>
+      </div>
+      <div class="grid grid--4">
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="card-feature__title">Expertise technique</h3>
+          <p class="card-feature__text">Maîtrise des techniques de chape fluide et traditionnelle depuis 15 ans.</p>
+        </div>
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="card-feature__title">Réactivité</h3>
+          <p class="card-feature__text">Devis sous 48h et intervention planifiée selon vos contraintes.</p>
+        </div>
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="card-feature__title">Qualité certifiée</h3>
+          <p class="card-feature__text">Matériaux NF, normes DTU respectées et garantie décennale.</p>
+        </div>
+        <div class="card-feature">
+          <div class="card-feature__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="card-feature__title">Fiabilité</h3>
+          <p class="card-feature__text">98% de clients satisfaits et partenaires fidèles depuis des années.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Bannière immersive */}
+  <section class="immersive-banner animate-on-scroll" aria-labelledby="promise-title">
+    <div class="immersive-banner__background">
+      <img src="/images/optimized/banner-chantier.webp"
+           alt="Équipe Sudest Chape en action sur un chantier"
+           width="1920" height="1080"
+           loading="lazy" />
+    </div>
+    <div class="immersive-banner__content">
+      <h2 class="immersive-banner__title" id="promise-title">
+        <span class="immersive-banner__highlight">200 m²</span> coulés par jour.<br />
+        Séchage en <span class="immersive-banner__highlight">48h</span>.
+      </h2>
+      <p class="immersive-banner__text">
+        Grâce à notre technique de chape fluide autonivelante, nous intervenons rapidement
+        et efficacement sur tous types de chantiers. Planéité parfaite garantie.
+      </p>
+      <a href="/services" class="btn btn--cta btn--lg">
+        Découvrir nos techniques
+      </a>
+    </div>
+  </section>
+
+  {/* Étapes */}
+  <section class="section section--white section--rounded animate-on-scroll" aria-labelledby="steps-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Simple et rapide</p>
+        <h2 class="section__title" id="steps-title">Comment ça marche ?</h2>
+      </div>
+      <div class="steps">
+        <div class="steps__item">
+          <div class="steps__number" aria-hidden="true"></div>
+          <h3 class="steps__title">Prise de contact</h3>
+          <p class="steps__text">Appelez-nous ou remplissez le formulaire de devis en ligne. Nous vous répondons sous 24h.</p>
+        </div>
+        <div class="steps__item">
+          <div class="steps__number" aria-hidden="true"></div>
+          <h3 class="steps__title">Visite technique</h3>
+          <p class="steps__text">Un technicien se déplace gratuitement pour évaluer votre chantier et établir un devis précis.</p>
+        </div>
+        <div class="steps__item">
+          <div class="steps__number" aria-hidden="true"></div>
+          <h3 class="steps__title">Réalisation</h3>
+          <p class="steps__text">Notre équipe intervient à la date convenue. Chantier propre, finition soignée, dans les délais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Offre Professionnels - images + texte */}
+  <section class="images-text animate-on-scroll" aria-labelledby="pro-offer-title">
+    <div class="images-text__container">
+      <div class="images-text__image">
+        <img src="/images/optimized/pro-partenariat.webp"
+             alt="Partenariat professionnel avec Sudest Chape - équipe sur chantier"
+             width="800" height="600"
+             loading="lazy" />
+      </div>
+      <div class="images-text__content">
+        <p class="images-text__overline">Offre Professionnels</p>
+        <h2 class="images-text__title" id="pro-offer-title">
+          Simplifiez vos chantiers – gagnez en efficacité
+        </h2>
+        <p class="images-text__text">
+          Vous êtes constructeur, architecte ou maître d'œuvre ? Bénéficiez de notre
+          <strong>programme partenaires</strong> : tarifs préférentiels, priorité d'intervention
+          et un interlocuteur dédié pour tous vos projets. Concentrez-vous sur votre cœur de métier,
+          nous gérons la chape.
+        </p>
+        <ul class="images-text__list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Tarifs négociés sur volume
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Planning prioritaire garanti
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Facturation différée possible
+          </li>
+        </ul>
+        <a href="/contact?objet=partenariat" class="btn btn--primary btn--lg">
+          Devenir partenaire
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Engagements */}
+  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="engagements-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Notre philosophie</p>
+        <h2 class="section__title" id="engagements-title">Nos engagements qualité</h2>
+      </div>
+      <div class="engagements">
+        <div class="engagement">
+          <div class="engagement__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3 class="engagement__title">Respect des délais</h3>
+          <p class="engagement__text">Chaque chantier est planifié avec précision. Nous nous engageons à respecter les délais convenus pour ne jamais retarder votre projet.</p>
+        </div>
+        <div class="engagement">
+          <div class="engagement__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3 class="engagement__title">Garantie décennale</h3>
+          <p class="engagement__text">Tous nos travaux sont couverts par notre assurance décennale. Votre tranquillité d'esprit est notre priorité.</p>
+        </div>
+        <div class="engagement">
+          <div class="engagement__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3 class="engagement__title">Matériaux certifiés</h3>
+          <p class="engagement__text">Nous utilisons exclusivement des matériaux NF et certifiés, issus de nos partenaires de confiance Lafarge et Weber.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Chiffres clés */}
+  <Stats />
+
+  {/* Témoignages carousel */}
+  <Testimonials variant="carousel" />
+
+  {/* CTA aléatoire */}
+  <CtaRandom />
+
+</Default>

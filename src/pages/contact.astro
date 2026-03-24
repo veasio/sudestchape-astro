@@ -1,0 +1,179 @@
+---
+import Default from '../layouts/Default.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Sudest Chape",
+  "description": "Contactez Sudest Chape pour un devis gratuit de chape fluide ou traditionnelle.",
+  "url": "https://www.sudestchape.fr/contact"
+};
+---
+
+<Default
+  title="Contact – Devis gratuit chape | Sudest Chape"
+  description="Contactez Sudest Chape pour un devis gratuit. Formulaire en ligne, téléphone, adresse. Intervention chape fluide et traditionnelle dans le Sud-Est."
+  schema={schema}
+>
+
+  {/* Hero */}
+  <section class="hero hero--small" aria-label="Nous contacter">
+    <div class="hero__background">
+      <img src="/images/optimized/hero-contact.webp"
+           alt="Contactez Sudest Chape"
+           width="1920" height="600"
+           loading="eager"
+           fetchpriority="high" />
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__overline">Parlons de votre projet</p>
+        <h1 class="hero__title">Contactez-nous</h1>
+        <p class="hero__description">
+          Devis gratuit sous 48h, sans engagement.
+          Nous intervenons dans tout le Sud-Est de la France.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Formulaire + Infos contact */}
+  <section class="section animate-on-scroll" aria-labelledby="contact-form-title">
+    <div class="container">
+      <h2 class="sr-only" id="contact-form-title">Formulaire de contact et coordonnées</h2>
+
+      <div class="grid grid--2">
+        {/* Colonne 1 : Formulaire */}
+        <div class="contact-form" aria-labelledby="form-title">
+          <h3 id="form-title">Demandez votre devis gratuit</h3>
+          <p>Remplissez le formulaire ci-dessous et nous vous répondrons sous 48h.</p>
+
+          <form class="form" action="#" method="post" aria-label="Formulaire de contact">
+            <div class="form__group">
+              <label for="contact-nom" class="form__label">Nom complet *</label>
+              <input type="text" id="contact-nom" name="nom"
+                     class="form__input" required
+                     autocomplete="name"
+                     placeholder="Votre nom et prénom" />
+            </div>
+
+            <div class="form__group">
+              <label for="contact-email" class="form__label">Email *</label>
+              <input type="email" id="contact-email" name="email"
+                     class="form__input" required
+                     autocomplete="email"
+                     placeholder="votre@email.com" />
+            </div>
+
+            <div class="form__group">
+              <label for="contact-telephone" class="form__label">Téléphone</label>
+              <input type="tel" id="contact-telephone" name="telephone"
+                     class="form__input"
+                     autocomplete="tel"
+                     placeholder="06 00 00 00 00" />
+            </div>
+
+            <div class="form__group">
+              <label for="contact-sujet" class="form__label">Sujet *</label>
+              <select id="contact-sujet" name="sujet" class="form__select" required>
+                <option value="">Choisir un sujet</option>
+                <option value="devis-chape-fluide">Devis chape fluide</option>
+                <option value="devis-chape-traditionnelle">Devis chape traditionnelle</option>
+                <option value="renseignement">Renseignement</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="form__group">
+              <label for="contact-message" class="form__label">Message *</label>
+              <textarea id="contact-message" name="message"
+                        class="form__textarea" required
+                        rows="5"
+                        placeholder="Décrivez votre projet (surface, type de chape, délai souhaité…)"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--full">
+              Envoyer ma demande
+            </button>
+          </form>
+        </div>
+
+        {/* Colonne 2 : Informations de contact */}
+        <div class="contact-info" aria-labelledby="info-title">
+          <h3 id="info-title">Nos coordonnées</h3>
+
+          <div class="contact-info__block">
+            <h4 class="contact-info__label">Téléphone</h4>
+            <a href="tel:+33491000000" class="contact-info__value contact-info__value--link">
+              04 91 00 00 00
+            </a>
+          </div>
+
+          <div class="contact-info__block">
+            <h4 class="contact-info__label">Email</h4>
+            <a href="mailto:contact@sudestchape.fr" class="contact-info__value contact-info__value--link">
+              contact@sudestchape.fr
+            </a>
+          </div>
+
+          <div class="contact-info__block">
+            <h4 class="contact-info__label">Adresse</h4>
+            <address class="contact-info__value">
+              Zone d'activité<br />13000 Marseille
+            </address>
+          </div>
+
+          <div class="contact-info__block">
+            <h4 class="contact-info__label">Zone d'intervention</h4>
+            <p class="contact-info__value">
+              Bouches-du-Rhône (13), Var (83), Alpes-Maritimes (06),
+              Vaucluse (84), Gard (30), Hérault (34)
+            </p>
+          </div>
+
+          <div class="contact-info__block">
+            <h4 class="contact-info__label" id="horaires-label">Horaires</h4>
+            <table class="contact-info__hours" aria-labelledby="horaires-label">
+              <thead class="sr-only">
+                <tr>
+                  <th scope="col">Jour</th>
+                  <th scope="col">Horaires</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Lundi – Vendredi</th>
+                  <td>7h30 – 18h00</td>
+                </tr>
+                <tr>
+                  <th scope="row">Samedi</th>
+                  <td>8h00 – 12h00</td>
+                </tr>
+                <tr>
+                  <th scope="row">Dimanche</th>
+                  <td>Fermé</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Zone d'intervention */}
+  <section class="section section--accent animate-on-scroll" aria-labelledby="map-title">
+    <div class="container">
+      <h2 class="section__title text-center" id="map-title">Notre zone d'intervention</h2>
+      <p class="section__description text-center" style="margin-inline:auto;">
+        Nous intervenons dans 6 départements du Sud-Est de la France.
+      </p>
+      <div class="contact-map" aria-label="Zone d'intervention Sudest Chape">
+        <div class="contact-map__placeholder">
+          <p>Carte interactive — à intégrer en production</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Default>
