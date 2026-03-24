@@ -1,0 +1,129 @@
+---
+// Hero Slider — 3 slides
+// Source : partials/hero-slider.htm + partials/hero-slides/slide-{1,2,3}.htm
+
+const headerTransparentEnabled = true;
+---
+
+{/* Wrapper avec fond coloré pour afficher les coins arrondis du hero */}
+<div class={`hero-wrapper${headerTransparentEnabled ? ' hero-wrapper--transparent-mode' : ''}`}>
+  <section class="hero hero--full hero-slider"
+           role="region"
+           aria-roledescription="carousel"
+           aria-label="Présentation de l'entreprise">
+
+    {/* Slide 1 */}
+    <div class="hero-slider__slide hero-slider__slide--active" role="group" aria-roledescription="slide" aria-label="Slide 1 sur 3">
+      <div class="hero__background">
+        <img src="/images/optimized/hero-chape.webp"
+             alt="Réalisation de chape fluide par Sudest Chape"
+             width="1920" height="1080"
+             loading="eager"
+             fetchpriority="high" />
+      </div>
+      <div class="container">
+        <div class="hero__content">
+          <p class="hero__overline">Spécialiste chape dans le Sud-Est</p>
+          <h2 class="hero__title">
+            Chape fluide &amp; traditionnelle pour tous vos projets
+          </h2>
+          <p class="hero__description">
+            Intervention rapide, finition impeccable et respect des délais.
+            Particuliers et professionnels dans toute la région PACA.
+          </p>
+          <div class="hero__actions">
+            <a href="/contact" class="btn btn--cta btn--lg">
+              Devis gratuit
+            </a>
+            <a href="/services" class="btn btn--white btn--lg">
+              Nos services
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Slide 2 */}
+    <div class="hero-slider__slide hero-slider__slide--content-right" role="group" aria-roledescription="slide" aria-label="Slide 2 sur 3">
+      <div class="hero__background">
+        <img src="/images/optimized/hero-services.webp"
+             alt="Coulage de chape fluide sur plancher chauffant"
+             width="1920" height="1080"
+             loading="lazy" />
+      </div>
+      <div class="container">
+        <div class="hero__content">
+          <p class="hero__overline">Plancher chauffant</p>
+          <h2 class="hero__title">
+            La chape fluide idéale pour votre plancher chauffant
+          </h2>
+          <p class="hero__description">
+            Plan&eacute;it&eacute; parfaite, s&eacute;chage rapide et r&eacute;partition homog&egrave;ne
+            de la chaleur. Jusqu&rsquo;&agrave; 200 m&sup2; coul&eacute;s par jour.
+          </p>
+          <div class="hero__actions">
+            <a href="/contact" class="btn btn--cta btn--lg">
+              Demander un devis
+            </a>
+            <a href="/realisations" class="btn btn--white btn--lg">
+              Nos réalisations
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Slide 3 */}
+    <div class="hero-slider__slide" role="group" aria-roledescription="slide" aria-label="Slide 3 sur 3">
+      <div class="hero__background">
+        <img src="/images/optimized/hero-a-propos.webp"
+             alt="Équipe Sudest Chape sur un chantier"
+             width="1920" height="1080"
+             loading="lazy" />
+      </div>
+      <div class="container">
+        <div class="hero__content">
+          <p class="hero__overline">15 ans d'exp&eacute;rience</p>
+          <h2 class="hero__title">
+            Plus de 500 chantiers r&eacute;alis&eacute;s dans le Sud-Est
+          </h2>
+          <p class="hero__description">
+            Une &eacute;quipe qualifi&eacute;e, des mat&eacute;riaux certifi&eacute;s et un engagement
+            qualit&eacute; reconnu par nos clients depuis 15 ans.
+          </p>
+          <div class="hero__actions">
+            <a href="/a-propos" class="btn btn--cta btn--lg">
+              D&eacute;couvrir notre &eacute;quipe
+            </a>
+            <a href="/contact" class="btn btn--white btn--lg">
+              Nous contacter
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Navigation flèches */}
+    <button type="button"
+            class="hero-slider__arrow hero-slider__arrow--prev"
+            aria-label="Slide précédent">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button type="button"
+            class="hero-slider__arrow hero-slider__arrow--next"
+            aria-label="Slide suivant">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="9 6 15 12 9 18"/>
+      </svg>
+    </button>
+
+    {/* Dots */}
+    <div class="hero-slider__dots" role="tablist" aria-label="Slides">
+      <button type="button" class="hero-slider__dot hero-slider__dot--active" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+      <button type="button" class="hero-slider__dot" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+      <button type="button" class="hero-slider__dot" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+    </div>
+  </section>
+</div>

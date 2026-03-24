@@ -1,0 +1,63 @@
+---
+// Breadcrumb avec Schema.org BreadcrumbList JSON-LD
+// Source : partials/breadcrumb.htm
+
+interface Props {
+  pageTitle: string;
+  pageUrl: string;
+  isHome?: boolean;
+  parentTitle?: string;
+  parentUrl?: string;
+}
+
+const { pageTitle, pageUrl, isHome = false, parentTitle, parentUrl } = Astro.props;
+
+const siteUrl = 'https://sudestchape.fr';
+
+// Construire les items JSON-LD
+const ldItems: { '@type': string; position: number; name: string; item: string }[] = [
+  { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+];
+
+if (parentTitle && parentUrl) {
+  ldItems.push({ '@type': 'ListItem', position: 2, name: parentTitle, item: siteUrl + parentUrl });
+  ldItems.push({ '@type': 'ListItem', position: 3, name: pageTitle, item: siteUrl + pageUrl });
+} else {
+  ldItems.push({ '@type': 'ListItem', position: 2, name: pageTitle, item: siteUrl + pageUrl });
+}
+
+const ldJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: ldItems,
+});
+---
+
+{!isHome && (
+  <>
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <div class="container">
+        <ol class="breadcrumb__list" role="list">
+          <li class="breadcrumb__item">
+            <a href="/" class="breadcrumb__link">
+              Accueil
+            </a>
+          </li>
+          {parentTitle && parentUrl && (
+            <li class="breadcrumb__item">
+              <a href={parentUrl} class="breadcrumb__link">
+                {parentTitle}
+              </a>
+            </li>
+          )}
+          <li class="breadcrumb__item is-active" aria-current="page">
+            {pageTitle}
+          </li>
+        </ol>
+      </div>
+    </nav>
+
+    {/* JSON-LD BreadcrumbList */}
+    <script type="application/ld+json" set:html={ldJson}></script>
+  </>
+)}

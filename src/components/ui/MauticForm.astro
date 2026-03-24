@@ -1,0 +1,44 @@
+---
+// Embed formulaire Mautic (standalone)
+// Source : partials/mautic/form-embed.htm
+
+interface Props {
+  formId: string | number;
+  formStyle?: 'default' | 'inline' | 'modal';
+}
+
+const { formId, formStyle = 'default' } = Astro.props;
+
+const mauticUrl = 'https://m.sudestchape.fr';
+const mauticEnabled = true;
+---
+
+{mauticEnabled && formId && (
+  <div id={`mautic-embed-${formId}`}
+       class={`mautic-form mautic-form--embed mautic-form--${formStyle}`}
+       role="region"
+       aria-label="Formulaire"
+       data-mautic-form-id={String(formId)}>
+
+    <div class="mautic-form__container" aria-live="polite">
+      {/* Le formulaire est injecté par le script Mautic */}
+    </div>
+
+    <script type="text/javascript"
+            src={`${mauticUrl}/form/generate.js?id=${formId}`}
+            async
+            defer>
+    </script>
+
+    <noscript>
+      <p class="mautic-form__noscript">
+        JavaScript est requis pour afficher ce formulaire.
+        <a href={`${mauticUrl}/form/${formId}`}
+           target="_blank"
+           rel="noopener noreferrer">
+          Ouvrir le formulaire
+        </a>.
+      </p>
+    </noscript>
+  </div>
+)}
