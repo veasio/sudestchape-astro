@@ -2,11 +2,7 @@
 // Navigation principale (desktop)
 // Source : partials/navigation.htm
 
-interface NavItem {
-  title: string;
-  url: string;
-  items?: { title: string; url: string }[];
-}
+import { NAV_ITEMS } from '../../config';
 
 interface Props {
   currentPath?: string;
@@ -14,21 +10,7 @@ interface Props {
 
 const { currentPath = '/' } = Astro.props;
 
-const menuItems: NavItem[] = [
-  { title: 'Accueil', url: '/' },
-  {
-    title: 'Services',
-    url: '/services',
-    items: [
-      { title: 'Chape fluide', url: '/services/chape-fluide' },
-      { title: 'Chape traditionnelle', url: '/services/chape-traditionnelle' },
-      { title: 'Plancher chauffant', url: '/services/plancher-chauffant' },
-    ],
-  },
-  { title: 'Réalisations', url: '/realisations' },
-  { title: 'À propos', url: '/a-propos' },
-  { title: 'Contact', url: '/contact' },
-];
+const menuItems = NAV_ITEMS;
 ---
 
 <nav class="main-nav" role="navigation" aria-label="Navigation principale">
