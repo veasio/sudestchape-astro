@@ -3,7 +3,7 @@
 // Source : partials/header.htm
 
 import Navigation from './Navigation.astro';
-import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY, HEADER_TRANSPARENT } from '../../config';
+import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY, NAV_ITEMS } from '../../config';
 
 interface Props {
   currentPath?: string;
@@ -11,25 +11,7 @@ interface Props {
 
 const { currentPath = '/' } = Astro.props;
 
-const siteName = SITE_NAME;
-const sitePhone = SITE_PHONE_DISPLAY;
-const sitePhoneRaw = SITE_PHONE;
-
-const menuItems = [
-  { title: 'Accueil', url: '/' },
-  {
-    title: 'Services',
-    url: '/services',
-    items: [
-      { title: 'Chape fluide', url: '/services/chape-fluide' },
-      { title: 'Chape traditionnelle', url: '/services/chape-traditionnelle' },
-      { title: 'Plancher chauffant', url: '/services/plancher-chauffant' },
-    ],
-  },
-  { title: 'Réalisations', url: '/realisations' },
-  { title: 'À propos', url: '/a-propos' },
-  { title: 'Contact', url: '/contact' },
-];
+const menuItems = NAV_ITEMS;
 ---
 
 {/* Header principal */}
@@ -39,10 +21,10 @@ const menuItems = [
     {/* Logo */}
     <div class="site-header__logo">
       <a href="/"
-         aria-label={`${siteName} - Retour à l'accueil`}
+         aria-label={`${SITE_NAME} - Retour à l'accueil`}
          itemprop="url">
         <img src="/images/logo.svg"
-             alt={siteName}
+             alt={SITE_NAME}
              class="site-header__logo-dark"
              width="200" height="50"
              itemprop="logo"
@@ -69,13 +51,13 @@ const menuItems = [
       </a>
 
       {/* Téléphone (visible desktop) */}
-      <a href={`tel:${sitePhoneRaw}`}
+      <a href={`tel:${SITE_PHONE}`}
          class="site-header__phone"
-         aria-label={`Appeler le ${sitePhone}`}>
+         aria-label={`Appeler le ${SITE_PHONE_DISPLAY}`}>
         <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
         </svg>
-        <span class="site-header__phone-number">{sitePhone}</span>
+        <span class="site-header__phone-number">{SITE_PHONE_DISPLAY}</span>
       </a>
 
       {/* Bouton hamburger (mobile) */}
@@ -159,11 +141,11 @@ const menuItems = [
 
     {/* Footer mobile : téléphone + CTA */}
     <div class="mobile-nav__footer">
-      <a href={`tel:${sitePhoneRaw}`} class="mobile-nav__phone">
+      <a href={`tel:${SITE_PHONE}`} class="mobile-nav__phone">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
         </svg>
-        {sitePhone}
+        {SITE_PHONE_DISPLAY}
       </a>
       <a href="/contact" class="btn btn--primary btn--full">
         Devis gratuit

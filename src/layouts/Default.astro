@@ -9,7 +9,14 @@ import {
   FONT_GOOGLE_URL, FONT_FAMILY,
   MAUTIC_BASE_URL, MAUTIC_ENABLED, MAUTIC_TRACKING_ENABLED,
   COLOR_PRIMARY, COLOR_ACCENT, COLOR_CTA, COLOR_SUCCESS, COLOR_ERROR,
+  HEADER_TRANSPARENT, TOPBAR_STICKY,
 } from '../config';
+
+const headerWrapperClass = [
+  'header-wrapper',
+  HEADER_TRANSPARENT ? 'header-wrapper--transparent' : '',
+  TOPBAR_STICKY      ? 'header-wrapper--sticky-topbar' : '',
+].filter(Boolean).join(' ');
 
 interface Props {
   title: string;
@@ -101,8 +108,10 @@ const currentPath = Astro.url.pathname;
 
 <body class="layout-default">
 
-  <TopBar />
-  <Header currentPath={currentPath} />
+  <div class={headerWrapperClass}>
+    <TopBar />
+    <Header currentPath={currentPath} />
+  </div>
 
   <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 

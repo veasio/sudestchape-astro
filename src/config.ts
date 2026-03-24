@@ -100,7 +100,7 @@ export const HEADER_TRANSPARENT = false;
 export const TOPBAR_ENABLED     = true;
 export const TOPBAR_STICKY      = false;
 // Colonne droite de la top bar : 'phone' | 'social' | 'text'
-export const TOPBAR_RIGHT_TYPE  = 'phone' as 'phone' | 'social' | 'text';
+export const TOPBAR_RIGHT_TYPE  = 'social' as 'phone' | 'social' | 'text';
 export const TOPBAR_RIGHT_TEXT  = ''; // utilisé si TOPBAR_RIGHT_TYPE = 'text'
 
 // ---------------------------------------------------------------------------
@@ -118,6 +118,25 @@ export const PROMO_MESSAGES = [
   { text: 'Intervention dans tout le Sud-Est PACA',                   icon: 'truck',    link: '' },
   { text: '+15 ans d\'expérience en chape fluide et traditionnelle',   icon: 'star',     link: '/a-propos' },
   { text: 'Certifié CTB-P — Travaux conformes aux normes DTU 26.2',   icon: 'shield',   link: '/services' },
+];
+
+// ---------------------------------------------------------------------------
+// Navigation
+// ---------------------------------------------------------------------------
+export const NAV_ITEMS = [
+  { title: 'Accueil',      url: '/' },
+  {
+    title: 'Services',
+    url: '/services',
+    items: [
+      { title: 'Chape fluide',          url: '/services/chape-fluide' },
+      { title: 'Chape traditionnelle',  url: '/services/chape-traditionnelle' },
+      { title: 'Plancher chauffant',    url: '/services/plancher-chauffant' },
+    ],
+  },
+  { title: 'Réalisations', url: '/realisations' },
+  { title: 'À propos',     url: '/a-propos' },
+  { title: 'Contact',      url: '/contact' },
 ];
 
 // ---------------------------------------------------------------------------
