@@ -18,7 +18,8 @@
    Hero Wrapper (fond coloré pour les coins arrondis)
    ------------------------------------------------------------------ */
 .hero-wrapper {
-    background: var(--color-white);
+    /* Fond sombre pour que les coins arrondis de la section suivante soient visibles */
+    background: var(--color-gray-900);
     transition: background var(--transition-base);
 }
 
