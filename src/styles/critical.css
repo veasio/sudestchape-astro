@@ -447,8 +447,7 @@ ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
     transition: background var(--transition-base);
 }
 .hero-wrapper:not(.hero-wrapper--transparent-mode) {
-    background: var(--color-gray-900);
-    border-radius: var(--border-radius-hero) var(--border-radius-hero) 0 0;
+    background: var(--color-white);
 }
 .hero-wrapper--transparent-mode {
     background: var(--color-cta);

@@ -21,22 +21,11 @@
     transition: background var(--transition-base);
 }
 
-/* Mode normal : fond sombre visible derrière les coins arrondis de la section suivante.
-   Le border-radius du wrapper correspond à celui du hero pour que les coins du haut restent visibles.
-   Pas de overflow:hidden (couperait les arrondis du hero--full enfant). */
+/* Mode normal : fond blanc.
+   Le blanc montre à travers les coins arrondis sombres du hero (arc en haut).
+   En bas, la section blanche chevauche le wrapper blanc → jonction invisible. */
 .hero-wrapper:not(.hero-wrapper--transparent-mode) {
-    background: var(--color-gray-900);
-    border-radius: var(--border-radius-hero) var(--border-radius-hero) 0 0;
-}
-
-/* Jonction hero → section arrondie : compense le gap naturel (var(--spacing-6) = 1.5rem)
-   entre le bas du wrapper et la position naturelle de la section, en plus de l'overlap d'arrondi.
-   Sans ce correctif, il resterait un résidu blanc de ~2.4px à 1440px. */
-.hero-wrapper + .section--rounded,
-.hero-wrapper + .section--rounded-top,
-.hero-wrapper + .section--rounded-both,
-.hero-wrapper + .section--rounded-full {
-    margin-top: calc((var(--border-radius-section) + var(--spacing-6)) * -1);
+    background: var(--color-white);
 }
 
 /* Mode transparent activé : fond coloré visible derrière les coins arrondis */
