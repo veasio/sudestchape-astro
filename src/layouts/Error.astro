@@ -1,4 +1,6 @@
 ---
+import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY } from '../config';
+
 interface Props {
   title?: string;
   errorCode?: string | number;
@@ -17,7 +19,7 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <title>{title} — sudestchape</title>
+  <title>{title} — {SITE_NAME}</title>
 
   {/* noindex : ne pas indexer les pages d'erreur */}
   <meta name="robots" content="noindex, nofollow" />
@@ -218,8 +220,8 @@ const {
 
   {/* Header : logo seul */}
   <header class="error-header" role="banner">
-    <a href="/" aria-label="sudestchape - Retour à l'accueil">
-      <span class="error-header__logo-text">sudestchape</span>
+    <a href="/" aria-label={`${SITE_NAME} - Retour à l'accueil`}>
+      <span class="error-header__logo-text">{SITE_NAME}</span>
     </a>
   </header>
 
@@ -239,10 +241,10 @@ const {
 
   {/* Footer minimal */}
   <footer class="error-footer" role="contentinfo">
-    <p>&copy; {new Date().getFullYear()} sudestchape. Tous droits réservés.</p>
+    <p>&copy; {new Date().getFullYear()} {SITE_NAME}. Tous droits réservés.</p>
     <p>
       Besoin d'aide ? Appelez-nous au
-      <a href="tel:+33XXXXXXXXX">+33 X XX XX XX XX</a>
+      <a href={`tel:${SITE_PHONE}`}>{SITE_PHONE_DISPLAY}</a>
     </p>
   </footer>
 

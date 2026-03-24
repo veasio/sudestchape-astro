@@ -3,19 +3,21 @@
 // Source : partials/footer.htm
 
 import MauticForm from '../ui/MauticForm.astro';
+import {
+  SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL, SITE_ADDRESS_HTML,
+  SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM, SOCIAL_LINKEDIN, SOCIAL_YOUTUBE, SOCIAL_TIKTOK,
+  FOOTER_COPYRIGHT, FOOTER_MENTIONS_URL, FOOTER_CGV_URL, FOOTER_CONFIDENTIALITE_URL,
+  MAUTIC_FORM_NEWSLETTER_ID,
+} from '../../config';
 
-const siteName = 'Sudest Chape';
-const siteDescription = 'Spécialiste de la chape fluide et traditionnelle dans le Sud-Est de la France. Particuliers et professionnels, nous intervenons dans toute la région PACA.';
-const sitePhone = '04 91 00 00 00';
-const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
-const siteEmail = 'contact@sudestchape.fr';
-const siteAddress = '123 Avenue du Prado\n13008 Marseille';
+const siteName = SITE_NAME;
+const sitePhone = SITE_PHONE_DISPLAY;
+const sitePhoneRaw = SITE_PHONE;
+const siteEmail = SITE_EMAIL;
 
-const socialFacebook = 'https://www.facebook.com/sudestchape';
-const socialInstagram = 'https://www.instagram.com/sudestchape';
-const socialLinkedin = 'https://www.linkedin.com/company/sudestchape';
-
-const currentYear = new Date().getFullYear();
+const socialFacebook = SOCIAL_FACEBOOK;
+const socialInstagram = SOCIAL_INSTAGRAM;
+const socialLinkedin = SOCIAL_LINKEDIN;
 ---
 
 <footer class="site-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
@@ -31,38 +33,68 @@ const currentYear = new Date().getFullYear();
 
         {/* Réseaux sociaux */}
         <ul class="site-footer__social" role="list" aria-label="Réseaux sociaux">
-          <li>
-            <a href={socialFacebook}
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Facebook (nouvelle fenêtre)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href={socialInstagram}
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Instagram (nouvelle fenêtre)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href={socialLinkedin}
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="LinkedIn (nouvelle fenêtre)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
-              </svg>
-            </a>
-          </li>
+          {socialFacebook && (
+            <li>
+              <a href={socialFacebook}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Facebook (nouvelle fenêtre)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                </svg>
+              </a>
+            </li>
+          )}
+          {socialInstagram && (
+            <li>
+              <a href={socialInstagram}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Instagram (nouvelle fenêtre)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+            </li>
+          )}
+          {socialLinkedin && (
+            <li>
+              <a href={socialLinkedin}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="LinkedIn (nouvelle fenêtre)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/>
+                </svg>
+              </a>
+            </li>
+          )}
+          {SOCIAL_YOUTUBE && (
+            <li>
+              <a href={SOCIAL_YOUTUBE}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="YouTube (nouvelle fenêtre)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20.06 12 20.06 12 20.06s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+                </svg>
+              </a>
+            </li>
+          )}
+          {SOCIAL_TIKTOK && (
+            <li>
+              <a href={SOCIAL_TIKTOK}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="TikTok (nouvelle fenêtre)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.79a8.18 8.18 0 004.78 1.52V6.87a4.85 4.85 0 01-1.01-.18z"/>
+                </svg>
+              </a>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -82,9 +114,7 @@ const currentYear = new Date().getFullYear();
       <div class="site-footer__col">
         <h2 class="site-footer__heading">Contact</h2>
         <address class="site-footer__contact" itemscope itemtype="https://schema.org/PostalAddress">
-          <p itemprop="streetAddress">
-            123 Avenue du Prado<br />13008 Marseille
-          </p>
+          <p itemprop="streetAddress" set:html={SITE_ADDRESS_HTML}></p>
           <p>
             <a href={`tel:${sitePhoneRaw}`} itemprop="telephone">
               {sitePhone}
@@ -104,7 +134,7 @@ const currentYear = new Date().getFullYear();
         <p class="site-footer__newsletter-desc">
           Recevez nos actualités et conseils.
         </p>
-        <MauticForm formId="3" formStyle="inline" />
+        <MauticForm formId={MAUTIC_FORM_NEWSLETTER_ID} formStyle="inline" />
       </div>
 
     </div>
@@ -112,11 +142,12 @@ const currentYear = new Date().getFullYear();
     {/* Barre de copyright */}
     <div class="site-footer__bottom">
       <p class="site-footer__copyright">
-        &copy; {currentYear} {siteName}. Tous droits réservés.
+        {FOOTER_COPYRIGHT}
       </p>
       <ul class="site-footer__legal" role="list">
-        <li><a href="/mentions-legales">Mentions légales</a></li>
-        <li><a href="/politique-de-confidentialite">Politique de confidentialité</a></li>
+        <li><a href={FOOTER_MENTIONS_URL}>Mentions légales</a></li>
+        {FOOTER_CGV_URL && <li><a href={FOOTER_CGV_URL}>CGV</a></li>}
+        <li><a href={FOOTER_CONFIDENTIALITE_URL}>Politique de confidentialité</a></li>
       </ul>
     </div>
 

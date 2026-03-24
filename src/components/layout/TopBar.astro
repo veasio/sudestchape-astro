@@ -2,15 +2,16 @@
 // Top bar avec accroches promotionnelles défilantes
 // Source : partials/top-bar.htm
 
-const sitePhone = '04 91 00 00 00';
-const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
+import {
+  SITE_PHONE, SITE_PHONE_DISPLAY,
+  TOPBAR_LEFT_TEXT,
+  PROMO_ENABLED, PROMO_AUTOPLAY, PROMO_INTERVAL_MS, PROMO_PAUSE_ON_HOVER,
+  PROMO_MESSAGES,
+} from '../../config';
 
-const promoMessages = [
-  { icon: 'truck', text: 'Intervention rapide dans tout le Sud-Est', link: '' },
-  { icon: 'star', text: 'Plus de 500 chantiers réalisés depuis 15 ans', link: '' },
-  { icon: 'shield', text: 'Garantie décennale & assurance RC Pro', link: '' },
-  { icon: 'percent', text: 'Devis gratuit sous 48h', link: '/contact' },
-];
+const sitePhone = SITE_PHONE_DISPLAY;
+const sitePhoneRaw = SITE_PHONE;
+const promoMessages = PROMO_MESSAGES;
 ---
 
 <div class="top-bar" role="banner" aria-label="Informations et promotions">
@@ -18,15 +19,15 @@ const promoMessages = [
 
     {/* Colonne gauche : Slogan/Tagline */}
     <div class="top-bar__col top-bar__col--left">
-      <span class="top-bar__tagline">Spécialiste chape dans le Sud-Est</span>
+      <span class="top-bar__tagline">{TOPBAR_LEFT_TEXT}</span>
     </div>
 
     {/* Colonne centrale : Messages promotionnels défilants */}
     <div class="top-bar__col top-bar__col--center">
       <div class="promo-carousel"
-           data-autoplay="true"
-           data-interval="4"
-           data-pause-on-hover="true"
+           data-autoplay={String(PROMO_AUTOPLAY)}
+           data-interval={String(Math.round(PROMO_INTERVAL_MS / 1000))}
+           data-pause-on-hover={String(PROMO_PAUSE_ON_HOVER)}
            aria-live="polite"
            aria-atomic="true">
 

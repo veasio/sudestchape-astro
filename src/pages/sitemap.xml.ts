@@ -1,7 +1,8 @@
 import type { APIRoute } from 'astro';
 import { realisations } from '../data/realisations';
+import { SITE_URL } from '../config';
 
-const BASE = 'https://sudestchape.fr';
+const BASE = SITE_URL;
 const today = new Date().toISOString().split('T')[0];
 
 const pages = [

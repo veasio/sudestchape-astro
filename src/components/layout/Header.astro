@@ -3,6 +3,7 @@
 // Source : partials/header.htm
 
 import Navigation from './Navigation.astro';
+import { SITE_NAME, SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
 
 interface Props {
   currentPath?: string;
@@ -10,9 +11,9 @@ interface Props {
 
 const { currentPath = '/' } = Astro.props;
 
-const siteName = 'Sudest Chape';
-const sitePhone = '04 91 00 00 00';
-const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
+const siteName = SITE_NAME;
+const sitePhone = SITE_PHONE_DISPLAY;
+const sitePhoneRaw = SITE_PHONE;
 
 const menuItems = [
   { title: 'Accueil', url: '/' },

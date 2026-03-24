@@ -2,6 +2,8 @@
 // Embed formulaire Mautic (standalone)
 // Source : partials/mautic/form-embed.htm
 
+import { MAUTIC_BASE_URL, MAUTIC_ENABLED } from '../../config';
+
 interface Props {
   formId: string | number;
   formStyle?: 'default' | 'inline' | 'modal';
@@ -9,8 +11,8 @@ interface Props {
 
 const { formId, formStyle = 'default' } = Astro.props;
 
-const mauticUrl = 'https://m.sudestchape.fr';
-const mauticEnabled = true;
+const mauticUrl = MAUTIC_BASE_URL;
+const mauticEnabled = MAUTIC_ENABLED;
 ---
 
 {mauticEnabled && formId && (

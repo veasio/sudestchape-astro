@@ -2,6 +2,8 @@
 // Boutons de partage social
 // Source : partials/social-share.htm
 
+import { SITE_URL } from '../../config';
+
 interface Props {
   url?: string;
   title?: string;
@@ -18,7 +20,7 @@ const {
   variant = 'default',
 } = Astro.props;
 
-const siteUrl = 'https://sudestchape.fr';
+const siteUrl = SITE_URL;
 const fullUrl = url.startsWith('http') ? url : siteUrl + url;
 
 const shareUrl = encodeURIComponent(fullUrl);

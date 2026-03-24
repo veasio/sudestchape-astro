@@ -2,6 +2,8 @@
 // Breadcrumb avec Schema.org BreadcrumbList JSON-LD
 // Source : partials/breadcrumb.htm
 
+import { SITE_URL } from '../../config';
+
 interface Props {
   pageTitle: string;
   pageUrl: string;
@@ -12,7 +14,7 @@ interface Props {
 
 const { pageTitle, pageUrl, isHome = false, parentTitle, parentUrl } = Astro.props;
 
-const siteUrl = 'https://sudestchape.fr';
+const siteUrl = SITE_URL;
 
 // Construire les items JSON-LD
 const ldItems: { '@type': string; position: number; name: string; item: string }[] = [

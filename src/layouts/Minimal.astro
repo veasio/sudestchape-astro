@@ -2,6 +2,7 @@
 import SEO from '../components/SEO.astro';
 import criticalCss from '../styles/critical.css?raw';
 import mainCssUrl from '../styles/main.css?url';
+import { FONT_GOOGLE_URL, MAUTIC_BASE_URL, MAUTIC_ENABLED, MAUTIC_TRACKING_ENABLED, SITE_NAME, FOOTER_COPYRIGHT, FOOTER_CONFIDENTIALITE_URL } from '../config';
 
 interface Props {
   title: string;
@@ -28,13 +29,13 @@ const props = Astro.props;
   {/* Preconnect */}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="dns-prefetch" href="https://m.sudestchape.fr" />
+  <link rel="dns-prefetch" href={MAUTIC_BASE_URL} />
 
   {/* Google Fonts Inter (async) */}
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'" />
+  <link rel="preload" as="style" href={FONT_GOOGLE_URL} />
+  <link rel="stylesheet" href={FONT_GOOGLE_URL} media="print" onload="this.media='all'" />
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" />
+    <link rel="stylesheet" href={FONT_GOOGLE_URL} />
   </noscript>
 
   {/* Critical CSS inline */}
@@ -84,25 +85,27 @@ const props = Astro.props;
   </noscript>
 
   {/* Mautic tracking (mtc.js) */}
-  <script is:inline>
-  (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
-    w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),
-    m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://m.sudestchape.fr/mtc.js','mt');
-  (function(){
-    var params = new URLSearchParams(window.location.search);
-    var utmFields = {};
-    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(key){
-      var val = params.get(key);
-      if (val) utmFields[key] = val;
-    });
-    if (Object.keys(utmFields).length > 0) {
-      mt('send', 'pageview', utmFields);
-    } else {
-      mt('send', 'pageview');
-    }
-  })();
-  </script>
+  {MAUTIC_ENABLED && MAUTIC_TRACKING_ENABLED && (
+    <script is:inline define:vars={{ mauticBaseUrl: MAUTIC_BASE_URL }}>
+    (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
+      w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),
+      m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
+    })(window,document,'script',mauticBaseUrl+'/mtc.js','mt');
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utmFields = {};
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(key){
+        var val = params.get(key);
+        if (val) utmFields[key] = val;
+      });
+      if (Object.keys(utmFields).length > 0) {
+        mt('send', 'pageview', utmFields);
+      } else {
+        mt('send', 'pageview');
+      }
+    })();
+    </script>
+  )}
 </head>
 
 <body class="layout-minimal" itemscope itemtype="https://schema.org/WebPage">
@@ -113,9 +116,9 @@ const props = Astro.props;
   <header class="minimal-header" role="banner">
     <a href="/"
        class="minimal-header__logo"
-       aria-label="sudestchape - Retour à l'accueil">
+       aria-label={`${SITE_NAME} - Retour à l'accueil`}>
       <img src="/images/logo.svg"
-           alt="sudestchape"
+           alt={SITE_NAME}
            width="200"
            height="50"
            loading="eager" />
@@ -130,8 +133,8 @@ const props = Astro.props;
   {/* Footer minimal */}
   <footer class="minimal-footer" role="contentinfo">
     <p>
-      &copy; {new Date().getFullYear()} sudestchape. Tous droits réservés.
-      &mdash; <a href="/politique-de-confidentialite">Politique de confidentialité</a>
+      {FOOTER_COPYRIGHT}
+      &mdash; <a href={FOOTER_CONFIDENTIALITE_URL}>Politique de confidentialité</a>
     </p>
     <p>
       <a href="/">Retour au site</a>

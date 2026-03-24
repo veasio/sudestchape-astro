@@ -5,6 +5,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import criticalCss from '../styles/critical.css?raw';
 import mainCssUrl from '../styles/main.css?url';
+import { FONT_GOOGLE_URL, MAUTIC_BASE_URL, MAUTIC_ENABLED, MAUTIC_TRACKING_ENABLED } from '../config';
 
 interface Props {
   title: string;
@@ -33,13 +34,13 @@ const currentPath = Astro.url.pathname;
   {/* Preconnect */}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="dns-prefetch" href="https://m.sudestchape.fr" />
+  <link rel="dns-prefetch" href={MAUTIC_BASE_URL} />
 
-  {/* Google Fonts Montserrat (async pour la performance) */}
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'" />
+  {/* Google Fonts Inter (async pour la performance) */}
+  <link rel="preload" as="style" href={FONT_GOOGLE_URL} />
+  <link rel="stylesheet" href={FONT_GOOGLE_URL} media="print" onload="this.media='all'" />
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" />
+    <link rel="stylesheet" href={FONT_GOOGLE_URL} />
   </noscript>
 
   {/* Critical CSS inline pour les Core Web Vitals */}
@@ -59,25 +60,27 @@ const currentPath = Astro.url.pathname;
   </noscript>
 
   {/* Mautic tracking (mtc.js) */}
-  <script is:inline>
-  (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
-    w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),
-    m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://m.sudestchape.fr/mtc.js','mt');
-  (function(){
-    var params = new URLSearchParams(window.location.search);
-    var utmFields = {};
-    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(key){
-      var val = params.get(key);
-      if (val) utmFields[key] = val;
-    });
-    if (Object.keys(utmFields).length > 0) {
-      mt('send', 'pageview', utmFields);
-    } else {
-      mt('send', 'pageview');
-    }
-  })();
-  </script>
+  {MAUTIC_ENABLED && MAUTIC_TRACKING_ENABLED && (
+    <script is:inline define:vars={{ mauticBaseUrl: MAUTIC_BASE_URL }}>
+    (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
+      w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),
+      m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
+    })(window,document,'script',mauticBaseUrl+'/mtc.js','mt');
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utmFields = {};
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(key){
+        var val = params.get(key);
+        if (val) utmFields[key] = val;
+      });
+      if (Object.keys(utmFields).length > 0) {
+        mt('send', 'pageview', utmFields);
+      } else {
+        mt('send', 'pageview');
+      }
+    })();
+    </script>
+  )}
 </head>
 
 <body class="layout-default">

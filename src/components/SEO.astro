@@ -1,4 +1,6 @@
 ---
+import { SEO_DEFAULT_OG_IMAGE, SEO_GOOGLE_VERIF, SEO_BING_VERIF } from '../config';
+
 interface Props {
   title: string;
   description: string;
@@ -9,7 +11,7 @@ interface Props {
 const {
   title,
   description,
-  ogImage = '/images/og-default.jpg',
+  ogImage = SEO_DEFAULT_OG_IMAGE,
   noindex = false,
   schema,
 } = Astro.props;
@@ -19,6 +21,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
 {noindex && <meta name="robots" content="noindex, nofollow" />}
+{SEO_GOOGLE_VERIF && <meta name="google-site-verification" content={SEO_GOOGLE_VERIF} />}
+{SEO_BING_VERIF && <meta name="msvalidate.01" content={SEO_BING_VERIF} />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(ogImage, Astro.site)} />

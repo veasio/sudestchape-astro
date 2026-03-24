@@ -1,12 +1,13 @@
 ---
 import Default from '../layouts/Default.astro';
+import { SITE_URL, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL, SITE_ADDRESS_HTML } from '../config';
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   "name": "Contact Sudest Chape",
   "description": "Contactez Sudest Chape pour un devis gratuit de chape fluide ou traditionnelle.",
-  "url": "https://www.sudestchape.fr/contact"
+  "url": `${SITE_URL}/contact`
 };
 ---
 
@@ -104,23 +105,21 @@ const schema = {
 
           <div class="contact-info__block">
             <h4 class="contact-info__label">Téléphone</h4>
-            <a href="tel:+33491000000" class="contact-info__value contact-info__value--link">
-              04 91 00 00 00
+            <a href={`tel:${SITE_PHONE}`} class="contact-info__value contact-info__value--link">
+              {SITE_PHONE_DISPLAY}
             </a>
           </div>
 
           <div class="contact-info__block">
             <h4 class="contact-info__label">Email</h4>
-            <a href="mailto:contact@sudestchape.fr" class="contact-info__value contact-info__value--link">
-              contact@sudestchape.fr
+            <a href={`mailto:${SITE_EMAIL}`} class="contact-info__value contact-info__value--link">
+              {SITE_EMAIL}
             </a>
           </div>
 
           <div class="contact-info__block">
             <h4 class="contact-info__label">Adresse</h4>
-            <address class="contact-info__value">
-              Zone d'activité<br />13000 Marseille
-            </address>
+            <address class="contact-info__value" set:html={SITE_ADDRESS_HTML}></address>
           </div>
 
           <div class="contact-info__block">
