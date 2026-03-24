@@ -18,9 +18,16 @@
    Hero Wrapper (fond coloré pour les coins arrondis)
    ------------------------------------------------------------------ */
 .hero-wrapper {
-    /* Fond sombre pour que les coins arrondis de la section suivante soient visibles */
-    background: var(--color-gray-900);
     transition: background var(--transition-base);
+}
+
+/* Mode normal : fond sombre + overlap précis pour les coins arrondis de la section suivante.
+   overflow:hidden évite le margin-collapse avec la section.
+   margin-bottom:-1.5rem compense le gap naturel de 24px entre le wrapper et la section. */
+.hero-wrapper:not(.hero-wrapper--transparent-mode) {
+    background: var(--color-gray-900);
+    overflow: hidden;
+    margin-bottom: -1.5rem;
 }
 
 /* Mode transparent activé : fond coloré visible derrière les coins arrondis */

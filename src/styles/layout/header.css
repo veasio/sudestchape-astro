@@ -68,7 +68,7 @@
    Top bar (3 colonnes)
    ------------------------------------------------------------------ */
 .top-bar {
-    background: var(--color-cta);
+    background: var(--color-primary);
     color: var(--color-white);
     font-size: var(--fs-sm);
     font-weight: var(--font-weight-medium);
