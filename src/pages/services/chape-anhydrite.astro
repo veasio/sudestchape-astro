@@ -3,6 +3,8 @@ import Default from '../../layouts/Default.astro';
 import Faq from '../../components/ui/Faq.astro';
 import CtaRandom from '../../components/ui/CtaRandom.astro';
 import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import Steps from '../../components/sections/Steps.astro';
+import Stats from '../../components/sections/Stats.astro';
 import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
 
 const faqItems = [
@@ -117,6 +119,30 @@ const schema = {
     </div>
   </section>
 
+  {/* Stats chape anhydrite */}
+  <Stats
+    stat1Count={40} stat1Suffix=" mm" stat1Label="Épaisseur min. plancher chauffant"
+    stat2Count={1000} stat2Suffix=" m²" stat2Label="Coulés par jour par équipe"
+    stat3Count={48} stat3Suffix="h" stat3Label="Praticable à pied"
+    stat4Count={15} stat4Suffix=" ans" stat4Label="D'expérience applicateur"
+  />
+
+  {/* Process d'intervention */}
+  <Steps
+    overline="Notre intervention"
+    title="Comment se déroule la pose de chape anhydrite ?"
+    titleId="steps-anhydrite-title"
+    bg="gray"
+    step1Title="Visite technique gratuite"
+    step1Text="Un technicien évalue votre chantier : support, réseau de tubes, accès camion-pompe. Devis remis sous 24h."
+    step2Title="Préparation du support"
+    step2Text="Vérification et traitement du support, mise en place des bandes périphériques de désolidarisation, contrôle des niveaux."
+    step3Title="Coulage et nivellement"
+    step3Text="La chape anhydrite est pompée et répandue en une seule opération. Débullage au rouleau hérisson pour éliminer les poches d'air."
+    step4Title="Séchage et mise en chauffe"
+    step4Text="Protocolé de séchage et de première mise en chauffe remis. Suivi et disponibilité jusqu'à la pose du revêtement."
+  />
+
   {/* Zone d'intervention */}
   <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-anhydrite-title">
     <div class="container">
@@ -138,6 +164,30 @@ const schema = {
         <div class="card-feature">
           <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
           <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Domaines d'application */}
+  <section class="section section--white section--rounded" aria-labelledby="applications-anhydrite-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Qui fait appel à nous ?</p>
+        <h2 class="section__title" id="applications-anhydrite-title">Chape anhydrite pour tous les projets</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Particuliers</h3>
+          <p class="card-feature__text">Maisons individuelles, villas, appartements. Plancher chauffant neuf ou rénovation. Nous intervenons dès 80 m².</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Promoteurs & constructeurs</h3>
+          <p class="card-feature__text">Résidences collectives, programmes neufs. Coordination avec tous les corps de métier. Capacité jusqu'à 1 000 m²/jour.</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Hôtellerie & tertiaire</h3>
+          <p class="card-feature__text">Hôtels, bureaux, commerces. Intervention nocturne ou week-end possible pour limiter l'impact sur l'exploitation.</p>
         </div>
       </div>
     </div>
