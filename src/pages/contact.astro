@@ -125,31 +125,22 @@ const schema = {
           <div class="contact-info__block">
             <h4 class="contact-info__label">Zone d'intervention</h4>
             <p class="contact-info__value">
-              Bouches-du-Rhône (13), Var (83), Alpes-Maritimes (06),
-              Vaucluse (84), Gard (30), Hérault (34)
+              Var (83), Bouches-du-Rhône (13), Alpes-Maritimes (06), Vaucluse (84)
             </p>
           </div>
 
           <div class="contact-info__block">
-            <h4 class="contact-info__label" id="horaires-label">Horaires</h4>
-            <table class="contact-info__hours" aria-labelledby="horaires-label">
-              <thead class="sr-only">
-                <tr>
-                  <th scope="col">Jour</th>
-                  <th scope="col">Horaires</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Lundi – Vendredi</th>
-                  <td>08h00 – 18h00</td>
-                </tr>
-                <tr>
-                  <th scope="row">Dimanche</th>
-                  <td>Fermé</td>
-                </tr>
-              </tbody>
-            </table>
+            <h4 class="contact-info__label">Horaires</h4>
+            <div class="opening-hours">
+              <div class="opening-hours__row">
+                <span class="opening-hours__days">Lun – Ven</span>
+                <span class="opening-hours__time opening-hours__time--open">08h00 – 18h00</span>
+              </div>
+              <div class="opening-hours__row">
+                <span class="opening-hours__days">Sam – Dim</span>
+                <span class="opening-hours__time opening-hours__time--closed">Fermé</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -161,7 +152,7 @@ const schema = {
     <div class="container">
       <h2 class="section__title text-center" id="map-title">Notre zone d'intervention</h2>
       <p class="section__description text-center" style="margin-inline:auto;">
-        Nous intervenons dans 6 départements du Sud-Est de la France.
+        Nous intervenons dans 4 départements du Sud-Est de la France.
       </p>
       <div class="contact-map" aria-label="Zone d'intervention Sud Est Chape">
         <div class="contact-map__placeholder">

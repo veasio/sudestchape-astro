@@ -500,3 +500,46 @@
     color: var(--color-gray-500);
     font-size: var(--fs-sm);
 }
+
+/* ------------------------------------------------------------------
+   Horaires d'ouverture — design clean
+   ------------------------------------------------------------------ */
+
+.opening-hours {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.opening-hours__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius);
+    background: var(--color-gray-50);
+}
+
+.opening-hours__days {
+    font-size: var(--fs-sm);
+    color: var(--color-gray-600);
+    font-weight: var(--font-weight-medium);
+}
+
+.opening-hours__time {
+    font-size: var(--fs-sm);
+    font-weight: var(--font-weight-bold);
+    padding: 2px var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+}
+
+.opening-hours__time--open {
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 10%, white);
+}
+
+.opening-hours__time--closed {
+    color: var(--color-gray-400);
+    background: var(--color-gray-100);
+}
