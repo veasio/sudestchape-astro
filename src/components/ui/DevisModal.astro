@@ -81,25 +81,25 @@ import { SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
   z-index: 1;
   background: white;
   width: 100%;
-  max-width: 760px;
-  margin: auto;
-  border-radius: 0;
+  max-width: 720px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100dvh;
   animation: dmodal-slide-up .25s ease;
 }
 
 @media (min-width: 768px) {
   .dmodal {
-    padding: var(--spacing-8, 2rem) var(--spacing-4, 1rem);
+    padding: 2rem 1rem;
     align-items: flex-start;
   }
   .dmodal__container {
+    height: auto;
+    max-height: calc(100dvh - 4rem);
     border-radius: var(--border-radius-xl, 1rem);
-    min-height: auto;
-    margin: auto;
     box-shadow: 0 24px 80px rgba(0,0,0,.22);
+    margin: auto;
   }
 }
 
@@ -190,14 +190,14 @@ import { SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
 
 /* ── Body ── */
 .dmodal__body {
-  padding: var(--spacing-6, 1.5rem) var(--spacing-5, 1.25rem);
+  padding: 1.25rem;
   flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 640px) {
-  .dmodal__body {
-    padding: var(--spacing-8, 2rem);
-  }
+  .dmodal__body { padding: 1.75rem 2rem; }
 }
 
 /* ── Animations ── */
