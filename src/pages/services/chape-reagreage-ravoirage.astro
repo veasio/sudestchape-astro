@@ -3,6 +3,8 @@ import Default from '../../layouts/Default.astro';
 import Faq from '../../components/ui/Faq.astro';
 import CtaRandom from '../../components/ui/CtaRandom.astro';
 import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import Steps from '../../components/sections/Steps.astro';
+import Stats from '../../components/sections/Stats.astro';
 import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
 
 const faqItems = [
@@ -113,6 +115,28 @@ const schema = {
     </div>
   </section>
 
+  <Stats
+    stat1Count={15} stat1Suffix=" cm" stat1Label="Épaisseur max. de rattrapage"
+    stat2Count={20} stat2Suffix=" mm" stat2Label="Dénivelé déclenchant un ravoirage"
+    stat3Count={6} stat3Suffix="" stat3Label="Équipes disponibles en PACA"
+    stat4Count={500} stat4Suffix="+" stat4Label="Chantiers de remise à niveau"
+  />
+
+  <Steps
+    overline="Notre méthode"
+    title="Remise à niveau de sol : notre process en 4 étapes"
+    titleId="steps-ravoirage-title"
+    bg="gray"
+    step1Title="Diagnostic du sol"
+    step1Text="Relevé des niveaux avec laser rotatif, identification des points hauts et bas, évaluation du support et des contraintes (réseaux, plancher chauffant)."
+    step2Title="Préparation du support"
+    step2Text="Nettoyage, dépoussiérage, application d'un primaire d'accrochage. Pose des repères de niveau et des joints périphériques."
+    step3Title="Coulage du ravoirage"
+    step3Text="Application de la chape liquide ou du béton de ravoirage selon l'épaisseur. Contrôle continu de la planéité pendant le coulage."
+    step4Title="Finition et réagréage"
+    step4Text="Si nécessaire, application d'un réagréage de finition pour parfaire la surface. Remise d'un bon de conformité avant pose du revêtement."
+  />
+
   {/* Zone d'intervention */}
   <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-ravoirage-title">
     <div class="container">
@@ -134,6 +158,29 @@ const schema = {
         <div class="card-feature">
           <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
           <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white section--rounded" aria-labelledby="usages-ravoirage-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Cas d'application</p>
+        <h2 class="section__title" id="usages-ravoirage-title">Dans quels cas faire appel à nous ?</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Rénovation</h3>
+          <p class="card-feature__text">Ancien carrelage décollé, béton dégradé, sol irrégulier. Le ravoirage repart sur une base saine avant tout nouveau revêtement.</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Construction neuve</h3>
+          <p class="card-feature__text">Rattrapage des niveaux entre dalles, enrobage des réseaux (électricité, plomberie, plancher chauffant) avant chape de finition.</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Industrie & logistique</h3>
+          <p class="card-feature__text">Remise à niveau de sols industriels dégradés, création de pentes d'écoulement, reprises localisées sous charge.</p>
         </div>
       </div>
     </div>
