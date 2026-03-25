@@ -3,6 +3,7 @@ import SEO from '../components/SEO.astro';
 import TopBar from '../components/layout/TopBar.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import DevisModal from '../components/ui/DevisModal.astro';
 import criticalCss from '../styles/critical.css?raw';
 import mainCssUrl from '../styles/main.css?url';
 import {
@@ -124,6 +125,8 @@ const currentPath = Astro.url.pathname;
   </main>
 
   <Footer />
+
+  <DevisModal />
 
   <script src="/scripts/app.js" type="module"></script>
 </body>

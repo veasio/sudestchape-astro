@@ -1,0 +1,290 @@
+---
+import DevisWizard from './DevisWizard.astro';
+import { SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
+---
+
+{/* ── Modal devis — injecté une seule fois dans le layout ── */}
+<div
+  id="devis-modal"
+  class="dmodal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="dmodal-title"
+  hidden
+>
+  <div class="dmodal__backdrop" id="dmodal-backdrop" aria-hidden="true"></div>
+
+  <div class="dmodal__container">
+
+    {/* Header du modal */}
+    <div class="dmodal__header">
+      <div class="dmodal__header-left">
+        <h2 class="dmodal__title" id="dmodal-title">Demande de devis gratuit</h2>
+        <p class="dmodal__subtitle">Réponse sous 24h · Sans engagement</p>
+      </div>
+      <div class="dmodal__header-right">
+        <a href={`tel:${SITE_PHONE}`} class="dmodal__phone" aria-label={`Appeler le ${SITE_PHONE_DISPLAY}`}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          <span class="dmodal__phone-num">{SITE_PHONE_DISPLAY}</span>
+        </a>
+        <button
+          type="button"
+          class="dmodal__close"
+          id="dmodal-close"
+          aria-label="Fermer la demande de devis"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    {/* Corps : wizard */}
+    <div class="dmodal__body">
+      <DevisWizard />
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* ── Backdrop ── */
+.dmodal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.dmodal[hidden] { display: none; }
+
+.dmodal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: dmodal-fade-in .2s ease;
+}
+
+/* ── Container ── */
+.dmodal__container {
+  position: relative;
+  z-index: 1;
+  background: white;
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  animation: dmodal-slide-up .25s ease;
+}
+
+@media (min-width: 768px) {
+  .dmodal {
+    padding: var(--spacing-8, 2rem) var(--spacing-4, 1rem);
+    align-items: flex-start;
+  }
+  .dmodal__container {
+    border-radius: var(--border-radius-xl, 1rem);
+    min-height: auto;
+    margin: auto;
+    box-shadow: 0 24px 80px rgba(0,0,0,.22);
+  }
+}
+
+/* ── Header ── */
+.dmodal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4, 1rem);
+  padding: var(--spacing-4, 1rem) var(--spacing-5, 1.25rem);
+  border-bottom: 1px solid var(--color-gray-100, #f3f4f6);
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+  border-radius: inherit;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dmodal__header-left { flex: 1; min-width: 0; }
+.dmodal__header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3, .75rem);
+  flex-shrink: 0;
+}
+
+.dmodal__title {
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: 700;
+  color: var(--color-gray-900, #111827);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dmodal__subtitle {
+  font-size: .75rem;
+  color: var(--color-gray-500, #6b7280);
+  margin-top: .1rem;
+}
+
+.dmodal__phone {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-1, .25rem);
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--color-primary, #ED4830);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dmodal__phone:hover { text-decoration: underline; }
+
+@media (min-width: 480px) {
+  .dmodal__phone { display: flex; }
+}
+
+.dmodal__phone-num {
+  display: none;
+}
+@media (min-width: 640px) {
+  .dmodal__phone-num { display: inline; }
+}
+
+.dmodal__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gray-200, #e5e7eb);
+  background: white;
+  color: var(--color-gray-600, #4b5563);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, color .15s, border-color .15s;
+  flex-shrink: 0;
+}
+
+.dmodal__close:hover {
+  background: var(--color-gray-100, #f3f4f6);
+  border-color: var(--color-gray-400, #9ca3af);
+  color: var(--color-gray-900, #111827);
+}
+
+/* ── Body ── */
+.dmodal__body {
+  padding: var(--spacing-6, 1.5rem) var(--spacing-5, 1.25rem);
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .dmodal__body {
+    padding: var(--spacing-8, 2rem);
+  }
+}
+
+/* ── Animations ── */
+@keyframes dmodal-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes dmodal-slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dmodal__backdrop,
+  .dmodal__container { animation: none; }
+}
+</style>
+
+<script>
+(function () {
+  const modal    = document.getElementById('devis-modal');
+  const backdrop = document.getElementById('dmodal-backdrop');
+  const closeBtn = document.getElementById('dmodal-close');
+  if (!modal) return;
+
+  let lastFocused = null;
+
+  // ── Ouvrir ──
+  function openModal() {
+    lastFocused = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    // Focus sur le premier élément interactif du modal
+    requestAnimationFrame(() => {
+      const first = modal.querySelector('input, button, [tabindex="0"]');
+      if (first) first.focus();
+    });
+    window.dispatchEvent(new CustomEvent('devis-modal:open'));
+  }
+
+  // ── Fermer ──
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+    window.dispatchEvent(new CustomEvent('devis-modal:close'));
+  }
+
+  // ── Interception des clics sur href="/devis" ──
+  document.addEventListener('click', function (e) {
+    const anchor = e.target.closest('a[href="/devis"]');
+    if (!anchor) return;
+    e.preventDefault();
+    openModal();
+  });
+
+  // ── Fermeture via bouton, backdrop, ESC ──
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+
+  // ── Focus trap ──
+  modal.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(
+      modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]')
+    ).filter(el => !el.closest('[hidden]') && el.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  // ── Auto-ouverture si on arrive sur /devis directement ──
+  if (window.location.pathname === '/devis') {
+    openModal();
+  }
+
+  // ── API globale ──
+  window.devisModal = { open: openModal, close: closeModal };
+})();
+</script>

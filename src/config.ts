@@ -112,7 +112,7 @@ export const PROMO_INTERVAL_MS     = 4000;
 export const PROMO_PAUSE_ON_HOVER  = true;
 
 export const PROMO_MESSAGES = [
-  { text: 'Devis gratuit - Réponse rapide garantie',        icon: 'calendar', link: '/contact' },
+  { text: 'Devis gratuit - Réponse rapide garantie',        icon: 'calendar', link: '/devis' },
   { text: 'Intervention dans tout le Sud-Est',                   icon: 'truck',    link: '' },
   { text: '+15 ans d\'expérience en chape fluide',   icon: 'star',     link: '/a-propos' },
   { text: 'Certifié CTB-P - Conformes normes DTU 26.2',   icon: 'shield',   link: '/services' },
@@ -136,7 +136,7 @@ export const NAV_ITEMS = [
   },
   { title: 'Qui Sommes Nous',     url: '/a-propos' },
   { title: 'Nos Réalisations', url: '/realisations' },
-  { title: 'Contact & Devis',      url: '/contact' },
+  { title: 'Contact & Devis',      url: '/devis' },
 ];
 
 // ---------------------------------------------------------------------------

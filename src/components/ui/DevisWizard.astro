@@ -1,0 +1,1390 @@
+---
+import { MAUTIC_BASE_URL } from '../../config';
+
+const mauticUrl = MAUTIC_BASE_URL;
+---
+
+<div
+  class="wizard"
+  id="devis-wizard"
+  data-mautic-url={mauticUrl}
+  data-form-contact-id="2"
+  data-form-contact-name="formulairecontact"
+  data-form-devis-id="4"
+  data-form-devis-name="formulairedevis"
+>
+
+  {/* Indicateur de progression */}
+  <div class="wizard__progress" aria-label="Étapes du formulaire">
+    <div class="wizard__steps-nav" role="list">
+      {[
+        { n: 1, label: 'Contact' },
+        { n: 2, label: 'Projet' },
+        { n: 3, label: 'Prestation' },
+        { n: 4, label: 'Chantier' },
+        { n: 5, label: 'Planning' },
+        { n: 6, label: 'Récap' },
+      ].map(({ n, label }) => (
+        <div class="wizard__step-dot" data-nav-step={n} role="listitem" aria-current={n === 1 ? 'step' : undefined}>
+          <div class="wizard__step-circle">
+            <span class="wizard__step-num">{n}</span>
+            <svg class="wizard__step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <span class="wizard__step-label">{label}</span>
+        </div>
+      ))}
+    </div>
+    <div class="wizard__progress-track" aria-hidden="true">
+      <div class="wizard__progress-fill" id="wizard-progress-fill"></div>
+    </div>
+  </div>
+
+  {/* ─────────────────── ÉTAPE 1 : Contact ─────────────────── */}
+  <div class="wizard__panel" data-step="1">
+    <div class="wizard__panel-header">
+      <p class="wizard__panel-overline">Étape 1 sur 6</p>
+      <h2 class="wizard__panel-title">Vos coordonnées</h2>
+      <p class="wizard__panel-desc">Nous vous enverrons votre devis par email. L'email est obligatoire.</p>
+    </div>
+    <div class="wizard__fields">
+      <div class="wizard__row">
+        <div class="wizard__field">
+          <label class="wizard__label" for="wz-firstname">Prénom <span aria-hidden="true">*</span></label>
+          <input class="wizard__input" type="text" id="wz-firstname" name="firstname"
+                 autocomplete="given-name" required placeholder="Jean" />
+        </div>
+        <div class="wizard__field">
+          <label class="wizard__label" for="wz-lastname">Nom</label>
+          <input class="wizard__input" type="text" id="wz-lastname" name="lastname"
+                 autocomplete="family-name" placeholder="Dupont" />
+        </div>
+      </div>
+      <div class="wizard__field">
+        <label class="wizard__label" for="wz-email">Email <span class="wizard__label-req" aria-hidden="true">*</span></label>
+        <input class="wizard__input" type="email" id="wz-email" name="email"
+               autocomplete="email" required placeholder="jean.dupont@email.fr" />
+        <p class="wizard__hint">Votre devis vous sera envoyé à cette adresse.</p>
+      </div>
+      <div class="wizard__field">
+        <label class="wizard__label" for="wz-phone">Téléphone</label>
+        <input class="wizard__input" type="tel" id="wz-phone" name="phone"
+               autocomplete="tel" placeholder="06 12 34 56 78" />
+      </div>
+    </div>
+  </div>
+
+  {/* ─────────────────── ÉTAPE 2 : Projet ─────────────────── */}
+  <div class="wizard__panel wizard__panel--hidden" data-step="2">
+    <div class="wizard__panel-header">
+      <p class="wizard__panel-overline">Étape 2 sur 6</p>
+      <h2 class="wizard__panel-title">Votre projet</h2>
+      <p class="wizard__panel-desc">Dites-nous en plus sur la nature de votre chantier.</p>
+    </div>
+
+    <div class="wizard__fields">
+      <fieldset class="wizard__fieldset">
+        <legend class="wizard__legend">Type de construction <span aria-hidden="true">*</span></legend>
+        <div class="wizard__cards wizard__cards--3" role="radiogroup" aria-label="Type de construction">
+          <label class="wizard__card" data-value="neuf">
+            <input type="radio" name="type_projet" value="neuf" class="wizard__card-radio" />
+            <div class="wizard__card-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <span class="wizard__card-title">Construction neuve</span>
+          </label>
+          <label class="wizard__card" data-value="renovation">
+            <input type="radio" name="type_projet" value="renovation" class="wizard__card-radio" />
+            <div class="wizard__card-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <span class="wizard__card-title">Rénovation</span>
+          </label>
+          <label class="wizard__card" data-value="les_deux">
+            <input type="radio" name="type_projet" value="les_deux" class="wizard__card-radio" />
+            <div class="wizard__card-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <span class="wizard__card-title">Les deux</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="wizard__fieldset">
+        <legend class="wizard__legend">Plancher chauffant ?</legend>
+        <div class="wizard__toggle-group" role="radiogroup" aria-label="Plancher chauffant">
+          <label class="wizard__toggle">
+            <input type="radio" name="plancher_chauffant" value="oui" class="wizard__toggle-radio" />
+            <span class="wizard__toggle-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Oui
+            </span>
+          </label>
+          <label class="wizard__toggle">
+            <input type="radio" name="plancher_chauffant" value="non" class="wizard__toggle-radio" />
+            <span class="wizard__toggle-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              Non
+            </span>
+          </label>
+        </div>
+        <p class="wizard__hint">Cette information nous aide à vous recommander la meilleure solution.</p>
+      </fieldset>
+    </div>
+  </div>
+
+  {/* ─────────────────── ÉTAPE 3 : Type de prestation ─────────────────── */}
+  <div class="wizard__panel wizard__panel--hidden" data-step="3">
+    <div class="wizard__panel-header">
+      <p class="wizard__panel-overline">Étape 3 sur 6</p>
+      <h2 class="wizard__panel-title">Type de prestation</h2>
+      <p class="wizard__panel-desc" id="step3-desc">Sélectionnez la prestation souhaitée.</p>
+    </div>
+    <div class="wizard__fields">
+      <div class="wizard__cards wizard__cards--2" role="radiogroup" aria-label="Type de prestation" aria-describedby="step3-desc">
+        <label class="wizard__card wizard__card--service" data-value="chape_anhydrite">
+          <input type="radio" name="type_chape" value="chape_anhydrite" class="wizard__card-radio" />
+          <span class="wizard__card-badge wizard__card-badge--hidden" id="badge-anhydrite">★ Recommandé</span>
+          <div class="wizard__card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <span class="wizard__card-title">Chape Anhydrite</span>
+          <span class="wizard__card-sub">Autonivelante · Plancher chauffant</span>
+        </label>
+        <label class="wizard__card wizard__card--service" data-value="chape_ciment">
+          <input type="radio" name="type_chape" value="chape_ciment" class="wizard__card-radio" />
+          <div class="wizard__card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <span class="wizard__card-title">Chape Ciment</span>
+          <span class="wizard__card-sub">Robuste · Milieux humides</span>
+        </label>
+        <label class="wizard__card wizard__card--service" data-value="ravoirage">
+          <input type="radio" name="type_chape" value="ravoirage" class="wizard__card-radio" />
+          <div class="wizard__card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 17l4-8 4 5 3-3 5 6"/>
+              <line x1="3" y1="21" x2="21" y2="21"/>
+            </svg>
+          </div>
+          <span class="wizard__card-title">Ravoirage / Réagréage</span>
+          <span class="wizard__card-sub">Remise à niveau · Rattrapage</span>
+        </label>
+        <label class="wizard__card wizard__card--service" data-value="isolation_phonique">
+          <input type="radio" name="type_chape" value="isolation_phonique" class="wizard__card-radio" />
+          <div class="wizard__card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+              <path d="M15.54 8.46a5 5 0 010 7.07"/>
+            </svg>
+          </div>
+          <span class="wizard__card-title">Isolation Phonique</span>
+          <span class="wizard__card-sub">Bruits de choc · DTU 26.2</span>
+        </label>
+        <label class="wizard__card wizard__card--service" data-value="isolation_thermique">
+          <input type="radio" name="type_chape" value="isolation_thermique" class="wizard__card-radio" />
+          <div class="wizard__card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+            </svg>
+          </div>
+          <span class="wizard__card-title">Isolation Thermique</span>
+          <span class="wizard__card-sub">RE 2020 · Économies d'énergie</span>
+        </label>
+        <label class="wizard__card wizard__card--service" data-value="mousse_polyurethane">
+          <input type="radio" name="type_chape" value="mousse_polyurethane" class="wizard__card-radio" />
+          <div class="wizard__card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <span class="wizard__card-title">Mousse Polyuréthane</span>
+          <span class="wizard__card-sub">Vide sanitaire · Toiture-terrasse</span>
+        </label>
+        <label class="wizard__card wizard__card--service" data-value="autre">
+          <input type="radio" name="type_chape" value="autre" class="wizard__card-radio" />
+          <div class="wizard__card-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <span class="wizard__card-title">Autre / Je ne sais pas</span>
+          <span class="wizard__card-sub">Nous vous conseillons</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  {/* ─────────────────── ÉTAPE 4 : Chantier ─────────────────── */}
+  <div class="wizard__panel wizard__panel--hidden" data-step="4">
+    <div class="wizard__panel-header">
+      <p class="wizard__panel-overline">Étape 4 sur 6</p>
+      <h2 class="wizard__panel-title">Votre chantier</h2>
+      <p class="wizard__panel-desc">Ces informations nous permettent de calculer votre devis avec précision.</p>
+    </div>
+    <div class="wizard__fields">
+      <div class="wizard__row">
+        <div class="wizard__field">
+          <label class="wizard__label" for="wz-surface">Surface totale (m²) <span aria-hidden="true">*</span></label>
+          <div class="wizard__input-wrap">
+            <input class="wizard__input wizard__input--unit" type="number" id="wz-surface"
+                   name="surface_m2" min="1" max="9999" required placeholder="150" />
+            <span class="wizard__input-suffix" aria-hidden="true">m²</span>
+          </div>
+        </div>
+        <div class="wizard__field">
+          <label class="wizard__label" for="wz-epaisseur">Épaisseur souhaitée (mm)</label>
+          <div class="wizard__input-wrap">
+            <input class="wizard__input wizard__input--unit" type="number" id="wz-epaisseur"
+                   name="epaisseur_mm" min="20" max="200" placeholder="40" />
+            <span class="wizard__input-suffix" aria-hidden="true">mm</span>
+          </div>
+          <p class="wizard__hint">En général : 40–70 mm pour chape standard, 35–50 mm avec plancher chauffant.</p>
+        </div>
+      </div>
+      <div class="wizard__field">
+        <label class="wizard__label" for="wz-adresse">Adresse du chantier</label>
+        <input class="wizard__input" type="text" id="wz-adresse" name="adresse_chantier"
+               autocomplete="street-address" placeholder="123 rue de la Chape" />
+      </div>
+      <div class="wizard__row wizard__row--3">
+        <div class="wizard__field">
+          <label class="wizard__label" for="wz-ville">Ville</label>
+          <input class="wizard__input" type="text" id="wz-ville" name="ville_chantier"
+                 autocomplete="address-level2" placeholder="Toulon" />
+        </div>
+        <div class="wizard__field">
+          <label class="wizard__label" for="wz-cp">Code postal</label>
+          <input class="wizard__input" type="text" id="wz-cp" name="code_postal_chantier"
+                 autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="83000" />
+        </div>
+        <div class="wizard__field">
+          <label class="wizard__label" for="wz-dept">Département</label>
+          <select class="wizard__select" id="wz-dept" name="departement">
+            <option value="">-- Choisir --</option>
+            <option value="83">Var (83)</option>
+            <option value="13">Bouches-du-Rhône (13)</option>
+            <option value="06">Alpes-Maritimes (06)</option>
+            <option value="84">Vaucluse (84)</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+      </div>
+      <fieldset class="wizard__fieldset">
+        <legend class="wizard__legend">Accès au chantier</legend>
+        <div class="wizard__cards wizard__cards--3" role="radiogroup" aria-label="Accès au chantier">
+          <label class="wizard__card wizard__card--sm" data-value="normal">
+            <input type="radio" name="acces_difficile" value="normal" class="wizard__card-radio" />
+            <div class="wizard__card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 17H5a2 2 0 00-2 2v0a2 2 0 002 2h14a2 2 0 002-2v0a2 2 0 00-2-2h-4"/>
+                <path d="M9 1h6v12H9zM9 7h6"/>
+              </svg>
+            </div>
+            <span class="wizard__card-title">Normal</span>
+            <span class="wizard__card-sub">Accès standard</span>
+          </label>
+          <label class="wizard__card wizard__card--sm" data-value="difficile">
+            <input type="radio" name="acces_difficile" value="difficile" class="wizard__card-radio" />
+            <div class="wizard__card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <span class="wizard__card-title">Difficile</span>
+            <span class="wizard__card-sub">Étages, escaliers…</span>
+          </label>
+          <label class="wizard__card wizard__card--sm" data-value="a_preciser">
+            <input type="radio" name="acces_difficile" value="a_preciser" class="wizard__card-radio" />
+            <div class="wizard__card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <span class="wizard__card-title">À préciser</span>
+            <span class="wizard__card-sub">Je vais détailler</span>
+          </label>
+        </div>
+        <div class="wizard__field wizard__field--conditional" id="acces-detail-field" style="display:none">
+          <label class="wizard__label" for="wz-acces-desc">Précisez l'accès</label>
+          <input class="wizard__input" type="text" id="wz-acces-desc" name="description_acces"
+                 placeholder="Ex : 3e étage sans ascenseur, accès par l'arrière…" />
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  {/* ─────────────────── ÉTAPE 5 : Planning ─────────────────── */}
+  <div class="wizard__panel wizard__panel--hidden" data-step="5">
+    <div class="wizard__panel-header">
+      <p class="wizard__panel-overline">Étape 5 sur 6</p>
+      <h2 class="wizard__panel-title">Planning et détails</h2>
+      <p class="wizard__panel-desc">Quand souhaitez-vous que nous intervenions ?</p>
+    </div>
+    <div class="wizard__fields">
+      <fieldset class="wizard__fieldset">
+        <legend class="wizard__legend">Date d'intervention souhaitée</legend>
+        <div class="wizard__cards wizard__cards--3" role="radiogroup" aria-label="Date d'intervention">
+          <label class="wizard__card wizard__card--sm" data-value="urgent">
+            <input type="radio" name="date_intervention" value="urgent" class="wizard__card-radio" />
+            <span class="wizard__card-title">Dès que possible</span>
+            <span class="wizard__card-sub">Urgent</span>
+          </label>
+          <label class="wizard__card wizard__card--sm" data-value="1_mois">
+            <input type="radio" name="date_intervention" value="1_mois" class="wizard__card-radio" />
+            <span class="wizard__card-title">Dans 1 mois</span>
+            <span class="wizard__card-sub">Sous 4 semaines</span>
+          </label>
+          <label class="wizard__card wizard__card--sm" data-value="2_3_mois">
+            <input type="radio" name="date_intervention" value="2_3_mois" class="wizard__card-radio" />
+            <span class="wizard__card-title">Dans 2–3 mois</span>
+            <span class="wizard__card-sub">En cours de préparation</span>
+          </label>
+          <label class="wizard__card wizard__card--sm" data-value="3_6_mois">
+            <input type="radio" name="date_intervention" value="3_6_mois" class="wizard__card-radio" />
+            <span class="wizard__card-title">Dans 3–6 mois</span>
+            <span class="wizard__card-sub">Projet en cours</span>
+          </label>
+          <label class="wizard__card wizard__card--sm" data-value="indetermine">
+            <input type="radio" name="date_intervention" value="indetermine" class="wizard__card-radio" />
+            <span class="wizard__card-title">Je ne sais pas encore</span>
+            <span class="wizard__card-sub">À définir</span>
+          </label>
+        </div>
+      </fieldset>
+      <div class="wizard__field">
+        <label class="wizard__label" for="wz-message">Informations complémentaires</label>
+        <textarea class="wizard__textarea" id="wz-message" name="message" rows="4"
+                  placeholder="Précisez votre projet, contraintes particulières, questions…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  {/* ─────────────────── ÉTAPE 6 : Récapitulatif ─────────────────── */}
+  <div class="wizard__panel wizard__panel--hidden" data-step="6">
+    <div class="wizard__panel-header">
+      <p class="wizard__panel-overline">Étape 6 sur 6</p>
+      <h2 class="wizard__panel-title">Récapitulatif</h2>
+      <p class="wizard__panel-desc">Vérifiez vos informations avant d'envoyer votre demande.</p>
+    </div>
+    <div class="wizard__summary" id="wizard-summary">
+      {/* Rempli dynamiquement */}
+    </div>
+    <div class="wizard__submit-area">
+      <p class="wizard__privacy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0110 0v4"/>
+        </svg>
+        Vos données sont confidentielles et ne seront jamais partagées.
+      </p>
+    </div>
+  </div>
+
+  {/* Message de succès */}
+  <div class="wizard__success wizard__panel--hidden" id="wizard-success" role="alert" aria-live="polite">
+    <div class="wizard__success-icon" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    <h2 class="wizard__success-title">Demande envoyée !</h2>
+    <p class="wizard__success-text">
+      Merci pour votre demande. Un technicien vous contactera sous 24h pour affiner votre devis.
+    </p>
+    <a href="/" class="btn btn--primary" style="margin-top: var(--spacing-6);">Retour à l'accueil</a>
+  </div>
+
+  {/* Navigation (boutons Précédent / Suivant / Envoyer) */}
+  <div class="wizard__nav" id="wizard-nav">
+    <button type="button" class="wizard__btn-back btn btn--ghost" id="wizard-btn-back" style="visibility:hidden">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Précédent
+    </button>
+    <button type="button" class="wizard__btn-next btn btn--primary" id="wizard-btn-next">
+      Continuer
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+    <button type="button" class="wizard__btn-submit btn btn--primary wizard__panel--hidden" id="wizard-btn-submit">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+      Envoyer ma demande
+    </button>
+  </div>
+
+  {/* Erreur de soumission */}
+  <div class="wizard__error-msg wizard__panel--hidden" id="wizard-error" role="alert" aria-live="assertive">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span id="wizard-error-text">Une erreur est survenue. Veuillez réessayer.</span>
+  </div>
+
+</div>
+
+<style>
+/* ── Wizard layout ── */
+.wizard {
+  --wz-primary: var(--color-primary, #ED4830);
+  --wz-primary-light: color-mix(in srgb, var(--wz-primary) 12%, white);
+  --wz-gray-50: var(--color-gray-50, #f9fafb);
+  --wz-gray-100: var(--color-gray-100, #f3f4f6);
+  --wz-gray-200: var(--color-gray-200, #e5e7eb);
+  --wz-gray-600: var(--color-gray-600, #4b5563);
+  --wz-gray-900: var(--color-gray-900, #111827);
+
+  width: 100%;
+}
+
+/* ── Progress bar ── */
+.wizard__progress {
+  margin-bottom: var(--spacing-8, 2rem);
+}
+
+.wizard__steps-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-1, .25rem);
+  margin-bottom: var(--spacing-3, .75rem);
+}
+
+.wizard__step-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1, .25rem);
+  flex: 1;
+}
+
+.wizard__step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--wz-gray-200);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: .85rem;
+  color: var(--wz-gray-600);
+  transition: all .25s ease;
+  position: relative;
+}
+
+.wizard__step-check { display: none; }
+
+.wizard__step-dot--active .wizard__step-circle {
+  border-color: var(--wz-primary);
+  background: var(--wz-primary);
+  color: white;
+}
+
+.wizard__step-dot--done .wizard__step-circle {
+  border-color: var(--wz-primary);
+  background: var(--wz-primary);
+  color: white;
+}
+
+.wizard__step-dot--done .wizard__step-num { display: none; }
+.wizard__step-dot--done .wizard__step-check { display: block; }
+
+.wizard__step-label {
+  font-size: .7rem;
+  color: var(--wz-gray-600);
+  text-align: center;
+  white-space: nowrap;
+  transition: color .25s;
+}
+
+.wizard__step-dot--active .wizard__step-label,
+.wizard__step-dot--done .wizard__step-label {
+  color: var(--wz-primary);
+  font-weight: 600;
+}
+
+.wizard__progress-track {
+  height: 4px;
+  background: var(--wz-gray-100);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.wizard__progress-fill {
+  height: 100%;
+  background: var(--wz-primary);
+  border-radius: 2px;
+  transition: width .4s ease;
+  width: 0%;
+}
+
+/* ── Panel ── */
+.wizard__panel { display: block; }
+.wizard__panel--hidden { display: none; }
+
+.wizard__panel-header {
+  margin-bottom: var(--spacing-6, 1.5rem);
+}
+
+.wizard__panel-overline {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--wz-primary);
+  margin-bottom: var(--spacing-1, .25rem);
+}
+
+.wizard__panel-title {
+  font-size: var(--text-2xl, 1.5rem);
+  font-weight: 700;
+  color: var(--wz-gray-900);
+  margin-bottom: var(--spacing-2, .5rem);
+}
+
+.wizard__panel-desc {
+  color: var(--wz-gray-600);
+  font-size: .95rem;
+}
+
+/* ── Fields ── */
+.wizard__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5, 1.25rem);
+}
+
+.wizard__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4, 1rem);
+}
+
+.wizard__row--3 {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+@media (max-width: 640px) {
+  .wizard__row,
+  .wizard__row--3 { grid-template-columns: 1fr; }
+}
+
+.wizard__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1, .25rem);
+}
+
+.wizard__label {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--wz-gray-900);
+}
+
+.wizard__label-req { color: var(--wz-primary); }
+
+.wizard__hint {
+  font-size: .75rem;
+  color: var(--wz-gray-600);
+  margin-top: var(--spacing-1, .25rem);
+}
+
+.wizard__input,
+.wizard__select,
+.wizard__textarea {
+  width: 100%;
+  padding: .625rem .875rem;
+  border: 1.5px solid var(--wz-gray-200);
+  border-radius: var(--border-radius-md, .5rem);
+  font-size: .9375rem;
+  color: var(--wz-gray-900);
+  background: white;
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+}
+
+.wizard__input:focus,
+.wizard__select:focus,
+.wizard__textarea:focus {
+  outline: none;
+  border-color: var(--wz-primary);
+  box-shadow: 0 0 0 3px var(--wz-primary-light);
+}
+
+.wizard__input.wizard__input--error {
+  border-color: #DC2626;
+}
+
+.wizard__input-wrap {
+  position: relative;
+}
+
+.wizard__input--unit {
+  padding-right: 2.5rem;
+}
+
+.wizard__input-suffix {
+  position: absolute;
+  right: .875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .8rem;
+  color: var(--wz-gray-600);
+  pointer-events: none;
+}
+
+.wizard__select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  padding-right: 2.5rem;
+}
+
+.wizard__textarea { resize: vertical; min-height: 100px; }
+
+/* ── Fieldset ── */
+.wizard__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wizard__legend {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--wz-gray-900);
+  margin-bottom: var(--spacing-3, .75rem);
+}
+
+/* ── Choice cards ── */
+.wizard__cards {
+  display: grid;
+  gap: var(--spacing-3, .75rem);
+}
+
+.wizard__cards--3 { grid-template-columns: repeat(3, 1fr); }
+.wizard__cards--2 { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 640px) {
+  .wizard__cards--3 { grid-template-columns: 1fr 1fr; }
+  .wizard__cards--2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 400px) {
+  .wizard__cards--3 { grid-template-columns: 1fr; }
+}
+
+.wizard__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2, .5rem);
+  padding: var(--spacing-4, 1rem) var(--spacing-3, .75rem);
+  border: 2px solid var(--wz-gray-200);
+  border-radius: var(--border-radius-lg, .75rem);
+  background: white;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+  text-align: center;
+  user-select: none;
+}
+
+.wizard__card:hover {
+  border-color: var(--wz-primary);
+  background: var(--wz-primary-light);
+}
+
+.wizard__card-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.wizard__card:has(.wizard__card-radio:checked) {
+  border-color: var(--wz-primary);
+  background: var(--wz-primary-light);
+  box-shadow: 0 0 0 3px var(--wz-primary-light);
+}
+
+.wizard__card-icon {
+  color: var(--wz-gray-600);
+  transition: color .2s;
+}
+
+.wizard__card:has(.wizard__card-radio:checked) .wizard__card-icon {
+  color: var(--wz-primary);
+}
+
+.wizard__card-title {
+  font-weight: 600;
+  font-size: .875rem;
+  color: var(--wz-gray-900);
+}
+
+.wizard__card-sub {
+  font-size: .75rem;
+  color: var(--wz-gray-600);
+}
+
+.wizard__card--sm {
+  padding: var(--spacing-3, .75rem);
+  gap: var(--spacing-1, .25rem);
+}
+
+.wizard__card--sm .wizard__card-icon {
+  display: none;
+}
+
+/* Badge recommandé */
+.wizard__card-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--wz-primary);
+  color: white;
+  font-size: .65rem;
+  font-weight: 700;
+  padding: .15rem .6rem;
+  border-radius: 99px;
+  white-space: nowrap;
+  letter-spacing: .03em;
+}
+
+.wizard__card-badge--hidden { display: none; }
+
+/* ── Toggle group (oui/non) ── */
+.wizard__toggle-group {
+  display: flex;
+  gap: var(--spacing-3, .75rem);
+}
+
+.wizard__toggle {
+  cursor: pointer;
+}
+
+.wizard__toggle-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.wizard__toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2, .5rem);
+  padding: .5rem 1.25rem;
+  border: 2px solid var(--wz-gray-200);
+  border-radius: var(--border-radius-md, .5rem);
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--wz-gray-600);
+  background: white;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.wizard__toggle-btn:hover {
+  border-color: var(--wz-primary);
+  color: var(--wz-primary);
+}
+
+.wizard__toggle:has(.wizard__toggle-radio:checked) .wizard__toggle-btn {
+  border-color: var(--wz-primary);
+  background: var(--wz-primary);
+  color: white;
+}
+
+/* ── Summary ── */
+.wizard__summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4, 1rem);
+  margin-bottom: var(--spacing-6, 1.5rem);
+}
+
+@media (max-width: 640px) {
+  .wizard__summary { grid-template-columns: 1fr; }
+}
+
+.wizard__summary-block {
+  background: var(--wz-gray-50);
+  border: 1px solid var(--wz-gray-200);
+  border-radius: var(--border-radius-lg, .75rem);
+  padding: var(--spacing-4, 1rem);
+}
+
+.wizard__summary-block--full {
+  grid-column: 1 / -1;
+}
+
+.wizard__summary-title {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--wz-primary);
+  margin-bottom: var(--spacing-3, .75rem);
+}
+
+.wizard__summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-3, .75rem);
+  font-size: .875rem;
+  padding: var(--spacing-1, .25rem) 0;
+  border-bottom: 1px solid var(--wz-gray-200);
+}
+
+.wizard__summary-row:last-child { border-bottom: none; }
+
+.wizard__summary-key {
+  color: var(--wz-gray-600);
+  flex-shrink: 0;
+}
+
+.wizard__summary-val {
+  color: var(--wz-gray-900);
+  font-weight: 500;
+  text-align: right;
+}
+
+.wizard__summary-edit {
+  display: block;
+  text-align: right;
+  margin-top: var(--spacing-2, .5rem);
+  font-size: .75rem;
+  color: var(--wz-primary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* ── Navigation buttons ── */
+.wizard__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-6, 1.5rem);
+  padding-top: var(--spacing-5, 1.25rem);
+  border-top: 1px solid var(--wz-gray-200);
+}
+
+.wizard__btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2, .5rem);
+}
+
+.wizard__btn-next,
+.wizard__btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2, .5rem);
+  margin-left: auto;
+}
+
+.wizard__btn-next:disabled,
+.wizard__btn-submit:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* ── Submit area ── */
+.wizard__submit-area {
+  margin-top: var(--spacing-4, 1rem);
+}
+
+.wizard__privacy {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2, .5rem);
+  font-size: .75rem;
+  color: var(--wz-gray-600);
+}
+
+/* ── Success state ── */
+.wizard__success {
+  text-align: center;
+  padding: var(--spacing-10, 2.5rem) var(--spacing-6, 1.5rem);
+}
+
+.wizard__success-icon {
+  width: 80px;
+  height: 80px;
+  background: color-mix(in srgb, #16a34a 12%, white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-5, 1.25rem);
+  color: #16a34a;
+}
+
+.wizard__success-title {
+  font-size: var(--text-2xl, 1.5rem);
+  font-weight: 700;
+  color: var(--wz-gray-900);
+  margin-bottom: var(--spacing-3, .75rem);
+}
+
+.wizard__success-text {
+  color: var(--wz-gray-600);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ── Error message ── */
+.wizard__error-msg {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2, .5rem);
+  margin-top: var(--spacing-4, 1rem);
+  padding: var(--spacing-3, .75rem) var(--spacing-4, 1rem);
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: var(--border-radius-md, .5rem);
+  font-size: .875rem;
+  color: #b91c1c;
+}
+</style>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'devis_wizard_v1';
+
+  // ── État du wizard ──
+  const state = {
+    currentStep: 1,
+    totalSteps: 6,
+    data: {},
+    partialSubmitted: false,
+  };
+
+  // ── Éléments DOM ──
+  const wizard   = document.getElementById('devis-wizard');
+  if (!wizard) return;
+
+  const mauticUrl     = wizard.dataset.mauticUrl;
+  const formContactId = wizard.dataset.formContactId;
+  const formContactName = wizard.dataset.formContactName;
+  const formDevisId   = wizard.dataset.formDevisId;
+  const formDevisName = wizard.dataset.formDevisName;
+
+  const panels      = wizard.querySelectorAll('.wizard__panel');
+  const navDots     = wizard.querySelectorAll('[data-nav-step]');
+  const progressFill = document.getElementById('wizard-progress-fill');
+  const btnBack     = document.getElementById('wizard-btn-back');
+  const btnNext     = document.getElementById('wizard-btn-next');
+  const btnSubmit   = document.getElementById('wizard-btn-submit');
+  const successDiv  = document.getElementById('wizard-success');
+  const errorDiv    = document.getElementById('wizard-error');
+  const errorText   = document.getElementById('wizard-error-text');
+  const navBar      = document.getElementById('wizard-nav');
+
+  // ── Restauration depuis sessionStorage ──
+  try {
+    const saved = sessionStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      Object.assign(state.data, parsed.data || {});
+      state.partialSubmitted = parsed.partialSubmitted || false;
+    }
+  } catch (_) {}
+
+  function saveState() {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+        data: state.data,
+        partialSubmitted: state.partialSubmitted,
+      }));
+    } catch (_) {}
+  }
+
+  // ── Affichage d'une étape ──
+  function showStep(n) {
+    state.currentStep = n;
+
+    panels.forEach(p => {
+      const step = parseInt(p.dataset.step);
+      p.classList.toggle('wizard__panel--hidden', step !== n);
+    });
+
+    // Avancement de la barre
+    const pct = ((n - 1) / (state.totalSteps - 1)) * 100;
+    if (progressFill) progressFill.style.width = pct + '%';
+
+    // Points de navigation
+    navDots.forEach(dot => {
+      const s = parseInt(dot.dataset.navStep);
+      dot.classList.toggle('wizard__step-dot--active', s === n);
+      dot.classList.toggle('wizard__step-dot--done', s < n);
+      dot.setAttribute('aria-current', s === n ? 'step' : null);
+    });
+
+    // Boutons
+    btnBack.style.visibility = n > 1 ? 'visible' : 'hidden';
+    const isLast = n === state.totalSteps;
+    btnNext.classList.toggle('wizard__panel--hidden', isLast);
+    btnSubmit.classList.toggle('wizard__panel--hidden', !isLast);
+    if (isLast) buildSummary();
+
+    hideError();
+    restoreStepValues(n);
+  }
+
+  // ── Restauration des valeurs saisies ──
+  function restoreStepValues(n) {
+    const panel = wizard.querySelector(`[data-step="${n}"]`);
+    if (!panel) return;
+
+    panel.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+      const val = state.data[el.name];
+      if (val === undefined) return;
+      if (el.type === 'radio') {
+        el.checked = el.value === val;
+      } else {
+        el.value = val;
+      }
+    });
+
+    // Champ accès conditionnel
+    if (n === 4) {
+      const accesVal = state.data['acces_difficile'];
+      toggleAccesDetail(accesVal === 'difficile' || accesVal === 'a_preciser');
+    }
+    // Badge recommandé
+    if (n === 3) {
+      updateRecommendationBadge();
+    }
+  }
+
+  // ── Collecte des valeurs de l'étape courante ──
+  function collectStep(n) {
+    const panel = wizard.querySelector(`[data-step="${n}"]`);
+    if (!panel) return;
+
+    panel.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+      if (el.type === 'radio') {
+        if (el.checked) state.data[el.name] = el.value;
+      } else if (el.value.trim() !== '') {
+        state.data[el.name] = el.value.trim();
+      }
+    });
+    saveState();
+  }
+
+  // ── Validation de l'étape ──
+  function validateStep(n) {
+    const panel = wizard.querySelector(`[data-step="${n}"]`);
+    if (!panel) return true;
+    let valid = true;
+
+    if (n === 1) {
+      const fn = panel.querySelector('#wz-firstname');
+      const em = panel.querySelector('#wz-email');
+      [fn, em].forEach(el => {
+        if (!el.value.trim()) {
+          el.classList.add('wizard__input--error');
+          valid = false;
+        } else {
+          el.classList.remove('wizard__input--error');
+        }
+      });
+      if (!valid) showError('Veuillez remplir les champs obligatoires (prénom, email).');
+    }
+
+    if (n === 2) {
+      const checked = panel.querySelector('input[name="type_projet"]:checked');
+      if (!checked) {
+        valid = false;
+        showError('Veuillez sélectionner un type de construction.');
+      }
+    }
+
+    if (n === 3) {
+      const checked = panel.querySelector('input[name="type_chape"]:checked');
+      if (!checked) {
+        valid = false;
+        showError('Veuillez sélectionner un type de prestation.');
+      }
+    }
+
+    if (n === 4) {
+      const surf = panel.querySelector('#wz-surface');
+      if (!surf.value) {
+        surf.classList.add('wizard__input--error');
+        valid = false;
+        showError('Veuillez indiquer la surface en m².');
+      } else {
+        surf.classList.remove('wizard__input--error');
+      }
+    }
+
+    return valid;
+  }
+
+  // ── Messages d'erreur ──
+  function showError(msg) {
+    errorText.textContent = msg;
+    errorDiv.classList.remove('wizard__panel--hidden');
+  }
+
+  function hideError() {
+    errorDiv.classList.add('wizard__panel--hidden');
+  }
+
+  // ── Affichage conditionnel du champ accès ──
+  function toggleAccesDetail(show) {
+    const field = document.getElementById('acces-detail-field');
+    if (field) field.style.display = show ? 'flex' : 'none';
+  }
+
+  // ── Badge recommandé ──
+  function updateRecommendationBadge() {
+    const badge = document.getElementById('badge-anhydrite');
+    if (!badge) return;
+    const hasPlancher = state.data['plancher_chauffant'] === 'oui';
+    badge.classList.toggle('wizard__card-badge--hidden', !hasPlancher);
+    if (hasPlancher) {
+      const step3Desc = document.getElementById('step3-desc');
+      if (step3Desc) step3Desc.textContent = 'La chape anhydrite est recommandée pour les planchers chauffants.';
+    }
+  }
+
+  // ── Soumission partielle (étape 1 → formulaire contact) ──
+  async function submitPartial() {
+    if (state.partialSubmitted) return;
+    const fd = new FormData();
+    fd.append('mauticform[formId]', formContactId);
+    fd.append('mauticform[formName]', formContactName);
+    fd.append('mauticform[return]', '');
+    ['firstname', 'lastname', 'email', 'phone'].forEach(k => {
+      if (state.data[k]) fd.append(`mauticform[${k}]`, state.data[k]);
+    });
+
+    try {
+      await fetch(`${mauticUrl}/form/submit?formId=${formContactId}`, {
+        method: 'POST',
+        body: fd,
+        mode: 'no-cors',
+      });
+      state.partialSubmitted = true;
+      saveState();
+    } catch (_) {
+      // Silencieux — ne pas bloquer la navigation
+    }
+  }
+
+  // ── Soumission finale (étape 6 → formulaire devis) ──
+  async function submitFinal() {
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Envoi en cours…';
+    hideError();
+
+    const fd = new FormData();
+    fd.append('mauticform[formId]', formDevisId);
+    fd.append('mauticform[formName]', formDevisName);
+    fd.append('mauticform[return]', '');
+
+    const fields = [
+      'firstname','lastname','email','phone',
+      'type_chape','surface_m2','epaisseur_mm',
+      'adresse_chantier','ville_chantier','code_postal_chantier',
+      'departement','acces_difficile','description_acces',
+      'type_projet','date_intervention','message',
+    ];
+    fields.forEach(k => {
+      if (state.data[k]) fd.append(`mauticform[${k}]`, state.data[k]);
+    });
+
+    try {
+      await fetch(`${mauticUrl}/form/submit?formId=${formDevisId}`, {
+        method: 'POST',
+        body: fd,
+        mode: 'no-cors',
+      });
+
+      // Succès (no-cors = on ne peut pas lire la réponse, on suppose OK)
+      sessionStorage.removeItem(STORAGE_KEY);
+      panels.forEach(p => p.classList.add('wizard__panel--hidden'));
+      successDiv.classList.remove('wizard__panel--hidden');
+      wizard.querySelector('.wizard__progress').style.display = 'none';
+      navBar.style.display = 'none';
+    } catch (err) {
+      showError('Une erreur réseau est survenue. Veuillez réessayer ou nous appeler directement.');
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer ma demande`;
+    }
+  }
+
+  // ── Construction du récapitulatif ──
+  const LABELS = {
+    type_projet: { neuf: 'Construction neuve', renovation: 'Rénovation', les_deux: 'Les deux' },
+    plancher_chauffant: { oui: 'Oui', non: 'Non' },
+    type_chape: {
+      chape_anhydrite: 'Chape Anhydrite', chape_ciment: 'Chape Ciment',
+      ravoirage: 'Ravoirage / Réagréage', isolation_phonique: 'Isolation Phonique',
+      isolation_thermique: 'Isolation Thermique', mousse_polyurethane: 'Mousse Polyuréthane',
+      autre: 'Autre / Je ne sais pas',
+    },
+    departement: { '83': 'Var (83)', '13': 'Bouches-du-Rhône (13)', '06': 'Alpes-Maritimes (06)', '84': 'Vaucluse (84)', autre: 'Autre' },
+    acces_difficile: { normal: 'Normal', difficile: 'Difficile', a_preciser: 'À préciser' },
+    date_intervention: {
+      urgent: 'Dès que possible', '1_mois': 'Dans 1 mois',
+      '2_3_mois': 'Dans 2–3 mois', '3_6_mois': 'Dans 3–6 mois', indetermine: 'Non déterminé',
+    },
+  };
+
+  function label(key, val) {
+    return LABELS[key]?.[val] || val || '—';
+  }
+
+  function buildSummary() {
+    const d = state.data;
+    const container = document.getElementById('wizard-summary');
+    if (!container) return;
+
+    const blocks = [
+      {
+        title: 'Vos coordonnées', step: 1,
+        rows: [
+          ['Prénom', d.firstname], ['Nom', d.lastname],
+          ['Email', d.email], ['Téléphone', d.phone],
+        ],
+      },
+      {
+        title: 'Votre projet', step: 2,
+        rows: [
+          ['Type', label('type_projet', d.type_projet)],
+          ['Plancher chauffant', label('plancher_chauffant', d.plancher_chauffant)],
+        ],
+      },
+      {
+        title: 'Prestation', step: 3,
+        rows: [['Type de chape', label('type_chape', d.type_chape)]],
+      },
+      {
+        title: 'Chantier', step: 4, fullWidth: true,
+        rows: [
+          ['Surface', d.surface_m2 ? d.surface_m2 + ' m²' : null],
+          ['Épaisseur', d.epaisseur_mm ? d.epaisseur_mm + ' mm' : null],
+          ['Adresse', d.adresse_chantier],
+          ['Ville / CP', [d.ville_chantier, d.code_postal_chantier].filter(Boolean).join(' ')],
+          ['Département', label('departement', d.departement)],
+          ['Accès', label('acces_difficile', d.acces_difficile)],
+          d.description_acces ? ['Détails accès', d.description_acces] : null,
+        ].filter(Boolean),
+      },
+      {
+        title: 'Planning', step: 5,
+        rows: [
+          ['Intervention', label('date_intervention', d.date_intervention)],
+          d.message ? ['Commentaire', d.message] : null,
+        ].filter(Boolean),
+      },
+    ];
+
+    container.innerHTML = blocks.map(b => `
+      <div class="wizard__summary-block ${b.fullWidth ? 'wizard__summary-block--full' : ''}">
+        <p class="wizard__summary-title">${b.title}</p>
+        ${b.rows.map(r => r && r[1] ? `
+          <div class="wizard__summary-row">
+            <span class="wizard__summary-key">${r[0]}</span>
+            <span class="wizard__summary-val">${r[1]}</span>
+          </div>` : ''
+        ).join('')}
+        <button class="wizard__summary-edit" data-goto="${b.step}" aria-label="Modifier ${b.title}">Modifier</button>
+      </div>
+    `).join('');
+
+    // Boutons "Modifier"
+    container.querySelectorAll('[data-goto]').forEach(btn => {
+      btn.addEventListener('click', () => showStep(parseInt(btn.dataset.goto)));
+    });
+  }
+
+  // ── Événements ──
+
+  btnNext.addEventListener('click', async () => {
+    collectStep(state.currentStep);
+    if (!validateStep(state.currentStep)) return;
+
+    if (state.currentStep === 1) {
+      submitPartial(); // feu et oublie
+    }
+
+    if (state.currentStep === 2) {
+      updateRecommendationBadge();
+    }
+
+    showStep(state.currentStep + 1);
+  });
+
+  btnBack.addEventListener('click', () => {
+    collectStep(state.currentStep);
+    showStep(state.currentStep - 1);
+  });
+
+  btnSubmit.addEventListener('click', () => {
+    submitFinal();
+  });
+
+  // Accès difficile — champ conditionnel
+  wizard.querySelectorAll('input[name="acces_difficile"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      toggleAccesDetail(radio.value === 'difficile' || radio.value === 'a_preciser');
+    });
+  });
+
+  // ── Init ──
+  showStep(1);
+})();
+</script>
