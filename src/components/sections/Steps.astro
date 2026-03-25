@@ -4,6 +4,7 @@ interface Props {
   title?: string;
   titleId?: string;
   bg?: 'white' | 'gray' | 'accent';
+  cols?: 3 | 4;
   step1Title?: string;
   step1Text?: string;
   step2Title?: string;
@@ -19,6 +20,7 @@ const {
   title = 'Comment ça marche ?',
   titleId = 'steps-title',
   bg = 'white',
+  cols = 4,
   step1Title = 'Prise de contact',
   step1Text = 'Appelez-nous ou remplissez le formulaire de devis en ligne. Nous vous répondons sous 24h.',
   step2Title = 'Visite technique',
@@ -37,7 +39,7 @@ const {
       <h2 class="section__title" id={titleId}>{title}</h2>
     </div>
 
-    <div class="steps">
+    <div class={`steps steps--${cols}col`}>
       <div class="steps__item">
         <div class="steps__number" aria-hidden="true"></div>
         <h3 class="steps__title">{step1Title}</h3>

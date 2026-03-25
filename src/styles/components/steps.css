@@ -11,15 +11,22 @@
 }
 
 @media (min-width: 768px) {
-    .steps {
+    .steps--3col {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .steps--4col {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1024px) {
-    .steps {
+    .steps--3col {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--spacing-10);
+    }
+    .steps--4col {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-8);
     }
 }
 
@@ -85,7 +92,8 @@
    Connecteur entre étapes (desktop)
    ------------------------------------------------------------------ */
 @media (min-width: 1024px) {
-    .steps__item:not(:last-child)::after {
+    .steps--3col .steps__item:not(:last-child)::after,
+    .steps--4col .steps__item:not(:last-child)::after {
         content: '';
         position: absolute;
         top: 1.75rem;
