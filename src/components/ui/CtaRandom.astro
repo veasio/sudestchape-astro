@@ -4,8 +4,7 @@
 // La sélection aléatoire se fait côté client via un script inline
 // (Astro est statique — pas de random côté serveur)
 
-const sitePhone = '04 91 00 00 00';
-const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
+import { SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
 ---
 
 {/* Les 3 variantes sont toutes rendues, JS côté client en affiche une au hasard */}
@@ -14,15 +13,14 @@ const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
   <section id="cta-devis" class="section section--accent animate-on-scroll" aria-labelledby="cta-devis-title" style="display:none">
     <div class="container text-center">
       <h2 class="section__title" id="cta-devis-title">
-        Un projet de chape ? Parlons-en.
+        Un projet de chape dans le Sud-Est ?
       </h2>
       <p class="section__description" style="margin-inline:auto;">
-        Obtenez votre devis gratuit en moins de 48h.
-        Intervention dans tout le Sud-Est de la France.
+        Obtenez votre devis gratuit sous 24h. 6 équipes disponibles, intervention rapide sur Var, Bouches-du-Rhône et Alpes-Maritimes.
       </p>
       <div class="hero__actions mt-8" style="justify-content:center;">
-        <a href="/contact" class="btn btn--primary btn--lg">
-          Demander un devis gratuit
+        <a href="/devis" class="btn btn--primary btn--lg">
+          Obtenir mon devis gratuit
         </a>
       </div>
     </div>
@@ -32,21 +30,20 @@ const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
   <section id="cta-telephone" class="section section--accent animate-on-scroll" aria-labelledby="cta-telephone-title" style="display:none">
     <div class="container text-center">
       <h2 class="section__title" id="cta-telephone-title">
-        Besoin d'un conseil ? Appelez-nous.
+        Vous avez un projet ? On vous répond.
       </h2>
       <p class="section__description" style="margin-inline:auto;">
-        Notre équipe est disponible pour répondre à toutes vos questions
-        et vous accompagner dans votre projet de chape.
+        Appelez directement notre équipe pour un conseil, une évaluation de faisabilité ou un délai d'intervention. Disponible lun–ven 8h–18h.
       </p>
       <div class="hero__actions mt-8" style="justify-content:center;">
-        <a href={`tel:${sitePhoneRaw}`} class="btn btn--primary btn--lg">
+        <a href={`tel:${SITE_PHONE}`} class="btn btn--primary btn--lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
           </svg>
-          {sitePhone}
+          {SITE_PHONE_DISPLAY}
         </a>
         <a href="/contact" class="btn btn--outline btn--lg">
-          Formulaire de contact
+          Nous envoyer un message
         </a>
       </div>
     </div>
@@ -56,18 +53,17 @@ const sitePhoneRaw = sitePhone.replace(/[\s.\-]/g, '');
   <section id="cta-realisations" class="section section--accent animate-on-scroll" aria-labelledby="cta-realisations-title" style="display:none">
     <div class="container text-center">
       <h2 class="section__title" id="cta-realisations-title">
-        Découvrez nos dernières réalisations
+        500+ chantiers réalisés dans le Sud-Est
       </h2>
       <p class="section__description" style="margin-inline:auto;">
-        Plus de 500 chantiers réalisés dans tout le Sud-Est.
-        Consultez nos projets pour voir la qualité de notre travail.
+        De la villa particulière aux grandes surfaces industrielles, retrouvez nos réalisations et découvrez la qualité de notre savoir-faire.
       </p>
       <div class="hero__actions mt-8" style="justify-content:center;">
         <a href="/realisations" class="btn btn--primary btn--lg">
           Voir nos réalisations
         </a>
-        <a href="/contact" class="btn btn--outline btn--lg">
-          Demander un devis
+        <a href="/devis" class="btn btn--outline btn--lg">
+          Obtenir un devis gratuit
         </a>
       </div>
     </div>
