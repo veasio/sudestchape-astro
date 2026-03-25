@@ -3,6 +3,8 @@ import Default from '../../layouts/Default.astro';
 import Faq from '../../components/ui/Faq.astro';
 import CtaRandom from '../../components/ui/CtaRandom.astro';
 import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import Steps from '../../components/sections/Steps.astro';
+import Stats from '../../components/sections/Stats.astro';
 import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
 
 const faqItems = [
@@ -117,6 +119,30 @@ const schema = {
     </div>
   </section>
 
+  {/* Stats chape ciment */}
+  <Stats
+    stat1Count={65} stat1Suffix=" mm" stat1Label="Épaisseur min. plancher chauffant"
+    stat2Count={28} stat2Suffix=" j" stat2Label="Avant pose carrelage (5 cm)"
+    stat3Count={100} stat3Suffix=" mm" stat3Label="Épaisseur recommandée en extérieur"
+    stat4Count={15} stat4Suffix=" ans" stat4Label="D'expérience certifié CTB-P"
+  />
+
+  {/* Process */}
+  <Steps
+    overline="Notre intervention"
+    title="La pose de chape ciment : étape par étape"
+    titleId="steps-ciment-title"
+    bg="gray"
+    step1Title="Diagnostic et devis gratuit"
+    step1Text="Évaluation du support, prise de cotes, identification des contraintes (humidité, charges, plancher chauffant). Devis détaillé sous 24h."
+    step2Title="Préparation du support"
+    step2Text="Nettoyage, reprises éventuelles, pose de l'enduit d'accrochage si nécessaire, mise en place des repères de niveau."
+    step3Title="Coulage et tirage à la règle"
+    step3Text="Application manuelle ou par pompe selon la surface. Tirage à la règle pour garantir la planéité conforme DTU 26.2."
+    step4Title="Protection et suivi"
+    step4Text="Protection de la chape pendant les premières 48h. Remise du protocole de cure et des délais de pose du revêtement."
+  />
+
   {/* Zone d'intervention */}
   <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-ciment-title">
     <div class="container">
@@ -140,6 +166,39 @@ const schema = {
           <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  {/* Tableau comparatif */}
+  <section class="section section--white section--rounded" aria-labelledby="comparatif-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Aide au choix</p>
+        <h2 class="section__title" id="comparatif-title">Chape ciment ou chape anhydrite : que choisir ?</h2>
+      </div>
+      <div class="grid grid--2" style="gap: var(--spacing-6);">
+        <div class="card-feature" style="border: 2px solid var(--color-primary);">
+          <h3 class="card-feature__title">✓ Choisir la chape ciment si...</h3>
+          <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+            <li>Pièce humide (salle de bain, cuisine, terrasse)</li>
+            <li>Application extérieure (garage, allée)</li>
+            <li>Charges lourdes (entrepôt, local industriel)</li>
+            <li>Pose sur vide sanitaire ventilé</li>
+          </ul>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">→ Préférer la chape anhydrite si...</h3>
+          <ul class="card-service__features" style="margin-top: var(--spacing-3);">
+            <li>Plancher chauffant hydraulique</li>
+            <li>Grande surface à couler rapidement</li>
+            <li>Planéité haute précision exigée</li>
+            <li>Zone sèche (séjour, chambres, bureaux)</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top: var(--spacing-6); color: var(--color-gray-600); font-size: var(--fs-sm);">
+        Vous ne savez pas quoi choisir ? <a href="/devis" style="color: var(--color-primary);">Contactez-nous</a> — nous vous conseillons gratuitement.
+      </p>
     </div>
   </section>
 
