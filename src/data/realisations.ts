@@ -3,7 +3,7 @@ export interface Realisation {
   title: string;
   description: string;
   image: string;
-  category: 'Chape fluide' | 'Chape traditionnelle';
+  category: 'Chape fluide' | 'Chape anhydrite' | 'Chape ciment' | 'Ravoirage' | 'Isolation phonique' | 'Isolation thermique' | 'Mousse polyuréthane';
   surface?: string;
   location?: string;
   date?: string;
@@ -21,11 +21,11 @@ export const realisations: Realisation[] = [
     date: '2025-11',
   },
   {
-    slug: 'chape-traditionnelle-local-commercial',
-    title: 'Chape traditionnelle — Local commercial',
-    description: 'Chape ciment tirée à la règle pour un local commercial en rénovation. Épaisseur 6 cm sur isolant.',
+    slug: 'chape-ciment-local-commercial',
+    title: 'Chape ciment — Local commercial',
+    description: 'Chape ciment sur isolant pour un local commercial en rénovation. Épaisseur 6 cm, surface parfaitement plane avant pose de carrelage grand format.',
     image: '/images/optimized/realisation-2.webp',
-    category: 'Chape traditionnelle',
+    category: 'Chape ciment',
     surface: '320 m²',
     location: 'Bouches-du-Rhône (13)',
     date: '2025-10',
@@ -41,11 +41,11 @@ export const realisations: Realisation[] = [
     date: '2025-09',
   },
   {
-    slug: 'chape-traditionnelle-maison-individuelle',
-    title: 'Chape traditionnelle — Maison individuelle',
-    description: "Rénovation complète des sols d'une maison de 150 m². Reprise de niveau et chape sur isolant.",
+    slug: 'chape-anhydrite-maison-individuelle',
+    title: 'Chape anhydrite — Maison individuelle',
+    description: 'Chape anhydrite autonivelante sur plancher chauffant hydraulique. Rénovation complète des sols d\'une maison de 150 m². Planéité < 3 mm.',
     image: '/images/optimized/realisation-4.webp',
-    category: 'Chape traditionnelle',
+    category: 'Chape anhydrite',
     surface: '150 m²',
     location: 'Var (83)',
     date: '2025-08',
