@@ -745,3 +745,77 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================================================
+   Card atouts — liste de points forts d'un service
+   Modificateur de .card-feature
+   ========================================================================== */
+
+.card-feature--atouts {
+    background: var(--color-white);
+    border: var(--border-width) solid var(--border-color);
+    border-top: 3px solid var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-feature--atouts .card-feature__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
+    padding-bottom: var(--spacing-3);
+    border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.card-feature--atouts .card-feature__icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    background: color-mix(in srgb, var(--color-primary) 10%, white);
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.card-feature--atouts .card-feature__title {
+    font-size: var(--fs-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-gray-900);
+    margin-bottom: 0;
+}
+
+.card-feature--atouts .card-feature__title::after {
+    display: none;
+}
+
+.card-feature--atouts .atouts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.card-feature--atouts .atouts-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+    font-size: var(--fs-sm);
+    color: var(--color-gray-700);
+    line-height: 1.5;
+}
+
+.card-feature--atouts .atouts-list li::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ED4830' stroke-width='2.5'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
