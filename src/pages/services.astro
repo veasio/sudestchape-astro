@@ -2,7 +2,10 @@
 import Default from '../layouts/Default.astro';
 import TestimonialsCompact from '../components/ui/TestimonialsCompact.astro';
 import CtaRandom from '../components/ui/CtaRandom.astro';
-import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../config';
+import Stats from '../components/sections/Stats.astro';
+import Engagements from '../components/sections/Engagements.astro';
+import Steps from '../components/sections/Steps.astro';
+import { SITE_NAME, SITE_URL, SITE_PHONE, SITE_PHONE_DISPLAY, SCHEMA_ORG_SAME_AS } from '../config';
 
 const schema = {
   "@context": "https://schema.org",
@@ -164,6 +167,79 @@ const schema = {
             <li>Toiture-terrasse</li>
           </ul>
           <span class="card-service__cta">En savoir plus →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Chiffres clés */}
+  <Stats
+    stat1Count={500} stat1Suffix="+" stat1Label="Chantiers réalisés"
+    stat2Count={15} stat2Suffix=" ans" stat2Label="D'expérience"
+    stat3Count={6} stat3Suffix="" stat3Label="Équipes disponibles"
+    stat4Count={3} stat4Suffix="" stat4Label="Départements couverts"
+  />
+
+  {/* Comment ça marche */}
+  <Steps
+    overline="Simple et rapide"
+    title="Comment obtenir votre chape ?"
+    titleId="steps-services-title"
+    bg="gray"
+    step1Title="Devis gratuit en 24h"
+    step1Text="Remplissez notre formulaire ou appelez-nous. Un technicien vous rappelle sous 24h pour qualifier votre projet."
+    step2Title="Visite technique offerte"
+    step2Text="Déplacement gratuit sur votre chantier pour mesures, diagnostic du support et conseil technique personnalisé."
+    step3Title="Intervention planifiée"
+    step3Text="Date d'intervention fixée selon votre planning. Nos équipes arrivent avec tout le matériel nécessaire."
+    step4Title="Réception et suivi"
+    step4Text="Remise d'un bon de conformité, protocole de séchage et disponibilité pour toutes vos questions post-chantier."
+  />
+
+  {/* CTA double — appel ou devis */}
+  <section class="section section--white section--rounded" aria-labelledby="cta-urgence-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Prêt à démarrer ?</p>
+        <h2 class="section__title" id="cta-urgence-title">Parlez-nous de votre projet</h2>
+        <p class="section__description" style="margin-inline:auto;">
+          Devis gratuit sous 24h, intervention rapide, 6 équipes disponibles dans tout le Sud-Est.
+        </p>
+      </div>
+      <div class="cta-dual">
+        <a href={`tel:${SITE_PHONE}`} class="cta-dual__card cta-dual__card--phone">
+          <div class="cta-dual__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 15.9a19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 12.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.34 1.85.574 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <div class="cta-dual__content">
+            <span class="cta-dual__label">Appel direct</span>
+            <strong class="cta-dual__value">{SITE_PHONE_DISPLAY}</strong>
+            <span class="cta-dual__sub">Lun–Ven 8h–18h · Réponse immédiate</span>
+          </div>
+          <svg class="cta-dual__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="/devis" class="cta-dual__card cta-dual__card--devis">
+          <div class="cta-dual__icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div class="cta-dual__content">
+            <span class="cta-dual__label">Devis gratuit</span>
+            <strong class="cta-dual__value">Réponse sous 24h</strong>
+            <span class="cta-dual__sub">Sans engagement · Déplacement offert</span>
+          </div>
+          <svg class="cta-dual__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </a>
       </div>
     </div>
