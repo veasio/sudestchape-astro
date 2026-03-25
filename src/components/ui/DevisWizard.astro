@@ -1,5 +1,5 @@
 ---
-import { MAUTIC_BASE_URL } from '../../config';
+import { MAUTIC_BASE_URL, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL } from '../../config';
 ---
 
 <div
@@ -10,10 +10,13 @@ import { MAUTIC_BASE_URL } from '../../config';
   data-form-contact-name="formulairecontact"
   data-form-devis-id="4"
   data-form-devis-name="formulairedevis"
+  data-phone={SITE_PHONE}
+  data-phone-display={SITE_PHONE_DISPLAY}
+  data-email={SITE_EMAIL}
 >
 
   {/* ── Progression ── */}
-  <div class="wizard__progress">
+  <div class="wizard__progress" id="wz-progress">
     <div class="wizard__steps-nav" role="list" aria-label="Étapes">
       {[
         { n:1, label:'Contact' },
@@ -21,12 +24,13 @@ import { MAUTIC_BASE_URL } from '../../config';
         { n:3, label:'Projet' },
         { n:4, label:'Prestation' },
         { n:5, label:'Chantier' },
-        { n:6, label:'Planning' },
+        { n:6, label:'Adresse' },
+        { n:7, label:'Planning' },
       ].map(({ n, label }) => (
         <div class="wizard__dot" data-nav-step={n} role="listitem">
           <div class="wizard__dot-circle">
             <span class="wizard__dot-num">{n}</span>
-            <svg class="wizard__dot-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="wizard__dot-check" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <span class="wizard__dot-label">{label}</span>
         </div>
@@ -37,501 +41,425 @@ import { MAUTIC_BASE_URL } from '../../config';
     </div>
   </div>
 
-  {/* ── Étape 1 : Contact ── */}
+  {/* ─────────── Étape 1 : Contact ─────────── */}
   <div class="wizard__step" data-step="1">
     <h3 class="wizard__step-title">Vos coordonnées</h3>
-    <p class="wizard__step-desc">Pour vous envoyer votre devis, nous avons besoin de votre email et téléphone.</p>
+    <p class="wizard__step-desc">Pour recevoir votre devis, email et téléphone sont obligatoires.</p>
     <div class="wz-fields">
       <div class="wz-field">
         <label class="wz-label" for="wz-email">Email <span class="wz-req" aria-label="obligatoire">*</span></label>
-        <input class="wz-input" type="email" id="wz-email" name="email" autocomplete="email" required placeholder="jean.dupont@email.fr" inputmode="email" />
+        <input class="wz-input" type="email" id="wz-email" name="email"
+               autocomplete="email" required inputmode="email" placeholder="jean.dupont@email.fr" />
       </div>
       <div class="wz-field">
         <label class="wz-label" for="wz-phone">Téléphone <span class="wz-req" aria-label="obligatoire">*</span></label>
-        <input class="wz-input" type="tel" id="wz-phone" name="phone" autocomplete="tel" required placeholder="06 12 34 56 78" inputmode="tel" />
+        <input class="wz-input" type="tel" id="wz-phone" name="phone"
+               autocomplete="tel" required inputmode="tel" placeholder="06 12 34 56 78" />
         <p class="wz-hint">Un technicien peut vous rappeler sous 24h.</p>
       </div>
     </div>
   </div>
 
-  {/* ── Étape 2 : Identité ── */}
+  {/* ─────────── Étape 2 : Identité ─────────── */}
   <div class="wizard__step" data-step="2" hidden>
     <h3 class="wizard__step-title">Votre identité</h3>
-    <p class="wizard__step-desc">Optionnel, mais utile pour personnaliser votre devis.</p>
+    <p class="wizard__step-desc">Pour personnaliser votre devis.</p>
     <div class="wz-fields">
       <div class="wz-row">
         <div class="wz-field">
           <label class="wz-label" for="wz-firstname">Prénom</label>
-          <input class="wz-input" type="text" id="wz-firstname" name="firstname" autocomplete="given-name" placeholder="Jean" />
+          <input class="wz-input" type="text" id="wz-firstname" name="firstname"
+                 autocomplete="given-name" placeholder="Jean" />
         </div>
         <div class="wz-field">
           <label class="wz-label" for="wz-lastname">Nom</label>
-          <input class="wz-input" type="text" id="wz-lastname" name="lastname" autocomplete="family-name" placeholder="Dupont" />
+          <input class="wz-input" type="text" id="wz-lastname" name="lastname"
+                 autocomplete="family-name" placeholder="Dupont" />
         </div>
       </div>
     </div>
   </div>
 
-  {/* ── Étape 3 : Projet ── */}
+  {/* ─────────── Étape 3 : Projet ─────────── */}
   <div class="wizard__step" data-step="3" hidden>
     <h3 class="wizard__step-title">Votre projet</h3>
-    <p class="wizard__step-desc">Aidez-nous à mieux comprendre la nature de votre chantier.</p>
+    <p class="wizard__step-desc">Aidez-nous à comprendre la nature de votre chantier.</p>
     <div class="wz-fields">
       <fieldset class="wz-fieldset">
         <legend class="wz-legend">Type de construction</legend>
-        <div class="wz-cards wz-cards--3">
-          <label class="wz-card"><input type="radio" name="type_projet" value="neuf" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="wz-card-title">Neuf</span></label>
-          <label class="wz-card"><input type="radio" name="type_projet" value="renovation" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg><span class="wz-card-title">Rénovation</span></label>
-          <label class="wz-card"><input type="radio" name="type_projet" value="les_deux" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span class="wz-card-title">Les deux</span></label>
+        <div class="wz-cards wz-cards--2">
+          <label class="wz-card">
+            <input type="radio" name="type_projet" value="neuf" class="wz-card-radio" />
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span class="wz-card-title">Construction neuve</span>
+          </label>
+          <label class="wz-card">
+            <input type="radio" name="type_projet" value="renovation" class="wz-card-radio" />
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+            <span class="wz-card-title">Rénovation</span>
+          </label>
         </div>
       </fieldset>
       <fieldset class="wz-fieldset">
         <legend class="wz-legend">Plancher chauffant ?</legend>
         <div class="wz-toggle-group">
-          <label class="wz-toggle"><input type="radio" name="plancher_chauffant" value="oui" class="wz-toggle-radio" /><span class="wz-toggle-btn">Oui</span></label>
-          <label class="wz-toggle"><input type="radio" name="plancher_chauffant" value="non" class="wz-toggle-radio" /><span class="wz-toggle-btn">Non</span></label>
+          <label class="wz-toggle">
+            <input type="radio" name="plancher_chauffant" value="oui" class="wz-toggle-radio" />
+            <span class="wz-toggle-btn">Oui</span>
+          </label>
+          <label class="wz-toggle">
+            <input type="radio" name="plancher_chauffant" value="non" class="wz-toggle-radio" />
+            <span class="wz-toggle-btn">Non</span>
+          </label>
         </div>
         <p class="wz-hint">Cela influence le choix de la chape recommandée.</p>
       </fieldset>
     </div>
   </div>
 
-  {/* ── Étape 4 : Prestation ── */}
+  {/* ─────────── Étape 4 : Prestation ─────────── */}
   <div class="wizard__step" data-step="4" hidden>
     <h3 class="wizard__step-title">Type de prestation</h3>
     <p class="wizard__step-desc" id="wz-step4-desc">Sélectionnez la prestation souhaitée.</p>
     <div class="wz-fields">
-      <div class="wz-cards wz-cards--2" role="radiogroup" aria-describedby="wz-step4-desc">
-        <label class="wz-card wz-card--svc"><input type="radio" name="type_chape" value="chape_anhydrite" class="wz-card-radio" /><span class="wz-badge" id="wz-badge-anhydrite" hidden>★ Recommandé</span><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span class="wz-card-title">Chape Anhydrite</span><span class="wz-card-sub">Autonivelante · Plancher chauffant</span></label>
-        <label class="wz-card wz-card--svc"><input type="radio" name="type_chape" value="chape_ciment" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span class="wz-card-title">Chape Ciment</span><span class="wz-card-sub">Robuste · Milieux humides</span></label>
-        <label class="wz-card wz-card--svc"><input type="radio" name="type_chape" value="ravoirage" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 17l4-8 4 5 3-3 5 6"/><line x1="3" y1="21" x2="21" y2="21"/></svg><span class="wz-card-title">Ravoirage / Réagréage</span><span class="wz-card-sub">Remise à niveau</span></label>
-        <label class="wz-card wz-card--svc"><input type="radio" name="type_chape" value="isolation_phonique" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg><span class="wz-card-title">Isolation Phonique</span><span class="wz-card-sub">Bruits de choc · DTU 26.2</span></label>
-        <label class="wz-card wz-card--svc"><input type="radio" name="type_chape" value="isolation_thermique" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg><span class="wz-card-title">Isolation Thermique</span><span class="wz-card-sub">RE 2020 · Économies d'énergie</span></label>
-        <label class="wz-card wz-card--svc"><input type="radio" name="type_chape" value="mousse_polyurethane" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="wz-card-title">Mousse Polyuréthane</span><span class="wz-card-sub">Vide sanitaire · Toiture-terrasse</span></label>
-        <label class="wz-card wz-card--svc"><input type="radio" name="type_chape" value="autre" class="wz-card-radio" /><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span class="wz-card-title">Autre / Je ne sais pas</span><span class="wz-card-sub">Nous vous conseillons</span></label>
+      <div class="wz-cards wz-cards--2">
+        <label class="wz-card wz-card--svc">
+          <input type="radio" name="type_chape" value="chape_anhydrite" class="wz-card-radio" />
+          <span class="wz-badge" id="wz-badge-anhydrite" hidden>★ Recommandé</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span class="wz-card-title">Chape Anhydrite</span>
+          <span class="wz-card-sub">Autonivelante · Plancher chauffant</span>
+        </label>
+        <label class="wz-card wz-card--svc">
+          <input type="radio" name="type_chape" value="chape_ciment" class="wz-card-radio" />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span class="wz-card-title">Chape Ciment</span>
+          <span class="wz-card-sub">Robuste · Milieux humides</span>
+        </label>
+        <label class="wz-card wz-card--svc">
+          <input type="radio" name="type_chape" value="ravoirage" class="wz-card-radio" />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 17l4-8 4 5 3-3 5 6"/><line x1="3" y1="21" x2="21" y2="21"/></svg>
+          <span class="wz-card-title">Ravoirage / Réagréage</span>
+          <span class="wz-card-sub">Remise à niveau</span>
+        </label>
+        <label class="wz-card wz-card--svc">
+          <input type="radio" name="type_chape" value="isolation_phonique" class="wz-card-radio" />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>
+          <span class="wz-card-title">Isolation Phonique</span>
+          <span class="wz-card-sub">Bruits de choc · DTU 26.2</span>
+        </label>
+        <label class="wz-card wz-card--svc">
+          <input type="radio" name="type_chape" value="isolation_thermique" class="wz-card-radio" />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>
+          <span class="wz-card-title">Isolation Thermique</span>
+          <span class="wz-card-sub">RE 2020 · Économies d'énergie</span>
+        </label>
+        <label class="wz-card wz-card--svc">
+          <input type="radio" name="type_chape" value="mousse_polyurethane" class="wz-card-radio" />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="wz-card-title">Mousse Polyuréthane</span>
+          <span class="wz-card-sub">Vide sanitaire · Toiture-terrasse</span>
+        </label>
       </div>
     </div>
   </div>
 
-  {/* ── Étape 5 : Chantier ── */}
+  {/* ─────────── Étape 5 : Chantier ─────────── */}
   <div class="wizard__step" data-step="5" hidden>
     <h3 class="wizard__step-title">Votre chantier</h3>
-    <p class="wizard__step-desc">Ces informations permettent de calculer votre devis précisément.</p>
+    <p class="wizard__step-desc">Ces informations permettent de calculer votre devis avec précision.</p>
     <div class="wz-fields">
       <div class="wz-row">
         <div class="wz-field">
-          <label class="wz-label" for="wz-surface">Surface (m²) <span class="wz-req" aria-label="obligatoire">*</span></label>
+          <label class="wz-label" for="wz-surface">Surface totale <span class="wz-req" aria-label="obligatoire">*</span></label>
           <div class="wz-input-wrap">
-            <input class="wz-input" type="number" id="wz-surface" name="surface_m2" min="1" max="9999" required placeholder="150" />
+            <input class="wz-input" type="number" id="wz-surface" name="surface_m2"
+                   min="1" max="9999" required placeholder="150" />
             <span class="wz-unit" aria-hidden="true">m²</span>
           </div>
         </div>
         <div class="wz-field">
-          <label class="wz-label" for="wz-epaisseur">Épaisseur (mm)</label>
+          <label class="wz-label" for="wz-epaisseur">Épaisseur souhaitée</label>
           <div class="wz-input-wrap">
-            <input class="wz-input" type="number" id="wz-epaisseur" name="epaisseur_mm" min="20" max="200" placeholder="40" />
+            <input class="wz-input" type="number" id="wz-epaisseur" name="epaisseur_mm"
+                   min="20" max="200" placeholder="40" />
             <span class="wz-unit" aria-hidden="true">mm</span>
           </div>
           <p class="wz-hint">Standard : 40–70 mm. Plancher chauffant : 35–50 mm.</p>
         </div>
       </div>
-      <div class="wz-field">
-        <label class="wz-label" for="wz-adresse">Adresse du chantier</label>
-        <input class="wz-input" type="text" id="wz-adresse" name="adresse_chantier" autocomplete="street-address" placeholder="123 rue de la Chape" />
-      </div>
-      <div class="wz-row wz-row--3">
-        <div class="wz-field">
-          <label class="wz-label" for="wz-ville">Ville</label>
-          <input class="wz-input" type="text" id="wz-ville" name="ville_chantier" autocomplete="address-level2" placeholder="Toulon" />
-        </div>
-        <div class="wz-field">
-          <label class="wz-label" for="wz-cp">Code postal</label>
-          <input class="wz-input" type="text" id="wz-cp" name="code_postal_chantier" autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="83000" />
-        </div>
-        <div class="wz-field">
-          <label class="wz-label" for="wz-dept">Département</label>
-          <select class="wz-select" id="wz-dept" name="departement">
-            <option value="">-- Choisir --</option>
-            <option value="83">Var (83)</option>
-            <option value="13">Bouches-du-Rhône (13)</option>
-            <option value="06">Alpes-Maritimes (06)</option>
-            <option value="84">Vaucluse (84)</option>
-            <option value="autre">Autre</option>
-          </select>
-        </div>
-      </div>
       <fieldset class="wz-fieldset">
         <legend class="wz-legend">Accès au chantier</legend>
         <div class="wz-cards wz-cards--3">
-          <label class="wz-card wz-card--sm"><input type="radio" name="acces_difficile" value="normal" class="wz-card-radio" /><span class="wz-card-title">Normal</span></label>
-          <label class="wz-card wz-card--sm"><input type="radio" name="acces_difficile" value="difficile" class="wz-card-radio" /><span class="wz-card-title">Difficile</span><span class="wz-card-sub">Étages, escaliers…</span></label>
-          <label class="wz-card wz-card--sm"><input type="radio" name="acces_difficile" value="a_preciser" class="wz-card-radio" /><span class="wz-card-title">À préciser</span></label>
+          <label class="wz-card wz-card--sm">
+            <input type="radio" name="acces_difficile" value="normal" class="wz-card-radio" />
+            <span class="wz-card-title">Normal</span>
+          </label>
+          <label class="wz-card wz-card--sm">
+            <input type="radio" name="acces_difficile" value="difficile" class="wz-card-radio" />
+            <span class="wz-card-title">Difficile</span>
+            <span class="wz-card-sub">Étages, escaliers…</span>
+          </label>
+          <label class="wz-card wz-card--sm">
+            <input type="radio" name="acces_difficile" value="a_preciser" class="wz-card-radio" />
+            <span class="wz-card-title">À préciser</span>
+          </label>
         </div>
         <div class="wz-field" id="wz-acces-detail" style="display:none; margin-top:.75rem">
           <label class="wz-label" for="wz-acces-desc">Précisez l'accès</label>
-          <input class="wz-input" type="text" id="wz-acces-desc" name="description_acces" placeholder="Ex : 3e étage sans ascenseur…" />
+          <input class="wz-input" type="text" id="wz-acces-desc" name="description_acces"
+                 placeholder="Ex : 3e étage sans ascenseur…" />
         </div>
       </fieldset>
     </div>
   </div>
 
-  {/* ── Étape 6 : Planning ── */}
+  {/* ─────────── Étape 6 : Adresse ─────────── */}
   <div class="wizard__step" data-step="6" hidden>
-    <h3 class="wizard__step-title">Planning &amp; commentaires</h3>
-    <p class="wizard__step-desc">Dernière étape avant votre récapitulatif.</p>
+    <h3 class="wizard__step-title">Adresse du chantier</h3>
+    <p class="wizard__step-desc">Nous en avons besoin pour organiser notre déplacement.</p>
     <div class="wz-fields">
-      <fieldset class="wz-fieldset">
-        <legend class="wz-legend">Quand souhaitez-vous l'intervention ?</legend>
-        <div class="wz-cards wz-cards--3">
-          <label class="wz-card wz-card--sm"><input type="radio" name="date_intervention" value="urgent" class="wz-card-radio" /><span class="wz-card-title">Dès que possible</span></label>
-          <label class="wz-card wz-card--sm"><input type="radio" name="date_intervention" value="1_mois" class="wz-card-radio" /><span class="wz-card-title">Dans 1 mois</span></label>
-          <label class="wz-card wz-card--sm"><input type="radio" name="date_intervention" value="2_3_mois" class="wz-card-radio" /><span class="wz-card-title">Dans 2–3 mois</span></label>
-          <label class="wz-card wz-card--sm"><input type="radio" name="date_intervention" value="3_6_mois" class="wz-card-radio" /><span class="wz-card-title">Dans 3–6 mois</span></label>
-          <label class="wz-card wz-card--sm"><input type="radio" name="date_intervention" value="indetermine" class="wz-card-radio" /><span class="wz-card-title">Non déterminé</span></label>
-        </div>
-      </fieldset>
       <div class="wz-field">
-        <label class="wz-label" for="wz-message">Informations complémentaires</label>
-        <textarea class="wz-textarea" id="wz-message" name="message" rows="3" placeholder="Précisez votre projet, contraintes, questions…"></textarea>
+        <label class="wz-label" for="wz-adresse">Adresse</label>
+        <input class="wz-input" type="text" id="wz-adresse" name="adresse_chantier"
+               autocomplete="street-address" placeholder="123 rue de la République" />
+      </div>
+      <div class="wz-row">
+        <div class="wz-field">
+          <label class="wz-label" for="wz-ville">Ville</label>
+          <input class="wz-input" type="text" id="wz-ville" name="ville_chantier"
+                 autocomplete="address-level2" placeholder="Toulon" />
+        </div>
+        <div class="wz-field">
+          <label class="wz-label" for="wz-cp">Code postal</label>
+          <input class="wz-input" type="text" id="wz-cp" name="code_postal_chantier"
+                 autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="83000" />
+        </div>
       </div>
     </div>
   </div>
 
-  {/* ── Récapitulatif ── */}
-  <div class="wizard__step" data-step="recap" hidden>
-    <h3 class="wizard__step-title">Récapitulatif</h3>
-    <p class="wizard__step-desc">Vérifiez vos informations avant l'envoi.</p>
-    <div class="wz-summary" id="wz-summary"></div>
-    <p class="wz-privacy">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      Données confidentielles · Jamais partagées
-    </p>
+  {/* ─────────── Étape 7 : Planning → envoi ─────────── */}
+  <div class="wizard__step" data-step="7" hidden>
+    <h3 class="wizard__step-title">Quand souhaitez-vous l'intervention ?</h3>
+    <p class="wizard__step-desc">Choisissez votre délai préféré pour finaliser votre demande.</p>
+    <div class="wz-fields">
+      <div class="wz-cards wz-cards--2 wz-cards--planning">
+        <label class="wz-card wz-card--planning">
+          <input type="radio" name="date_intervention" value="urgent" class="wz-card-radio" />
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="wz-card-title">Dès que possible</span>
+        </label>
+        <label class="wz-card wz-card--planning">
+          <input type="radio" name="date_intervention" value="1_3_mois" class="wz-card-radio" />
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span class="wz-card-title">1 à 3 mois</span>
+        </label>
+        <label class="wz-card wz-card--planning">
+          <input type="radio" name="date_intervention" value="3_6_mois" class="wz-card-radio" />
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          <span class="wz-card-title">3 à 6 mois</span>
+        </label>
+        <label class="wz-card wz-card--planning">
+          <input type="radio" name="date_intervention" value="indetermine" class="wz-card-radio" />
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="wz-card-title">Non déterminé</span>
+        </label>
+      </div>
+    </div>
   </div>
 
-  {/* ── Succès ── */}
+  {/* ─────────── Succès ─────────── */}
   <div class="wizard__success" id="wz-success" hidden role="status">
-    <div class="wizard__success-icon" aria-hidden="true">
-      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <div class="wz-success-check" aria-hidden="true">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
     </div>
-    <h3 class="wizard__success-title">Demande envoyée !</h3>
-    <p class="wizard__success-text">Un technicien vous contactera sous 24h pour finaliser votre devis.</p>
+    <h3 class="wz-success-title">Merci pour votre demande !</h3>
+    <p class="wz-success-text">
+      Votre demande de devis a bien été reçue. Vous recevrez votre devis par email très rapidement, généralement sous 24h.
+    </p>
+    <div class="wz-success-contact">
+      <p class="wz-success-contact-title">Besoin d'une réponse immédiate ?</p>
+      <a href={`tel:${SITE_PHONE}`} class="wz-success-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        {SITE_PHONE_DISPLAY}
+      </a>
+      <a href={`mailto:${SITE_EMAIL}`} class="wz-success-email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        {SITE_EMAIL}
+      </a>
+      <p class="wz-success-hours">Lun – Ven · 8h00 – 18h00</p>
+    </div>
   </div>
 
   {/* ── Navigation ── */}
   <div class="wz-nav" id="wz-nav">
     <button type="button" class="wz-btn-back btn btn--ghost" id="wz-btn-back" style="visibility:hidden">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Précédent
     </button>
     <button type="button" class="btn btn--primary wz-btn-next" id="wz-btn-next">
       Continuer
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
-    <button type="button" class="btn btn--primary wz-btn-submit" id="wz-btn-submit" style="display:none">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    <button type="button" class="btn btn--primary wz-btn-submit" id="wz-btn-submit" style="display:none" disabled>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       Envoyer ma demande
     </button>
   </div>
 
   {/* ── Erreur ── */}
   <div class="wz-error" id="wz-error" style="display:none" role="alert">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     <span id="wz-error-text"></span>
   </div>
 
 </div>
 
 <style>
-/* ─── Variables ─── */
-.wizard {
-  --p: var(--color-primary, #ED4830);
-  --p-light: color-mix(in srgb, var(--p) 10%, white);
-  --g2: var(--color-gray-200, #e5e7eb);
-  --g6: var(--color-gray-600, #4b5563);
-  --g9: var(--color-gray-900, #111827);
-}
+.wizard { --p: var(--color-primary, #ED4830); --pl: color-mix(in srgb,var(--p) 10%,white); --g2: var(--color-gray-200,#e5e7eb); --g6: var(--color-gray-600,#4b5563); --g9: var(--color-gray-900,#111827); }
 
-/* ─── Barre de progression ─── */
-.wizard__progress { margin-bottom: 1.75rem; }
-
-.wizard__steps-nav {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: .625rem;
-}
-
-.wizard__dot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .2rem;
-  flex: 1;
-}
-
-.wizard__dot-circle {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  border: 2px solid var(--g2);
-  background: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .8rem; font-weight: 700; color: var(--g6);
-  transition: all .2s;
-}
-
-.wizard__dot-check { display: none; }
-
+/* ── Progress ── */
+.wizard__progress { margin-bottom: 1.5rem; }
+.wizard__steps-nav { display:flex; justify-content:space-between; margin-bottom:.5rem; }
+.wizard__dot { display:flex; flex-direction:column; align-items:center; gap:.2rem; flex:1; }
+.wizard__dot-circle { width:30px;height:30px;border-radius:50%;border:2px solid var(--g2);background:white;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--g6);transition:all .2s; }
+.wizard__dot-check { display:none; }
 .wizard__dot--active .wizard__dot-circle,
-.wizard__dot--done .wizard__dot-circle {
-  border-color: var(--p); background: var(--p); color: white;
-}
-
-.wizard__dot--done .wizard__dot-num { display: none; }
-.wizard__dot--done .wizard__dot-check { display: block; }
-
-.wizard__dot-label {
-  font-size: .65rem; color: var(--g6); text-align: center;
-  transition: color .2s;
-}
+.wizard__dot--done  .wizard__dot-circle { border-color:var(--p);background:var(--p);color:white; }
+.wizard__dot--done .wizard__dot-num   { display:none; }
+.wizard__dot--done .wizard__dot-check { display:block; }
+.wizard__dot-label { font-size:.6rem;color:var(--g6);text-align:center;transition:color .2s; }
 .wizard__dot--active .wizard__dot-label,
-.wizard__dot--done .wizard__dot-label {
-  color: var(--p); font-weight: 600;
-}
+.wizard__dot--done  .wizard__dot-label { color:var(--p);font-weight:600; }
+.wizard__track { height:3px;background:var(--color-gray-100,#f3f4f6);border-radius:2px;overflow:hidden; }
+.wizard__track-fill { height:100%;background:var(--p);border-radius:2px;transition:width .35s ease;width:0%; }
 
-.wizard__track {
-  height: 4px; background: var(--color-gray-100, #f3f4f6);
-  border-radius: 2px; overflow: hidden;
-}
-.wizard__track-fill {
-  height: 100%; background: var(--p); border-radius: 2px;
-  transition: width .35s ease; width: 0%;
-}
+/* ── Step header ── */
+.wizard__step-title { font-size:1.0625rem;font-weight:700;color:var(--g9);margin-bottom:.3rem; }
+.wizard__step-desc  { font-size:.8125rem;color:var(--g6);margin-bottom:1.125rem; }
 
-/* ─── Étape ─── */
-.wizard__step-title {
-  font-size: 1.125rem; font-weight: 700; color: var(--g9);
-  margin-bottom: .375rem;
-}
-.wizard__step-desc {
-  font-size: .875rem; color: var(--g6); margin-bottom: 1.25rem;
-}
+/* ── Fields ── */
+.wz-fields { display:flex;flex-direction:column;gap:.875rem; }
+.wz-row    { display:grid;grid-template-columns:1fr 1fr;gap:.75rem; }
+@media(max-width:500px){ .wz-row { grid-template-columns:1fr; } }
+.wz-field  { display:flex;flex-direction:column;gap:.25rem; }
+.wz-label  { font-size:.8rem;font-weight:600;color:var(--g9); }
+.wz-req    { color:var(--p); }
+.wz-hint   { font-size:.7rem;color:var(--g6);margin-top:.1rem; }
+.wz-input,.wz-select,.wz-textarea { padding:.5rem .75rem;border:1.5px solid var(--g2);border-radius:.5rem;font-size:.9375rem;color:var(--g9);background:white;width:100%;transition:border-color .2s,box-shadow .2s;appearance:none; }
+.wz-input:focus,.wz-select:focus,.wz-textarea:focus { outline:none;border-color:var(--p);box-shadow:0 0 0 3px var(--pl); }
+.wz-input--err { border-color:#dc2626 !important; }
+.wz-input-wrap { position:relative; }
+.wz-input-wrap .wz-input { padding-right:2.25rem; }
+.wz-unit { position:absolute;right:.6875rem;top:50%;transform:translateY(-50%);font-size:.7rem;color:var(--g6);pointer-events:none; }
+.wz-select { cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .6rem center;padding-right:2rem; }
+.wz-textarea { resize:vertical;min-height:80px; }
 
-/* ─── Champs ─── */
-.wz-fields { display: flex; flex-direction: column; gap: 1rem; }
+/* ── Fieldset ── */
+.wz-fieldset { border:none;padding:0;margin:0; }
+.wz-legend   { font-size:.8rem;font-weight:600;color:var(--g9);margin-bottom:.5rem;display:block; }
 
-.wz-row { display: grid; grid-template-columns: 1fr 1fr; gap: .875rem; }
-.wz-row--3 { grid-template-columns: 2fr 1fr 1fr; }
-@media (max-width: 560px) {
-  .wz-row, .wz-row--3 { grid-template-columns: 1fr; }
-}
+/* ── Cards ── */
+.wz-cards   { display:grid;gap:.5rem; }
+.wz-cards--2 { grid-template-columns:repeat(2,1fr); }
+.wz-cards--3 { grid-template-columns:repeat(3,1fr); }
+@media(max-width:500px){ .wz-cards--3 { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:360px){ .wz-cards--2,.wz-cards--3 { grid-template-columns:1fr; } }
 
-.wz-field { display: flex; flex-direction: column; gap: .25rem; }
+.wz-card { position:relative;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.75rem .5rem;border:2px solid var(--g2);border-radius:.625rem;background:white;cursor:pointer;text-align:center;transition:border-color .2s,background .2s;user-select:none; }
+.wz-card:hover { border-color:var(--p);background:var(--pl); }
+.wz-card:has(.wz-card-radio:checked) { border-color:var(--p);background:var(--pl);box-shadow:0 0 0 3px var(--pl); }
+.wz-card svg { color:var(--g6);transition:color .2s;flex-shrink:0; }
+.wz-card:has(.wz-card-radio:checked) svg { color:var(--p); }
+.wz-card-radio { position:absolute;opacity:0;width:0;height:0;pointer-events:none; }
+.wz-card-title { font-weight:600;font-size:.8rem;color:var(--g9);line-height:1.3; }
+.wz-card-sub   { font-size:.7rem;color:var(--g6); }
+.wz-card--svc  { padding:.875rem .5rem; }
+.wz-card--sm   { flex-direction:row;justify-content:flex-start;padding:.5rem .75rem;gap:.4rem;align-items:center; }
 
-.wz-label { font-size: .8125rem; font-weight: 600; color: var(--g9); }
-.wz-req { color: var(--p); }
-.wz-hint { font-size: .75rem; color: var(--g6); margin-top: .125rem; }
-
-.wz-input, .wz-select, .wz-textarea {
-  padding: .5625rem .75rem;
-  border: 1.5px solid var(--g2);
-  border-radius: .5rem;
-  font-size: .9375rem; color: var(--g9); background: white;
-  width: 100%;
-  transition: border-color .2s, box-shadow .2s;
-  appearance: none;
-}
-.wz-input:focus, .wz-select:focus, .wz-textarea:focus {
-  outline: none;
-  border-color: var(--p);
-  box-shadow: 0 0 0 3px var(--p-light);
-}
-.wz-input--err { border-color: #dc2626 !important; }
-
-.wz-input-wrap { position: relative; }
-.wz-input-wrap .wz-input { padding-right: 2.5rem; }
-.wz-unit {
-  position: absolute; right: .75rem; top: 50%;
-  transform: translateY(-50%);
-  font-size: .75rem; color: var(--g6); pointer-events: none;
-}
-
-.wz-select {
-  cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right .625rem center;
-  padding-right: 2.25rem;
-}
-.wz-textarea { resize: vertical; min-height: 88px; }
-
-/* ─── Fieldset ─── */
-.wz-fieldset { border: none; padding: 0; margin: 0; }
-.wz-legend { font-size: .8125rem; font-weight: 600; color: var(--g9); margin-bottom: .625rem; display: block; }
-
-/* ─── Cards ─── */
-.wz-cards { display: grid; gap: .625rem; }
-.wz-cards--3 { grid-template-columns: repeat(3, 1fr); }
-.wz-cards--2 { grid-template-columns: repeat(2, 1fr); }
-@media (max-width: 560px) {
-  .wz-cards--3 { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 380px) {
-  .wz-cards--3, .wz-cards--2 { grid-template-columns: 1fr; }
-}
-
-.wz-card {
-  position: relative;
-  display: flex; flex-direction: column; align-items: center;
-  gap: .375rem;
-  padding: .875rem .625rem;
-  border: 2px solid var(--g2); border-radius: .625rem;
-  background: white; cursor: pointer; text-align: center;
-  transition: border-color .2s, background .2s;
-  user-select: none;
-}
-.wz-card:hover { border-color: var(--p); background: var(--p-light); }
-.wz-card:has(.wz-card-radio:checked) {
-  border-color: var(--p); background: var(--p-light);
-  box-shadow: 0 0 0 3px var(--p-light);
-}
-.wz-card svg { color: var(--g6); transition: color .2s; }
-.wz-card:has(.wz-card-radio:checked) svg { color: var(--p); }
-
-.wz-card-radio {
-  position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
-}
-.wz-card-title { font-weight: 600; font-size: .8125rem; color: var(--g9); }
-.wz-card-sub { font-size: .7rem; color: var(--g6); }
-
-.wz-card--svc { padding: .875rem .5rem; }
-.wz-card--sm { flex-direction: row; justify-content: flex-start; padding: .625rem .875rem; gap: .5rem; }
-.wz-card--sm svg { display: none; }
+/* Cards planning — plus grandes */
+.wz-cards--planning { gap:.625rem; }
+.wz-card--planning  { padding:1rem .75rem;gap:.4rem; }
+.wz-card--planning .wz-card-title { font-size:.875rem; }
 
 /* Badge recommandé */
-.wz-badge {
-  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
-  background: var(--p); color: white;
-  font-size: .6rem; font-weight: 700; padding: .1rem .5rem;
-  border-radius: 99px; white-space: nowrap;
-}
+.wz-badge { position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--p);color:white;font-size:.6rem;font-weight:700;padding:.1rem .5rem;border-radius:99px;white-space:nowrap; }
 
-/* ─── Toggle ─── */
-.wz-toggle-group { display: flex; gap: .75rem; }
-.wz-toggle { cursor: pointer; }
-.wz-toggle-radio { position: absolute; opacity: 0; width: 0; height: 0; }
-.wz-toggle-btn {
-  display: inline-flex; align-items: center; gap: .375rem;
-  padding: .4375rem 1.125rem;
-  border: 2px solid var(--g2); border-radius: .5rem;
-  font-size: .875rem; font-weight: 600; color: var(--g6); background: white;
-  cursor: pointer; transition: all .2s;
-}
-.wz-toggle-btn:hover { border-color: var(--p); color: var(--p); }
-.wz-toggle:has(.wz-toggle-radio:checked) .wz-toggle-btn {
-  border-color: var(--p); background: var(--p); color: white;
-}
+/* ── Toggle ── */
+.wz-toggle-group { display:flex;gap:.625rem; }
+.wz-toggle { cursor:pointer; }
+.wz-toggle-radio { position:absolute;opacity:0;width:0;height:0; }
+.wz-toggle-btn { display:inline-flex;align-items:center;padding:.4rem 1.125rem;border:2px solid var(--g2);border-radius:.5rem;font-size:.875rem;font-weight:600;color:var(--g6);background:white;cursor:pointer;transition:all .2s; }
+.wz-toggle-btn:hover { border-color:var(--p);color:var(--p); }
+.wz-toggle:has(.wz-toggle-radio:checked) .wz-toggle-btn { border-color:var(--p);background:var(--p);color:white; }
 
-/* ─── Récap ─── */
-.wz-summary {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .75rem;
-  margin-bottom: 1rem;
-}
-@media (max-width: 480px) { .wz-summary { grid-template-columns: 1fr; } }
+/* ── Succès ── */
+.wizard__success { text-align:center;padding:1.5rem .5rem; }
+.wz-success-check { width:68px;height:68px;background:color-mix(in srgb,#16a34a 10%,white);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:#16a34a; }
+.wz-success-title { font-size:1.1875rem;font-weight:700;color:var(--g9);margin-bottom:.5rem; }
+.wz-success-text  { font-size:.875rem;color:var(--g6);max-width:400px;margin:0 auto 1.5rem; }
+.wz-success-contact { background:var(--color-gray-50,#f9fafb);border:1px solid var(--g2);border-radius:.75rem;padding:1.125rem 1.25rem;display:inline-block;text-align:center;min-width:220px; }
+.wz-success-contact-title { font-size:.75rem;font-weight:600;color:var(--g6);margin-bottom:.625rem;text-transform:uppercase;letter-spacing:.05em; }
+.wz-success-phone { display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:1.125rem;font-weight:700;color:var(--p);text-decoration:none;margin-bottom:.375rem; }
+.wz-success-phone:hover { text-decoration:underline; }
+.wz-success-email { display:flex;align-items:center;justify-content:center;gap:.375rem;font-size:.8125rem;color:var(--g6);text-decoration:none;margin-bottom:.5rem; }
+.wz-success-email:hover { color:var(--p); }
+.wz-success-hours { font-size:.75rem;color:var(--g6); }
 
-.wz-summary-block {
-  background: var(--color-gray-50, #f9fafb);
-  border: 1px solid var(--g2);
-  border-radius: .625rem; padding: .875rem;
-}
-.wz-summary-block--full { grid-column: 1 / -1; }
-.wz-summary-label {
-  font-size: .65rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .07em; color: var(--p); margin-bottom: .5rem;
-}
-.wz-summary-row {
-  display: flex; justify-content: space-between; gap: .5rem;
-  font-size: .8125rem; padding: .2rem 0;
-  border-bottom: 1px solid var(--g2);
-}
-.wz-summary-row:last-of-type { border-bottom: none; }
-.wz-summary-key { color: var(--g6); flex-shrink: 0; }
-.wz-summary-val { color: var(--g9); font-weight: 500; text-align: right; }
-.wz-summary-edit {
-  display: block; text-align: right; margin-top: .375rem;
-  font-size: .7rem; color: var(--p); cursor: pointer;
-  background: none; border: none; padding: 0; text-decoration: underline;
-}
+/* ── Nav ── */
+.wz-nav { display:flex;align-items:center;justify-content:space-between;margin-top:1.375rem;padding-top:1.125rem;border-top:1px solid var(--g2); }
+.wz-btn-back   { display:inline-flex;align-items:center;gap:.375rem;font-size:.875rem; }
+.wz-btn-next,.wz-btn-submit { display:inline-flex;align-items:center;gap:.375rem;margin-left:auto; }
+.wz-btn-submit:disabled { opacity:.55;cursor:not-allowed; }
 
-.wz-privacy {
-  display: flex; align-items: center; gap: .375rem;
-  font-size: .75rem; color: var(--g6);
-}
-
-/* ─── Succès ─── */
-.wizard__success {
-  text-align: center; padding: 2rem 1rem;
-}
-.wizard__success-icon {
-  width: 72px; height: 72px;
-  background: color-mix(in srgb, #16a34a 10%, white);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1rem; color: #16a34a;
-}
-.wizard__success-title { font-size: 1.25rem; font-weight: 700; color: var(--g9); margin-bottom: .5rem; }
-.wizard__success-text { font-size: .875rem; color: var(--g6); }
-
-/* ─── Nav ─── */
-.wz-nav {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-top: 1.5rem; padding-top: 1.25rem;
-  border-top: 1px solid var(--g2);
-}
-.wz-btn-back { display: inline-flex; align-items: center; gap: .375rem; }
-.wz-btn-next, .wz-btn-submit { display: inline-flex; align-items: center; gap: .375rem; margin-left: auto; }
-.wz-btn-next:disabled, .wz-btn-submit:disabled { opacity: .6; cursor: not-allowed; }
-
-/* ─── Erreur ─── */
-.wz-error {
-  display: flex; align-items: center; gap: .5rem;
-  margin-top: .875rem;
-  padding: .625rem .875rem;
-  background: #fef2f2; border: 1px solid #fca5a5;
-  border-radius: .5rem; font-size: .8125rem; color: #b91c1c;
-}
+/* ── Erreur ── */
+.wz-error { display:flex;align-items:center;gap:.5rem;margin-top:.75rem;padding:.5625rem .875rem;background:#fef2f2;border:1px solid #fca5a5;border-radius:.5rem;font-size:.8125rem;color:#b91c1c; }
 </style>
 
 <script>
 (function () {
-  const STORAGE_KEY = 'devis_wz_v2';
-  const TOTAL = 6;
+  const STORAGE_KEY = 'devis_wz_v3';
+  const TOTAL = 7;
 
   const wz = document.getElementById('devis-wizard');
   if (!wz) return;
 
-  const mauticUrl       = wz.dataset.mauticUrl;
-  const fContactId      = wz.dataset.formContactId;
-  const fContactName    = wz.dataset.formContactName;
-  const fDevisId        = wz.dataset.formDevisId;
-  const fDevisName      = wz.dataset.formDevisName;
+  const mauticUrl    = wz.dataset.mauticUrl;
+  const fContactId   = wz.dataset.formContactId;
+  const fContactName = wz.dataset.formContactName;
+  const fDevisId     = wz.dataset.formDevisId;
+  const fDevisName   = wz.dataset.formDevisName;
 
-  const steps    = wz.querySelectorAll('.wizard__step[data-step]');
-  const recap    = wz.querySelector('[data-step="recap"]');
-  const success  = document.getElementById('wz-success');
-  const nav      = document.getElementById('wz-nav');
-  const btnBack  = document.getElementById('wz-btn-back');
-  const btnNext  = document.getElementById('wz-btn-next');
-  const btnSub   = document.getElementById('wz-btn-submit');
-  const errDiv   = document.getElementById('wz-error');
-  const errText  = document.getElementById('wz-error-text');
-  const track    = document.getElementById('wz-track');
-  const dots     = wz.querySelectorAll('[data-nav-step]');
+  const steps   = wz.querySelectorAll('.wizard__step[data-step]');
+  const success = document.getElementById('wz-success');
+  const navBar  = document.getElementById('wz-nav');
+  const btnBack = document.getElementById('wz-btn-back');
+  const btnNext = document.getElementById('wz-btn-next');
+  const btnSub  = document.getElementById('wz-btn-submit');
+  const errDiv  = document.getElementById('wz-error');
+  const errTxt  = document.getElementById('wz-error-text');
+  const track   = document.getElementById('wz-track');
+  const dots    = wz.querySelectorAll('[data-nav-step]');
 
   let current = 1;
   const data  = {};
   let partialDone = false;
 
-  /* ── Restaurer sessionStorage ── */
+  // Restauration sessionStorage
   try {
     const s = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
     Object.assign(data, s.data || {});
@@ -542,19 +470,16 @@ import { MAUTIC_BASE_URL } from '../../config';
     try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ data, partial: partialDone })); } catch (_) {}
   }
 
-  /* ── Afficher une étape ── */
+  // ── Afficher étape ──
   function show(n) {
     current = n;
-    const isLast = n === TOTAL;
-    const isRecap = n === TOTAL + 1;
+    const isLast = (n === TOTAL);
 
-    steps.forEach(el => { el.hidden = parseInt(el.dataset.step) !== n; });
-    if (recap) recap.hidden = !isRecap;
+    steps.forEach(el => { el.hidden = (parseInt(el.dataset.step) !== n); });
 
-    /* progression */
+    // Barre de progression
     const pct = ((n - 1) / (TOTAL - 1)) * 100;
-    if (track) track.style.width = Math.min(pct, 100) + '%';
-
+    if (track) track.style.width = pct + '%';
     dots.forEach(d => {
       const s = parseInt(d.dataset.navStep);
       d.classList.toggle('wizard__dot--active', s === n);
@@ -563,22 +488,36 @@ import { MAUTIC_BASE_URL } from '../../config';
 
     btnBack.style.visibility = n > 1 ? 'visible' : 'hidden';
 
-    if (isRecap) {
+    if (isLast) {
       btnNext.style.display = 'none';
       btnSub.style.display  = 'inline-flex';
+      // activer le bouton seulement si une option planning est déjà sélectionnée
+      updateSubmitBtn();
     } else {
-      btnNext.style.display  = 'inline-flex';
-      btnSub.style.display   = 'none';
+      btnNext.style.display = 'inline-flex';
+      btnSub.style.display  = 'none';
     }
 
     hideErr();
     restore(n);
-    if (isRecap) buildRecap();
+    if (n === 4) updateBadge();
   }
 
-  /* ── Collect & restore ── */
+  // ── Planning → activer bouton submit dès qu'une option est choisie ──
+  wz.querySelectorAll('input[name="date_intervention"]').forEach(r => {
+    r.addEventListener('change', () => {
+      if (current === TOTAL) updateSubmitBtn();
+    });
+  });
+
+  function updateSubmitBtn() {
+    const checked = wz.querySelector('input[name="date_intervention"]:checked');
+    btnSub.disabled = !checked;
+  }
+
+  // ── Collect / restore ──
   function collect(n) {
-    const panel = n === TOTAL + 1 ? recap : wz.querySelector(`[data-step="${n}"]`);
+    const panel = wz.querySelector(`[data-step="${n}"]`);
     if (!panel) return;
     panel.querySelectorAll('input[name],select[name],textarea[name]').forEach(el => {
       if (el.type === 'radio') { if (el.checked) data[el.name] = el.value; }
@@ -597,56 +536,57 @@ import { MAUTIC_BASE_URL } from '../../config';
       else el.value = v;
     });
     if (n === 5) toggleAcces(data.acces_difficile);
-    if (n === 4) updateBadge();
+    if (n === 7 && current === TOTAL) updateSubmitBtn();
   }
 
-  /* ── Validation ── */
+  // ── Validation ──
   function validate(n) {
     if (n === 1) {
       const em = wz.querySelector('#wz-email');
       const ph = wz.querySelector('#wz-phone');
-      const ok = em.value.trim() && ph.value.trim();
-      [em, ph].forEach(el => el.classList.toggle('wz-input--err', !el.value.trim()));
-      if (!ok) { showErr('Email et téléphone sont obligatoires.'); return false; }
+      const emOk = em.value.trim() && /\S+@\S+\.\S+/.test(em.value.trim());
+      const phOk = ph.value.trim().length >= 8;
+      em.classList.toggle('wz-input--err', !emOk);
+      ph.classList.toggle('wz-input--err', !phOk);
+      if (!emOk || !phOk) { showErr('Veuillez saisir un email et un numéro de téléphone valides.'); return false; }
     }
     if (n === 4 && !wz.querySelector('input[name="type_chape"]:checked')) {
       showErr('Veuillez choisir un type de prestation.'); return false;
     }
     if (n === 5) {
       const s = wz.querySelector('#wz-surface');
-      if (!s.value) { s.classList.add('wz-input--err'); showErr('La surface est obligatoire.'); return false; }
+      if (!s.value) { s.classList.add('wz-input--err'); showErr('La surface en m² est obligatoire.'); return false; }
       s.classList.remove('wz-input--err');
     }
     return true;
   }
 
-  /* ── Erreur ── */
-  function showErr(msg) { errText.textContent = msg; errDiv.style.display = 'flex'; }
-  function hideErr() { errDiv.style.display = 'none'; }
+  // ── Erreur ──
+  function showErr(msg) { errTxt.textContent = msg; errDiv.style.display = 'flex'; }
+  function hideErr()    { errDiv.style.display = 'none'; }
 
-  /* ── Accès conditionnel ── */
+  // ── Accès conditionnel ──
   function toggleAcces(val) {
     const f = document.getElementById('wz-acces-detail');
     if (f) f.style.display = (val === 'difficile' || val === 'a_preciser') ? 'flex' : 'none';
   }
-
   wz.querySelectorAll('input[name="acces_difficile"]').forEach(r => {
     r.addEventListener('change', () => toggleAcces(r.value));
   });
 
-  /* ── Badge recommandé ── */
+  // ── Badge recommandé ──
   function updateBadge() {
-    const badge = document.getElementById('wz-badge-anhydrite');
-    if (!badge) return;
+    const b = document.getElementById('wz-badge-anhydrite');
+    if (!b) return;
     const ok = data.plancher_chauffant === 'oui';
-    badge.hidden = !ok;
-    const desc = document.getElementById('wz-step4-desc');
-    if (desc) desc.textContent = ok
+    b.hidden = !ok;
+    const d = document.getElementById('wz-step4-desc');
+    if (d) d.textContent = ok
       ? 'La chape anhydrite est recommandée pour les planchers chauffants.'
       : 'Sélectionnez la prestation souhaitée.';
   }
 
-  /* ── Soumission partielle ── */
+  // ── Soumission partielle ──
   async function submitPartial() {
     if (partialDone) return;
     const fd = new FormData();
@@ -662,10 +602,11 @@ import { MAUTIC_BASE_URL } from '../../config';
     } catch (_) {}
   }
 
-  /* ── Soumission finale ── */
+  // ── Soumission finale ──
   async function submitFinal() {
     btnSub.disabled = true;
-    btnSub.textContent = 'Envoi en cours…';
+    const orig = btnSub.innerHTML;
+    btnSub.innerHTML = 'Envoi en cours…';
     hideErr();
 
     const fd = new FormData();
@@ -674,92 +615,44 @@ import { MAUTIC_BASE_URL } from '../../config';
     fd.append('mauticform[return]', '');
     const fields = ['firstname','lastname','email','phone','type_chape','surface_m2',
       'epaisseur_mm','adresse_chantier','ville_chantier','code_postal_chantier',
-      'departement','acces_difficile','description_acces','type_projet',
-      'date_intervention','message'];
+      'acces_difficile','description_acces','type_projet','date_intervention'];
     fields.forEach(k => { if (data[k]) fd.append('mauticform[' + k + ']', data[k]); });
 
     try {
       await fetch(mauticUrl + '/form/submit?formId=' + fDevisId, { method:'POST', body:fd, mode:'no-cors' });
       sessionStorage.removeItem(STORAGE_KEY);
-      wz.querySelector('.wizard__progress').hidden = true;
+      // Afficher succès
+      document.getElementById('wz-progress').hidden = true;
       steps.forEach(el => { el.hidden = true; });
-      if (recap) recap.hidden = true;
-      nav.hidden = true;
+      navBar.hidden = true;
       success.hidden = false;
     } catch (_) {
       showErr('Erreur réseau. Veuillez réessayer ou nous appeler directement.');
       btnSub.disabled = false;
-      btnSub.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer ma demande';
+      btnSub.innerHTML = orig;
     }
   }
 
-  /* ── Récap ── */
-  const LBL = {
-    type_projet: { neuf:'Neuf', renovation:'Rénovation', les_deux:'Les deux' },
-    plancher_chauffant: { oui:'Oui', non:'Non' },
-    type_chape: { chape_anhydrite:'Chape Anhydrite', chape_ciment:'Chape Ciment',
-      ravoirage:'Ravoirage/Réagréage', isolation_phonique:'Isolation Phonique',
-      isolation_thermique:'Isolation Thermique', mousse_polyurethane:'Mousse Polyuréthane', autre:'Autre' },
-    departement: { '83':'Var (83)','13':'Bouches-du-Rhône (13)','06':'Alpes-Maritimes (06)','84':'Vaucluse (84)', autre:'Autre' },
-    acces_difficile: { normal:'Normal', difficile:'Difficile', a_preciser:'À préciser' },
-    date_intervention: { urgent:'Dès que possible','1_mois':'Dans 1 mois','2_3_mois':'Dans 2–3 mois','3_6_mois':'Dans 3–6 mois', indetermine:'Non déterminé' },
-  };
-  const lbl = (k, v) => LBL[k]?.[v] || v || '—';
-
-  function row(k, v) {
-    if (!v) return '';
-    return `<div class="wz-summary-row"><span class="wz-summary-key">${k}</span><span class="wz-summary-val">${v}</span></div>`;
-  }
-
-  function buildRecap() {
-    const d = data;
-    const blocks = [
-      { t:'Contact', s:1, rows:[ ['Email',d.email],['Téléphone',d.phone] ] },
-      { t:'Identité', s:2, rows:[ ['Prénom',d.firstname],['Nom',d.lastname] ] },
-      { t:'Projet', s:3, rows:[ ['Type',lbl('type_projet',d.type_projet)],['Plancher chauffant',lbl('plancher_chauffant',d.plancher_chauffant)] ] },
-      { t:'Prestation', s:4, rows:[ ['Type',lbl('type_chape',d.type_chape)] ] },
-      { t:'Chantier', s:5, full:true, rows:[
-        ['Surface', d.surface_m2 ? d.surface_m2+' m²' : null],
-        ['Épaisseur', d.epaisseur_mm ? d.epaisseur_mm+' mm' : null],
-        ['Adresse', d.adresse_chantier],
-        ['Ville / CP', [d.ville_chantier, d.code_postal_chantier].filter(Boolean).join(' ') || null],
-        ['Département', lbl('departement',d.departement)],
-        ['Accès', lbl('acces_difficile',d.acces_difficile)],
-        d.description_acces ? ['Détails', d.description_acces] : null,
-      ].filter(Boolean) },
-      { t:'Planning', s:6, rows:[ ['Date',lbl('date_intervention',d.date_intervention)], d.message ? ['Note',d.message] : null ].filter(Boolean) },
-    ];
-
-    document.getElementById('wz-summary').innerHTML = blocks.map(b => `
-      <div class="wz-summary-block${b.full?' wz-summary-block--full':''}">
-        <p class="wz-summary-label">${b.t}</p>
-        ${b.rows.map(r => r ? row(r[0], r[1]) : '').join('')}
-        <button class="wz-summary-edit" data-goto="${b.s}" aria-label="Modifier ${b.t}">Modifier</button>
-      </div>`).join('');
-
-    document.getElementById('wz-summary').querySelectorAll('[data-goto]').forEach(btn => {
-      btn.addEventListener('click', () => show(parseInt(btn.dataset.goto)));
-    });
-  }
-
-  /* ── Listeners nav ── */
+  // ── Listeners ──
   btnNext.addEventListener('click', async () => {
     collect(current);
     if (!validate(current)) return;
     if (current === 1) submitPartial();
     if (current === 3) updateBadge();
-    show(current < TOTAL ? current + 1 : TOTAL + 1);
+    show(current + 1);
   });
 
   btnBack.addEventListener('click', () => {
     collect(current);
-    const prev = current === TOTAL + 1 ? TOTAL : current - 1;
-    show(prev);
+    show(current - 1);
   });
 
-  btnSub.addEventListener('click', submitFinal);
+  btnSub.addEventListener('click', () => {
+    collect(current);
+    submitFinal();
+  });
 
-  /* ── Init ── */
+  // ── Init ──
   show(1);
 })();
 </script>
