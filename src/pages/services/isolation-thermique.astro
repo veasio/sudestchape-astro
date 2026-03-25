@@ -3,6 +3,8 @@ import Default from '../../layouts/Default.astro';
 import Faq from '../../components/ui/Faq.astro';
 import CtaRandom from '../../components/ui/CtaRandom.astro';
 import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import Steps from '../../components/sections/Steps.astro';
+import Stats from '../../components/sections/Stats.astro';
 import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
 
 const faqItems = [
@@ -113,6 +115,28 @@ const schema = {
     </div>
   </section>
 
+  <Stats
+    stat1Count={2} stat1Suffix=" m².K/W" stat1Label="Résistance thermique R (neuf RE 2020)"
+    stat2Count={1.2} stat2Suffix=" m².K/W" stat2Label="Résistance thermique R (rénovation)"
+    stat3Count={10} stat3Suffix=" cm" stat3Label="Épaisseur isolant typique (PSE)"
+    stat4Count={30} stat4Suffix="%" stat4Label="Économies d'énergie estimées"
+  />
+
+  <Steps
+    overline="Notre méthode"
+    title="Isolation thermique de sol : notre process"
+    titleId="steps-thermique-title"
+    bg="gray"
+    step1Title="Bilan thermique et conseil"
+    step1Text="Analyse de votre bâtiment, des déperditions actuelles et des exigences réglementaires (RE 2020 ou rénovation). Recommandation du type et de l'épaisseur d'isolant."
+    step2Title="Préparation du support"
+    step2Text="Nettoyage du plancher porteur, traitement des fissures éventuelles, vérification de la planéité. Pose de la membrane de désolidarisation si nécessaire."
+    step3Title="Pose de l'isolant"
+    step3Text="Mise en place de l'isolant (PSE, polyuréthane ou laine minérale) selon les préconisations. Jointement des panneaux pour éviter les ponts thermiques."
+    step4Title="Coulage de la chape"
+    step4Text="Coulage de la chape liquide sur l'isolant. La chape assure la finition et la tenue mécanique du complexe sol. Remise du rapport thermique de fin de chantier."
+  />
+
   {/* Zone d'intervention */}
   <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-thermique-title">
     <div class="container">
@@ -134,6 +158,29 @@ const schema = {
         <div class="card-feature">
           <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
           <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white section--rounded" aria-labelledby="isolants-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Les solutions d'isolation</p>
+        <h2 class="section__title" id="isolants-title">Quel isolant pour votre chantier ?</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Polystyrène expansé (PSE)</h3>
+          <p class="card-feature__text">La solution la plus répandue. Léger, économique, bonne résistance à la compression. Idéal sous chape liquide. Disponible en dalles de 60 à 120 mm.</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Polyuréthane (PU)</h3>
+          <p class="card-feature__text">Haute performance thermique pour une épaisseur minimale. Recommandé quand la hauteur disponible est limitée. R élevé avec seulement 5 à 8 cm d'épaisseur.</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Mousse projetée in-situ</h3>
+          <p class="card-feature__text">Application directe sur le support, sans joint, sans pont thermique. Idéale pour les surfaces irrégulières et les vides sanitaires. <a href="/services/mousse-polyurethane-projetee" style="color: var(--color-primary);">En savoir plus →</a></p>
         </div>
       </div>
     </div>
