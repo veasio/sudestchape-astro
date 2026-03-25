@@ -7,7 +7,6 @@ import {
   SITE_NAME, SITE_DESCRIPTION, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL, SITE_ADDRESS_HTML,
   SOCIAL_FACEBOOK, SOCIAL_INSTAGRAM, SOCIAL_LINKEDIN, SOCIAL_YOUTUBE, SOCIAL_TIKTOK,
   FOOTER_COPYRIGHT, FOOTER_MENTIONS_URL, FOOTER_CGV_URL, FOOTER_CONFIDENTIALITE_URL,
-  MAUTIC_FORM_NEWSLETTER_ID,
 } from '../../config';
 
 const siteName = SITE_NAME;
@@ -128,13 +127,15 @@ const socialLinkedin = SOCIAL_LINKEDIN;
         </address>
       </div>
 
-      {/* Colonne 4 : Newsletter Mautic */}
+      {/* Colonne 4 : Devis gratuit */}
       <div class="site-footer__col">
-        <h2 class="site-footer__heading">Newsletter</h2>
+        <h2 class="site-footer__heading">Devis gratuit</h2>
         <p class="site-footer__newsletter-desc">
-          Recevez nos actualités et conseils.
+          Réponse sous 24h, visite technique offerte, sans engagement.
         </p>
-        <MauticForm formId={MAUTIC_FORM_NEWSLETTER_ID} formStyle="inline" />
+        <a href="/devis" class="btn btn--primary" style="margin-top: var(--spacing-3); display: inline-flex;">
+          Demander un devis
+        </a>
       </div>
 
     </div>

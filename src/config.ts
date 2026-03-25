@@ -64,10 +64,8 @@ export const SCHEMA_ORG_SAME_AS: string[] = [
 export const MAUTIC_ENABLED          = true;
 export const MAUTIC_BASE_URL         = 'https://m.sudestchape.fr';
 export const MAUTIC_TRACKING_ENABLED = true;
-export const MAUTIC_FORM_CONTACT_ID  = '1';
-export const MAUTIC_FORM_DEVIS_ID    = '2';
-export const MAUTIC_FORM_NEWSLETTER_ID = '3';
-export const MAUTIC_FORM_CALLBACK_ID   = '4';
+export const MAUTIC_FORM_CONTACT_ID  = '2';
+export const MAUTIC_FORM_DEVIS_ID    = '4';
 
 // ---------------------------------------------------------------------------
 // Analytics
