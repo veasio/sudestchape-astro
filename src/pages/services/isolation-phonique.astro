@@ -3,6 +3,8 @@ import Default from '../../layouts/Default.astro';
 import Faq from '../../components/ui/Faq.astro';
 import CtaRandom from '../../components/ui/CtaRandom.astro';
 import TestimonialsCompact from '../../components/ui/TestimonialsCompact.astro';
+import Steps from '../../components/sections/Steps.astro';
+import Stats from '../../components/sections/Stats.astro';
 import { SITE_NAME, SITE_URL, SITE_PHONE, SCHEMA_ORG_SAME_AS } from '../../config';
 
 const faqItems = [
@@ -113,6 +115,28 @@ const schema = {
     </div>
   </section>
 
+  <Stats
+    stat1Count={40} stat1Suffix=" mm" stat1Label="Épaisseur min. chape flottante"
+    stat2Count={21} stat2Suffix=" dB" stat2Label="Réduction bruits de choc (ΔLw)"
+    stat3Count={60} stat3Suffix=" mm" stat3Label="Épaisseur totale max. (sous-couche + chape)"
+    stat4Count={15} stat4Suffix=" ans" stat4Label="D'expérience en acoustique"
+  />
+
+  <Steps
+    overline="Notre méthode"
+    title="Pose de chape acoustique : comment on procède"
+    titleId="steps-phonique-title"
+    bg="gray"
+    step1Title="Étude acoustique préalable"
+    step1Text="Identification du type de bruit (choc, aérien), analyse du plancher existant, recommandation de la sous-couche adaptée et vérification de la hauteur disponible."
+    step2Title="Pose de la sous-couche désolidarisante"
+    step2Text="Application de la sous-couche acoustique sur toute la surface. Relevés périphériques pour éviter tout pont phonique avec les murs."
+    step3Title="Coulage de la chape flottante"
+    step3Text="Coulage de la chape liquide sur la sous-couche sans contact avec les murs. La chape 'flotte' pour garantir la désolidarisation acoustique."
+    step4Title="Contrôle et remise en service"
+    step4Text="Vérification de la planéité, contrôle de l'absence de pont phonique, mesure d'humidité avant remise en service. Rapport de fin de chantier."
+  />
+
   {/* Zone d'intervention */}
   <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="zone-phonique-title">
     <div class="container">
@@ -134,6 +158,29 @@ const schema = {
         <div class="card-feature">
           <h3 class="card-feature__title">Alpes-Maritimes (06)</h3>
           <p class="card-feature__text">Nice, Cannes, Antibes, Mougins, Sophia Antipolis, Grasse, Cagnes-sur-Mer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white section--rounded" aria-labelledby="types-bruit-title">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__overline">Nos solutions</p>
+        <h2 class="section__title" id="types-bruit-title">Quel type de nuisance acoustique traitons-nous ?</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card-feature">
+          <h3 class="card-feature__title">Bruits de choc</h3>
+          <p class="card-feature__text">Bruits de pas, chutes d'objets, roulements de chaises. La sous-couche désolidarisante est la solution la plus efficace. Réduction jusqu'à 21 dB (ΔLw).</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Copropriété & collectif</h3>
+          <p class="card-feature__text">Immeubles d'habitation, résidences, hôtels. Intervention pièce par pièce ou par étage, en site occupé ou en rénovation lourde.</p>
+        </div>
+        <div class="card-feature">
+          <h3 class="card-feature__title">Locaux sensibles</h3>
+          <p class="card-feature__text">Salles de réunion, studios d'enregistrement, établissements scolaires, cabinets médicaux. Solutions spécifiques haute performance.</p>
         </div>
       </div>
     </div>
