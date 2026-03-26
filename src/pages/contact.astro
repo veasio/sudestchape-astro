@@ -163,9 +163,14 @@ const mapData = JSON.stringify({
       var data;
       try { data = JSON.parse(mapData); } catch(e) { return; }
 
-      var map = L.map('contact-map', { scrollWheelZoom: false, zoomControl: true }).setView([data.company.lat, data.company.lng], 10);
-      // S'assurer que la carte remplit bien le conteneur absolu
-      setTimeout(function() { map.invalidateSize(); }, 100);
+      var map = L.map('contact-map', { scrollWheelZoom: false, zoomControl: true }).setView([data.company.lat, data.company.lng], 8);
+      // Positionner le repère à ~5% du bas : invalider la taille puis décaler le centre vers le nord
+      setTimeout(function() {
+        map.invalidateSize();
+        var h = el.getBoundingClientRect().height || 480;
+        // panBy([x, y]) avec y négatif déplace le centre vers le nord → repère descend vers le bas
+        map.panBy([0, -(h * 0.43)], { animate: false });
+      }, 150);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 18
