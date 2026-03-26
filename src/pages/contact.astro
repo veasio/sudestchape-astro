@@ -118,9 +118,9 @@ const mapData = JSON.stringify({
                 </svg>
               </div>
               <div class="contact-devis-cta__body">
-                <p class="contact-devis-cta__title">Recevez votre devis en ligne</p>
+                <p class="contact-devis-cta__title">Demandez votre devis en ligne</p>
                 <p class="contact-devis-cta__sub">
-                  Repondez a 7 questions en 3 minutes et recevez votre estimation par email sous 24h. Gratuit, sans engagement, sans attente.
+                  Chape anhydrite, ciment, ravoirage, isolation phonique &amp; thermique, mousse polyurethane - estimation precise, reponse sous 24h. Gratuit et sans engagement.
                 </p>
               </div>
               <svg class="contact-devis-cta__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -132,14 +132,15 @@ const mapData = JSON.stringify({
     </div>
   </section>
 
-  {/* Carte interactive Leaflet */}
-  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="map-title">
-    <div class="container">
+  {/* Carte interactive Leaflet en fond de section */}
+  <section class="section--map-full animate-on-scroll" aria-labelledby="map-title">
+    <div class="contact-map-full" id="contact-map" aria-hidden="true" data-map={mapData}></div>
+    <div class="contact-map-overlay" aria-hidden="true"></div>
+    <div class="container contact-map-content">
       <h2 class="section__title text-center" id="map-title">Notre zone d'intervention</h2>
-      <p class="section__description text-center" style="margin-inline:auto;">
-        Var, Bouches-du-Rhone, Alpes-Maritimes, Vaucluse - Bases a Six-Fours-les-Plages (83).
+      <p class="section__description text-center" style="margin-inline:auto; max-width:600px;">
+        Var (83), Bouches-du-Rhone (13), Alpes-Maritimes (06), Vaucluse (84) - Bases a Six-Fours-les-Plages.
       </p>
-      <div class="contact-map" id="contact-map" aria-label="Carte intervention Sud Est Chape" data-map={mapData}></div>
     </div>
   </section>
 
@@ -162,7 +163,9 @@ const mapData = JSON.stringify({
       var data;
       try { data = JSON.parse(mapData); } catch(e) { return; }
 
-      var map = L.map('contact-map', { scrollWheelZoom: false }).setView([data.company.lat, data.company.lng], 10);
+      var map = L.map('contact-map', { scrollWheelZoom: false, zoomControl: true }).setView([data.company.lat, data.company.lng], 10);
+      // S'assurer que la carte remplit bien le conteneur absolu
+      setTimeout(function() { map.invalidateSize(); }, 100);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 18

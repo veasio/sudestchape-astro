@@ -606,15 +606,56 @@
 }
 
 /* ------------------------------------------------------------------
-   Contact map (Leaflet)
+   Carte Leaflet en fond de section
    ------------------------------------------------------------------ */
-.contact-map {
-    margin-top: var(--spacing-8);
-    border-radius: var(--border-radius-lg);
+
+/* Section avec carte en fond */
+.section--map-full {
+    position: relative;
     overflow: hidden;
-    height: 420px;
-    background: var(--color-gray-200);
-    box-shadow: 0 4px 20px rgb(0 0 0 / 0.08);
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-16) 0;
+}
+
+/* Map positionnée en fond absolu */
+.contact-map-full {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* Overlay sombre pour lisibilité du texte */
+.contact-map-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.62) 0%,
+        rgba(0, 0, 0, 0.42) 50%,
+        rgba(0, 0, 0, 0.62) 100%
+    );
+    pointer-events: none;
+}
+
+/* Contenu texte au-dessus */
+.contact-map-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/* Texte blanc lisible sur fond carte */
+.section--map-full .section__title {
+    color: white;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.section--map-full .section__description {
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Marker personnalisé Leaflet */
