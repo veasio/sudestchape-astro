@@ -50,13 +50,14 @@ const mapData = JSON.stringify({
       <h2 class="sr-only" id="contact-form-title">Formulaire de contact et coordonnees</h2>
       <div class="grid grid--2">
 
+        {/* Colonne 1 - Formulaire */}
         <div class="contact-form" aria-labelledby="form-title">
           <div class="contact-form__header">
             <div class="contact-form__icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             </div>
             <div class="contact-form__heading">
-              <h3 id="form-title">Demandez votre devis gratuit</h3>
+              <h3 id="form-title">Ecrivez-nous</h3>
             </div>
           </div>
           <p class="contact-form__note">
@@ -66,6 +67,7 @@ const mapData = JSON.stringify({
           <MauticForm formId={MAUTIC_FORM_CONTACT_ID} />
         </div>
 
+        {/* Colonne 2 - Coordonnees + CTA */}
         <div class="contact-info" aria-labelledby="info-title">
           <h3 id="info-title">Nos coordonnees</h3>
 
@@ -103,27 +105,34 @@ const mapData = JSON.stringify({
             </div>
           </div>
 
-          <a href="/devis" class="contact-devis-cta" aria-label="Demarrer une demande de devis en ligne">
-            <div class="contact-devis-cta__icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-            </div>
-            <div class="contact-devis-cta__body">
-              <p class="contact-devis-cta__title">Demande de devis en ligne</p>
-              <p class="contact-devis-cta__sub">Reponse sous 24h - Sans engagement</p>
-            </div>
-            <svg class="contact-devis-cta__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          {/* Zone flexible - CTA centre dans l'espace restant */}
+          <div class="contact-info__cta-zone">
+            <a href="/devis" class="contact-devis-cta" aria-label="Demarrer une demande de devis en ligne">
+              <div class="contact-devis-cta__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <div class="contact-devis-cta__body">
+                <p class="contact-devis-cta__title">Recevez votre devis en ligne</p>
+                <p class="contact-devis-cta__sub">
+                  Repondez a 7 questions en 3 minutes et recevez votre estimation par email sous 24h. Gratuit, sans engagement, sans attente.
+                </p>
+              </div>
+              <svg class="contact-devis-cta__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
 
         </div>
       </div>
     </div>
   </section>
 
+  {/* Carte interactive Leaflet */}
   <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="map-title">
     <div class="container">
       <h2 class="section__title text-center" id="map-title">Notre zone d'intervention</h2>
@@ -134,61 +143,73 @@ const mapData = JSON.stringify({
     </div>
   </section>
 
-</Default>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
-<script is:inline>
-(function () {
-  function initMap() {
-    var el = document.getElementById('contact-map');
-    if (!el || typeof L === 'undefined') return;
-    var raw = el.getAttribute('data-map');
-    var data;
-    try { data = JSON.parse(raw); } catch(e) { return; }
-
-    var map = L.map('contact-map', { scrollWheelZoom: false }).setView([data.company.lat, data.company.lng], 10);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 18
-    }).addTo(map);
-
-    var companyIcon = L.divIcon({
-      className: 'map-company-marker',
-      html: '<div class="map-company-pin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>',
-      iconSize: [44, 44],
-      iconAnchor: [22, 44],
-      popupAnchor: [0, -48]
-    });
-
-    L.marker([data.company.lat, data.company.lng], { icon: companyIcon })
-      .addTo(map)
-      .bindPopup(
-        '<strong style="color:#ED4830;font-size:14px">Sud Est Chape</strong><br>' +
-        '<span style="font-size:12px;color:#6b7280">' + data.company.address + '</span><br>' +
-        '<a href="tel:+33494874041" style="color:#ED4830;font-size:12px;font-weight:600">04 94 87 40 41</a>'
-      ).openPopup();
-
-    if (data.chantiers && data.chantiers.length) {
-      var chantierIcon = L.divIcon({
-        className: 'map-company-marker',
-        html: '<div style="width:12px;height:12px;background:#F27C22;border:2px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>',
-        iconSize: [12, 12], iconAnchor: [6, 6], popupAnchor: [0, -10]
-      });
-      data.chantiers.forEach(function(c) {
-        L.marker([c.lat, c.lng], { icon: chantierIcon }).addTo(map).bindPopup(
-          '<strong style="font-size:13px">' + c.title + '</strong><br>' +
-          '<span style="font-size:12px;color:#6b7280">' + (c.location || '') + ' &middot; ' + (c.category || '') + '</span>'
-        );
-      });
+  {/* Script Leaflet - DOIT etre a l'interieur du layout pour etre dans le <body> */}
+  <script is:inline define:vars={{ mapData }}>
+  (function () {
+    function loadLeafletCSS() {
+      if (document.querySelector('link[data-leaflet]')) return;
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.setAttribute('data-leaflet', '1');
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+      link.crossOrigin = '';
+      document.head.appendChild(link);
     }
-  }
 
-  var s = document.createElement('script');
-  s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-  s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GqT0=';
-  s.crossOrigin = '';
-  s.onload = initMap;
-  document.head.appendChild(s);
-})();
-</script>
+    function initMap() {
+      var el = document.getElementById('contact-map');
+      if (!el || typeof L === 'undefined') return;
+
+      var data;
+      try { data = JSON.parse(mapData); } catch(e) { return; }
+
+      var map = L.map('contact-map', { scrollWheelZoom: false }).setView([data.company.lat, data.company.lng], 10);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      var companyIcon = L.divIcon({
+        className: 'map-company-marker',
+        html: '<div class="map-company-pin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>',
+        iconSize: [44, 44],
+        iconAnchor: [22, 44],
+        popupAnchor: [0, -48]
+      });
+
+      L.marker([data.company.lat, data.company.lng], { icon: companyIcon })
+        .addTo(map)
+        .bindPopup(
+          '<strong style="color:#ED4830;font-size:14px">Sud Est Chape</strong><br>' +
+          '<span style="font-size:12px;color:#6b7280">' + data.company.address + '</span><br>' +
+          '<a href="tel:+33494874041" style="color:#ED4830;font-size:12px;font-weight:600">04 94 87 40 41</a>'
+        ).openPopup();
+
+      if (data.chantiers && data.chantiers.length) {
+        var chantierIcon = L.divIcon({
+          className: 'map-company-marker',
+          html: '<div style="width:12px;height:12px;background:#F27C22;border:2px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3)"></div>',
+          iconSize: [12, 12], iconAnchor: [6, 6], popupAnchor: [0, -10]
+        });
+        data.chantiers.forEach(function(c) {
+          L.marker([c.lat, c.lng], { icon: chantierIcon }).addTo(map).bindPopup(
+            '<strong style="font-size:13px">' + c.title + '</strong><br>' +
+            '<span style="font-size:12px;color:#6b7280">' + (c.location || '') + ' - ' + (c.category || '') + '</span>'
+          );
+        });
+      }
+    }
+
+    loadLeafletCSS();
+
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GqT0=';
+    s.crossOrigin = '';
+    s.onload = initMap;
+    document.head.appendChild(s);
+  })();
+  </script>
+
+</Default>
