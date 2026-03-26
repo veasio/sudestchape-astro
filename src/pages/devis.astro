@@ -6,23 +6,23 @@ import { SITE_URL, SITE_NAME } from '../config';
 const schema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": `Devis gratuit chape liquide – ${SITE_NAME}`,
+  "name": `Devis gratuit chape liquide - ${SITE_NAME}`,
   "description": "Demandez un devis gratuit pour votre chape liquide. Réponse sous 24h, visite technique offerte.",
   "url": `${SITE_URL}/devis`
 };
 ---
 
 <Default
-  title="Devis Gratuit Chape Liquide – Réponse 24h | Sud Est Chape"
+  title="Devis Gratuit Chape Liquide - Réponse 24h | Sud Est Chape"
   description="Demandez votre devis gratuit pour chape anhydrite, ciment, ravoirage ou isolation. Réponse sous 24h, visite technique offerte, sans engagement."
   schema={schema}
 >
 
-  {/* Hero — le modal s'ouvre automatiquement via DevisModal.astro */}
+  {/* Hero - le modal s'ouvre automatiquement via DevisModal.astro */}
   <section class="hero hero--small" aria-label="Demander un devis">
     <div class="hero__background">
       <img src="/images/optimized/hero-contact.webp"
-           alt="Demandez un devis gratuit – Sud Est Chape"
+           alt="Demandez un devis gratuit - Sud Est Chape"
            width="1920" height="600"
            loading="eager"
            fetchpriority="high" />

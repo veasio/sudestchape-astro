@@ -1,8 +1,8 @@
 ---
-// CTA aléatoire — 3 variantes : devis, telephone, realisations
+// CTA aléatoire - 3 variantes : devis, telephone, realisations
 // Source : partials/cta-random.htm + partials/cta/*.htm
 // La sélection aléatoire se fait côté client via un script inline
-// (Astro est statique — pas de random côté serveur)
+// (Astro est statique - pas de random côté serveur)
 
 import { SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
 ---
@@ -33,7 +33,7 @@ import { SITE_PHONE, SITE_PHONE_DISPLAY } from '../../config';
         Vous avez un projet ? On vous répond.
       </h2>
       <p class="section__description" style="margin-inline:auto;">
-        Appelez directement notre équipe pour un conseil, une évaluation de faisabilité ou un délai d'intervention. Disponible lun–ven 8h–18h.
+        Appelez directement notre équipe pour un conseil, une évaluation de faisabilité ou un délai d'intervention. Disponible lun-ven 8h-18h.
       </p>
       <div class="hero__actions mt-8" style="justify-content:center;">
         <a href={`tel:${SITE_PHONE}`} class="btn btn--primary btn--lg">

@@ -136,7 +136,7 @@ export const NAV_ITEMS = [
   },
   { title: 'Qui Sommes Nous',     url: '/a-propos' },
   { title: 'Nos Réalisations', url: '/realisations' },
-  { title: 'Contact & Devis',      url: '/devis' },
+  { title: 'Contact & Devis',      url: '/contact' },
 ];
 
 // ---------------------------------------------------------------------------
