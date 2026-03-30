@@ -4,6 +4,7 @@ import HeroSlider from '../components/ui/HeroSlider.astro';
 import Stats from '../components/sections/Stats.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import CtaRandom from '../components/ui/CtaRandom.astro';
+import RealisationsFeed from '../components/sections/RealisationsFeed.astro';
 import { SITE_NAME, SITE_URL, SITE_PHONE, SITE_EMAIL, SCHEMA_ORG_SAME_AS, SCHEMA_ORG_AREA_SERVED } from '../config';
 
 const schema = {
@@ -169,138 +170,7 @@ const schema = {
   </section>
 
   {/* Feed réalisations (slider horizontal) */}
-  <section class="section section--gray section--rounded animate-on-scroll" aria-labelledby="realisations-feed-title">
-    <div class="container">
-      <div class="realisations-feed">
-        <div class="realisations-feed__header">
-          <div class="realisations-feed__title-group">
-            <div class="realisations-feed__icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>
-            <div>
-              <h2 class="realisations-feed__title" id="realisations-feed-title">Nos dernières réalisations</h2>
-              <p class="realisations-feed__subtitle">Découvrez nos chantiers récents dans le Sud-Est</p>
-            </div>
-          </div>
-          <a href="/realisations" class="btn btn--primary">
-            Voir tout
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
-
-        <div class="realisations-feed__track">
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-1.webp" alt="Chape fluide villa contemporaine Aix-en-Provence" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Villa contemporaine</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Aix-en-Provence • 180 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation villa contemporaine"></a>
-          </div>
-
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-2.webp" alt="Chape liquide entrepôt logistique Marseille" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Entrepôt logistique</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Marseille • 850 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation entrepôt logistique"></a>
-          </div>
-
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-3.webp" alt="Plancher chauffant appartement Nice" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Appartement rénové</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Nice • 95 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation appartement rénové"></a>
-          </div>
-
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-4.webp" alt="Chape fluide résidence collective Toulon" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Résidence collective</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Toulon • 1 200 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation résidence collective"></a>
-          </div>
-
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-5.webp" alt="Maison individuelle plancher chauffant Cannes" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Maison individuelle</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Cannes • 220 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation maison individuelle"></a>
-          </div>
-
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-6.webp" alt="Local commercial chape Avignon" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Local commercial</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Avignon • 350 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation local commercial"></a>
-          </div>
-
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-7.webp" alt="Chape garage Montpellier" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Garage automobile</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Montpellier • 480 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation garage automobile"></a>
-          </div>
-
-          <div class="realisations-feed__item">
-            <img src="/images/optimized/realisation-8.webp" alt="Bureaux entreprise Marseille" width="400" height="400" loading="lazy" />
-            <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">Bureaux d'entreprise</p>
-              <p class="realisations-feed__item-location">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Marseille • 620 m²
-              </p>
-            </div>
-            <a href="/realisations" class="realisations-feed__link" aria-label="Voir la réalisation bureaux d'entreprise"></a>
-          </div>
-        </div>
-
-        <button type="button" class="realisations-feed__nav realisations-feed__nav--prev" aria-label="Voir les réalisations précédentes" disabled>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        </button>
-        <button type="button" class="realisations-feed__nav realisations-feed__nav--next" aria-label="Voir les réalisations suivantes">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
+  <RealisationsFeed titleId="realisations-feed-title" />
 
   {/* Features 4 colonnes */}
   <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="features-title">

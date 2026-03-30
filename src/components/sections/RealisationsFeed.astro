@@ -1,4 +1,6 @@
 ---
+import { getCollection } from 'astro:content';
+
 interface Props {
   title?: string;
   subtitle?: string;
@@ -17,16 +19,9 @@ const {
   ctaUrl = '/realisations',
 } = Astro.props;
 
-const items = [
-  { img: '/images/optimized/realisation-1.webp', alt: 'Chape fluide villa contemporaine Aix-en-Provence', itemTitle: 'Villa contemporaine', location: 'Aix-en-Provence • 180 m²', ariaLabel: 'Voir la réalisation villa contemporaine' },
-  { img: '/images/optimized/realisation-2.webp', alt: "Chape traditionnelle entrepôt Marseille", itemTitle: 'Entrepôt logistique', location: 'Marseille • 850 m²', ariaLabel: 'Voir la réalisation entrepôt logistique' },
-  { img: '/images/optimized/realisation-3.webp', alt: 'Plancher chauffant appartement Nice', itemTitle: 'Appartement rénové', location: 'Nice • 95 m²', ariaLabel: 'Voir la réalisation appartement rénové' },
-  { img: '/images/optimized/realisation-4.webp', alt: 'Chape fluide résidence collective Toulon', itemTitle: 'Résidence collective', location: 'Toulon • 1200 m²', ariaLabel: 'Voir la réalisation résidence collective' },
-  { img: '/images/optimized/realisation-5.webp', alt: 'Maison individuelle plancher chauffant Cannes', itemTitle: 'Maison individuelle', location: 'Cannes • 220 m²', ariaLabel: 'Voir la réalisation maison individuelle' },
-  { img: '/images/optimized/realisation-6.webp', alt: 'Local commercial chape Avignon', itemTitle: 'Local commercial', location: 'Avignon • 350 m²', ariaLabel: 'Voir la réalisation local commercial' },
-  { img: '/images/optimized/realisation-7.webp', alt: 'Chape garage Montpellier', itemTitle: 'Garage automobile', location: 'Montpellier • 480 m²', ariaLabel: 'Voir la réalisation garage automobile' },
-  { img: '/images/optimized/realisation-8.webp', alt: "Bureaux entreprise Marseille", itemTitle: "Bureaux d'entreprise", location: 'Marseille • 620 m²', ariaLabel: "Voir la réalisation bureaux d'entreprise" },
-];
+const items = (await getCollection('realisations'))
+  .filter((r) => r.data.featured)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
 ---
 
 <section class={`section section--${bg} section--rounded animate-on-scroll`} aria-labelledby={titleId}>
@@ -55,20 +50,25 @@ const items = [
       </div>
 
       <div class="realisations-feed__track">
-        {items.map((item) => (
+        {items.map((r) => (
           <div class="realisations-feed__item">
-            <img src={item.img} alt={item.alt} width="400" height="400" loading="lazy" />
+            <img
+              src={r.data.images[0].src}
+              alt={r.data.images[0].alt}
+              width="400" height="400"
+              loading="lazy"
+            />
             <div class="realisations-feed__overlay">
-              <p class="realisations-feed__item-title">{item.itemTitle}</p>
+              <p class="realisations-feed__item-title">{r.data.title.split(' - ').pop()}</p>
               <p class="realisations-feed__item-location">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
-                {item.location}
+                {r.data.city} • {r.data.surface}
               </p>
             </div>
-            <a href={ctaUrl} class="realisations-feed__link" aria-label={item.ariaLabel}></a>
+            <a href={`/realisations/${r.slug}`} class="realisations-feed__link" aria-label={`Voir la réalisation : ${r.data.title}`}></a>
           </div>
         ))}
       </div>

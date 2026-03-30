@@ -1,20 +1,37 @@
 ---
+import { getCollection } from 'astro:content';
 import Default from '../layouts/Default.astro';
 import TestimonialsCompact from '../components/ui/TestimonialsCompact.astro';
 import CtaRandom from '../components/ui/CtaRandom.astro';
-import { realisations } from '../data/realisations';
+import { SITE_URL } from '../config';
+
+const realisations = (await getCollection('realisations'))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Nos realisations de chape - Sud Est Chape",
+  "description": "Decouvrez nos realisations de chape fluide et traditionnelle dans le Sud-Est. Photos de chantiers dans le Var, Bouches-du-Rhone et Alpes-Maritimes.",
+  "url": `${SITE_URL}/realisations`,
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Sud Est Chape",
+    "url": SITE_URL
+  }
+};
 ---
 
 <Default
-  title="Nos réalisations - Chantiers de chape | Sud Est Chape"
-  description="Découvrez nos réalisations de chape fluide et traditionnelle dans le Sud-Est. Photos de chantiers, témoignages clients et résultats."
+  title="Nos realisations - Chantiers de chape | Sud Est Chape"
+  description="Decouvrez nos realisations de chape fluide et traditionnelle dans le Sud-Est. Photos de chantiers, details techniques et resultats dans le Var, Bouches-du-Rhone et Alpes-Maritimes."
+  schema={schema}
 >
 
-  {/* Hero */}
-  <section class="hero hero--small" aria-label="Nos réalisations">
+  <section class="hero hero--small" aria-label="Nos realisations">
     <div class="hero__background">
       <img src="/images/optimized/hero-realisations.webp"
-           alt="Réalisations de chape par Sud Est Chape"
+           alt="Realisations de chape par Sud Est Chape"
            width="1920" height="600"
            loading="eager"
            fetchpriority="high" />
@@ -22,75 +39,44 @@ import { realisations } from '../data/realisations';
     <div class="container">
       <div class="hero__content">
         <p class="hero__overline">Portfolio</p>
-        <h1 class="hero__title">Nos réalisations</h1>
+        <h1 class="hero__title">Nos realisations</h1>
         <p class="hero__description">
-          Particuliers, professionnels, logements neufs ou rénovation :
-          découvrez nos chantiers récents dans tout le Sud-Est.
+          Particuliers, professionnels, logements neufs ou renovation :
+          decouvrez nos chantiers recents dans tout le Sud-Est.
         </p>
       </div>
     </div>
   </section>
 
-  {/* Grille réalisations depuis les données TypeScript */}
-  <section class="section section--rounded section--white" aria-labelledby="realisations-title">
+  <section class="section section--rounded section--white" aria-labelledby="realisations-list-title">
     <div class="container">
-      <h2 class="sr-only" id="realisations-title">Liste de nos réalisations</h2>
+      <h2 class="sr-only" id="realisations-list-title">Liste de nos realisations</h2>
 
       <div class="grid grid--3">
         {realisations.map((r) => (
           <a href={`/realisations/${r.slug}`} class="card-project">
             <div class="card-project__image">
-              <img src={r.image}
-                   alt={r.title}
-                   width="600" height="400"
-                   loading="lazy" />
+              <img
+                src={r.data.images[0].src}
+                alt={r.data.images[0].alt}
+                width="600" height="400"
+                loading="lazy"
+              />
             </div>
             <div class="card-project__content">
-              <h3 class="card-project__title">{r.title}</h3>
-              {r.location && <p class="card-project__location">{r.location}</p>}
-              {r.surface && (
-                <p class="card-project__type">{r.category} - {r.surface}</p>
-              )}
+              <p class="card-project__type">{r.data.category}</p>
+              <h3 class="card-project__title">{r.data.title}</h3>
+              <p class="card-project__location">{r.data.city} ({r.data.departmentCode}) - {r.data.surface}</p>
             </div>
           </a>
         ))}
-
-        {/* Réalisations supplémentaires statiques (issues de la page October CMS) */}
-        <a href="/realisations" class="card-project">
-          <div class="card-project__image">
-            <img src="/images/optimized/realisation-5.webp"
-                 alt="Rénovation chape traditionnelle à Avignon"
-                 width="600" height="400"
-                 loading="lazy" />
-          </div>
-          <div class="card-project__content">
-            <h3 class="card-project__title">Rénovation appartement</h3>
-            <p class="card-project__location">Avignon (84)</p>
-            <p class="card-project__type">Chape traditionnelle - 95 m²</p>
-          </div>
-        </a>
-
-        <a href="/realisations" class="card-project">
-          <div class="card-project__image">
-            <img src="/images/optimized/realisation-6.webp"
-                 alt="Chape fluide dans un local commercial à Montpellier"
-                 width="600" height="400"
-                 loading="lazy" />
-          </div>
-          <div class="card-project__content">
-            <h3 class="card-project__title">Local commercial</h3>
-            <p class="card-project__location">Montpellier (34)</p>
-            <p class="card-project__type">Chape fluide - 250 m²</p>
-          </div>
-        </a>
       </div>
+
     </div>
   </section>
 
-  {/* Témoignages */}
-  <TestimonialsCompact title="Nos clients témoignent" />
+  <TestimonialsCompact title="Nos clients temoignent" />
 
-  {/* CTA aléatoire */}
   <CtaRandom />
 
 </Default>

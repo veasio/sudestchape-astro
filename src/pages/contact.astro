@@ -2,7 +2,9 @@
 import Default from '../layouts/Default.astro';
 import MauticForm from '../components/ui/MauticForm.astro';
 import { SITE_URL, SITE_PHONE, SITE_PHONE_DISPLAY, SITE_EMAIL, SITE_ADDRESS_HTML, MAUTIC_FORM_CONTACT_ID } from '../config';
-import { realisations } from '../data/realisations';
+import { getCollection } from 'astro:content';
+
+const allRealisations = await getCollection('realisations');
 
 const schema = {
   "@context": "https://schema.org",
@@ -12,10 +14,10 @@ const schema = {
   "url": `${SITE_URL}/contact`
 };
 
-const chantiersMap = realisations.filter(r => r.lat && r.lng);
+const chantiersMap = allRealisations.filter(r => r.data.lat && r.data.lng);
 const mapData = JSON.stringify({
   company: { lat: 43.0977, lng: 6.0978, name: 'Sud Est Chape', address: '630 Chemin de Bassaquet, 83140 Six-Fours-les-Plages' },
-  chantiers: chantiersMap.map(r => ({ lat: r.lat, lng: r.lng, title: r.title, location: r.location, category: r.category }))
+  chantiers: chantiersMap.map(r => ({ lat: r.data.lat, lng: r.data.lng, title: r.data.title, location: `${r.data.city} (${r.data.departmentCode})`, category: r.data.category }))
 });
 ---
 

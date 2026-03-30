@@ -1,152 +1,281 @@
 ---
+import { getCollection } from 'astro:content';
 import Default from '../../layouts/Default.astro';
 import CtaRandom from '../../components/ui/CtaRandom.astro';
-import { realisations, type Realisation } from '../../data/realisations';
+import { SITE_URL } from '../../config';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const realisations = await getCollection('realisations');
   return realisations.map((r) => ({
     params: { slug: r.slug },
     props: { realisation: r },
   }));
 }
 
-interface Props {
-  realisation: Realisation;
-}
-
 const { realisation: r } = Astro.props;
+const { Content } = await r.render();
 
-const starSvg = `<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
-const stars = starSvg.repeat(5);
+// Réalisations similaires (même catégorie, slug différent)
+const allRealisations = await getCollection('realisations');
+const related = allRealisations
+  .filter((x) => x.data.category === r.data.category && x.slug !== r.slug)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 3);
+
+// Formatage de la date (YYYY-MM → Mois YYYY)
+const months = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+const [year, monthStr] = r.data.date.split('-');
+const dateDisplay = `${months[parseInt(monthStr)]} ${year}`;
+
+const imageMain = r.data.images[0];
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": r.title,
-  "description": r.description,
-  "image": `https://www.sudestchape.fr${r.image}`,
+  "headline": r.data.title,
+  "description": r.data.description,
+  "image": `${SITE_URL}${imageMain.src}`,
+  "datePublished": `${year}-${monthStr}-01`,
   "author": {
     "@type": "Organization",
-    "name": "Sud Est Chape"
-  }
+    "name": "Sud Est Chape",
+    "url": SITE_URL
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sud Est Chape",
+    "url": SITE_URL
+  },
+  "about": {
+    "@type": "Service",
+    "serviceType": r.data.category,
+    "areaServed": {
+      "@type": "City",
+      "name": r.data.city,
+      "containedInPlace": {
+        "@type": "State",
+        "name": r.data.region
+      }
+    },
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Sud Est Chape",
+      "url": SITE_URL
+    }
+  },
+  "keywords": `${r.data.category}, chape ${r.data.city}, ${r.data.department} (${r.data.departmentCode}), ${r.data.surface}`
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL },
+    { "@type": "ListItem", "position": 2, "name": "Réalisations", "item": `${SITE_URL}/realisations` },
+    { "@type": "ListItem", "position": 3, "name": r.data.title, "item": `${SITE_URL}/realisations/${r.slug}` }
+  ]
 };
 ---
 
 <Default
-  title={`${r.title} | Sud Est Chape`}
-  description={r.description}
-  ogImage={r.image}
-  schema={schema}
+  title={`${r.data.title} | Sud Est Chape`}
+  description={r.data.description}
+  ogImage={imageMain.src}
+  schema={[schema, breadcrumbSchema]}
 >
 
-  {/* Image principale + header */}
-  <section class="section section--rounded section--white" aria-label="Réalisation">
+  {/* Hero pleine largeur */}
+  <div class="project-hero">
+    <img
+      src={imageMain.src}
+      alt={imageMain.alt}
+      width="1920"
+      height="900"
+      loading="eager"
+      fetchpriority="high"
+      class="project-hero__img"
+    />
+    <div class="project-hero__overlay" aria-hidden="true"></div>
+    <div class="project-hero__content">
+      <div class="project-badges">
+        <span class="project-badge project-badge--category">{r.data.category}</span>
+        {r.data.secondaryCategory && (
+          <span class="project-badge project-badge--secondary">{r.data.secondaryCategory}</span>
+        )}
+        {r.data.clientType && (
+          <span class="project-badge project-badge--client">
+            {r.data.clientType}{r.data.clientName ? ` - ${r.data.clientName}` : ''}
+          </span>
+        )}
+        <span class="project-badge project-badge--date">{dateDisplay}</span>
+      </div>
+      <h1 class="project-hero__title">{r.data.title}</h1>
+      <p class="project-hero__location">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        {r.data.city} - {r.data.department} ({r.data.departmentCode})
+      </p>
+    </div>
+  </div>
+
+  {/* Corps principal */}
+  <section class="section section--white" aria-label="Détail de la réalisation">
     <div class="container">
-      <div class="project-detail">
-        <div class="project-detail__hero">
-          <img src={r.image}
-               alt={r.title}
-               width="1200" height="600"
-               loading="eager"
-               fetchpriority="high" />
-        </div>
 
-        <div class="project-detail__header">
-          <h1 class="project-detail__title">{r.title}</h1>
-          {r.location && <p class="project-detail__location">{r.location}</p>}
-        </div>
+      {/* Fil d'Ariane */}
+      <nav aria-label="Fil d'Ariane" style="padding: var(--spacing-6) 0 0; font-size: var(--fs-sm);">
+        <ol style="display:flex; gap:var(--spacing-2); list-style:none; padding:0; flex-wrap:wrap; align-items:center;">
+          <li><a href="/" style="color:var(--color-gray-500); text-decoration:none;">Accueil</a></li>
+          <li aria-hidden="true" style="color:var(--color-gray-300);">/</li>
+          <li><a href="/realisations" style="color:var(--color-gray-500); text-decoration:none;">Réalisations</a></li>
+          <li aria-hidden="true" style="color:var(--color-gray-300);">/</li>
+          <li style="color:var(--color-gray-700); font-weight:500;" aria-current="page">{r.data.city} - {r.data.surface}</li>
+        </ol>
+      </nav>
 
-        {/* Description + Caractéristiques */}
-        <div class="project-detail__body">
-          <div class="project-detail__description">
-            <h2>Le projet</h2>
-            <p>{r.description}</p>
-          </div>
+      {/* Description + Fiche technique */}
+      <div class="project-body">
 
-          <aside class="project-detail__specs" aria-labelledby="specs-title">
-            <h2 id="specs-title">Caractéristiques</h2>
-            <dl class="specs-list">
-              <div class="specs-list__item">
-                <dt>Type de chape</dt>
-                <dd>{r.category}</dd>
+        <article class="project-description">
+          <Content />
+        </article>
+
+        <aside class="project-specs" aria-labelledby="specs-title">
+          <div class="project-specs__card">
+            <div class="project-specs__header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
+                <polyline points="9 11 12 14 22 4"/>
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+              </svg>
+              <p class="project-specs__header-title" id="specs-title">Fiche technique</p>
+            </div>
+            <dl class="project-specs__grid">
+              <div class="project-spec">
+                <dt class="project-spec__label">Surface</dt>
+                <dd class="project-spec__value project-spec__value--highlight">{r.data.surface}</dd>
               </div>
-              {r.surface && (
-                <div class="specs-list__item">
-                  <dt>Surface</dt>
-                  <dd>{r.surface}</dd>
+              {r.data.thickness && (
+                <div class="project-spec">
+                  <dt class="project-spec__label">Epaisseur</dt>
+                  <dd class="project-spec__value">{r.data.thickness}</dd>
                 </div>
               )}
-              {r.location && (
-                <div class="specs-list__item">
-                  <dt>Lieu</dt>
-                  <dd>{r.location}</dd>
+              {r.data.volume && (
+                <div class="project-spec">
+                  <dt class="project-spec__label">Cubage</dt>
+                  <dd class="project-spec__value">{r.data.volume}</dd>
                 </div>
               )}
-              {r.date && (
-                <div class="specs-list__item">
-                  <dt>Période</dt>
-                  <dd>{r.date}</dd>
+              {r.data.duration && (
+                <div class="project-spec">
+                  <dt class="project-spec__label">Duree</dt>
+                  <dd class="project-spec__value">{r.data.duration}</dd>
                 </div>
               )}
+              <div class="project-spec">
+                <dt class="project-spec__label">Plancher chauffant</dt>
+                <dd class="project-spec__value">
+                  {r.data.heatedFloor ? (
+                    <span class="project-spec__badge project-spec__badge--yes">
+                      {r.data.heatedFloorType ?? 'Oui'}
+                    </span>
+                  ) : (
+                    <span class="project-spec__badge project-spec__badge--no">Non</span>
+                  )}
+                </dd>
+              </div>
+              {r.data.insulation && r.data.insulation !== 'Non' && (
+                <div class="project-spec">
+                  <dt class="project-spec__label">Isolant</dt>
+                  <dd class="project-spec__value">{r.data.insulation}</dd>
+                </div>
+              )}
+              {r.data.supplier && (
+                <div class="project-spec project-spec--full">
+                  <dt class="project-spec__label">Fournisseur</dt>
+                  <dd class="project-spec__value">{r.data.supplier}</dd>
+                </div>
+              )}
+              <div class="project-spec project-spec--full">
+                <dt class="project-spec__label">Localisation</dt>
+                <dd class="project-spec__value">{r.data.city} ({r.data.departmentCode})</dd>
+              </div>
             </dl>
-          </aside>
-        </div>
-
-        {/* Galerie photos */}
-        <section class="project-detail__gallery" aria-labelledby="gallery-title">
-          <h2 id="gallery-title">Photos du chantier</h2>
-          <div class="grid grid--3">
-            <figure class="project-detail__photo">
-              <img src={r.image}
-                   alt={`Préparation du sol - ${r.title}`}
-                   width="600" height="400"
-                   loading="lazy" />
-              <figcaption>Préparation du sol</figcaption>
-            </figure>
-            <figure class="project-detail__photo">
-              <img src={r.image}
-                   alt={`Coulage de la chape - ${r.title}`}
-                   width="600" height="400"
-                   loading="lazy" />
-              <figcaption>Coulage de la chape</figcaption>
-            </figure>
-            <figure class="project-detail__photo">
-              <img src={r.image}
-                   alt={`Résultat final - ${r.title}`}
-                   width="600" height="400"
-                   loading="lazy" />
-              <figcaption>Résultat final</figcaption>
-            </figure>
           </div>
-        </section>
+        </aside>
+
       </div>
+
+      {/* Galerie photos */}
+      {r.data.images.length > 1 && (
+        <div class="project-gallery">
+          <h2 class="project-gallery__title">Photos du chantier</h2>
+          <div class="project-gallery__grid">
+            {r.data.images.map((img) => (
+              <figure class="project-gallery__item" style="margin:0;">
+                <img src={img.src} alt={img.alt} width="600" height="450" loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Réalisations similaires */}
+      {related.length > 0 && (
+        <div class="project-related">
+          <h2 class="project-related__title">Autres realisations - {r.data.category}</h2>
+          <div class="project-related__grid">
+            {related.map((rel) => (
+              <a href={`/realisations/${rel.slug}`} class="project-related-card">
+                <img
+                  src={rel.data.images[0].src}
+                  alt={rel.data.images[0].alt}
+                  width="600"
+                  height="338"
+                  loading="lazy"
+                  class="project-related-card__img"
+                />
+                <div class="project-related-card__body">
+                  <p class="project-related-card__category">{rel.data.category}</p>
+                  <p class="project-related-card__title">{rel.data.title}</p>
+                  <p class="project-related-card__location">{rel.data.city} - {rel.data.surface}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
     </div>
   </section>
 
-  {/* Témoignage associé */}
-  <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="realisation-testimonial-title">
-    <div class="container">
-      <h2 class="sr-only" id="realisation-testimonial-title">Témoignage client</h2>
-      <div class="testimonial testimonial--featured" itemscope itemtype="https://schema.org/Review" style="max-width: 700px; margin-inline: auto;">
-        <div class="testimonial__rating" aria-label="5 étoiles sur 5">
-          <Fragment set:html={stars} />
-        </div>
-        <blockquote class="testimonial__quote" itemprop="reviewBody">
-          Travail impeccable, équipe ponctuelle et professionnelle.
-          La chape est parfaitement plane, idéale pour notre plancher chauffant.
-          Je recommande vivement Sud Est Chape.
-        </blockquote>
-        <div class="testimonial__author">
-          <div>
-            <p class="testimonial__name" itemprop="author">Marc D.</p>
-            <p class="testimonial__role">Propriétaire - {r.location ?? 'Sud-Est'}</p>
+  {/* Temoignage */}
+  {r.data.testimonial && (
+    <section class="section section--accent section--rounded animate-on-scroll" aria-labelledby="testimonial-title">
+      <div class="container">
+        <h2 class="sr-only" id="testimonial-title">Temoignage client</h2>
+        <div class="testimonial testimonial--featured" itemscope itemtype="https://schema.org/Review" style="max-width:700px; margin-inline:auto;">
+          <div class="testimonial__rating" aria-label="5 etoiles sur 5">
+            {Array(5).fill(null).map(() => (
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width="20" height="20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <blockquote class="testimonial__quote" itemprop="reviewBody">{r.data.testimonial}</blockquote>
+          <div class="testimonial__author">
+            <div>
+              <p class="testimonial__name" itemprop="author">{r.data.testimonialAuthor}</p>
+              <p class="testimonial__role">{r.data.clientType ?? 'Client'} - {r.data.city}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  {/* CTA aléatoire */}
   <CtaRandom />
 
 </Default>
