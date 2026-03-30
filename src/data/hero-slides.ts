@@ -25,9 +25,9 @@ export const heroSlides: HeroSlide[] = [
     imageAlt: 'Coulage de chape fluide sur plancher chauffant',
     overline: 'Plancher chauffant',
     title: 'Six équipes de chapistes qualifiés à votre service !',
-    description: "Expérimentés et diplômés du CQP Chef d’Équipe Chapiste, nos équipes ...",
-    ctaPrimary: { label: ‘Demander un devis’, url: ‘/devis’ },
-    ctaSecondary: { label: ‘Nos équipes’, url: ‘/a-propos’ },
+    description: "Expérimentés et diplômés du CQP Chef d'Équipe Chapiste, nos équipes ...",
+    ctaPrimary: { label: 'Demander un devis', url: '/devis' },
+    ctaSecondary: { label: 'Nos équipes', url: '/a-propos' },
     contentAlign: 'right',
   },
   {
