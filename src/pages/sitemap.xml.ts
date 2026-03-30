@@ -1,24 +1,30 @@
 import type { APIRoute } from 'astro';
-import { realisations } from '../data/realisations';
+import { getCollection } from 'astro:content';
 import { SITE_URL } from '../config';
 
 const BASE = SITE_URL;
 const today = new Date().toISOString().split('T')[0];
 
-const pages = [
+const staticPages = [
   { url: '/',              changefreq: 'weekly',  priority: '1.0' },
   { url: '/services/',     changefreq: 'monthly', priority: '0.8' },
   { url: '/realisations/', changefreq: 'monthly', priority: '0.7' },
   { url: '/a-propos/',     changefreq: 'monthly', priority: '0.6' },
   { url: '/contact/',      changefreq: 'monthly', priority: '0.8' },
-  ...realisations.map(r => ({
-    url: `/realisations/${r.slug}/`,
-    changefreq: 'monthly',
-    priority: '0.6',
-  })),
 ];
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
+  const realisations = await getCollection('realisations');
+
+  const pages = [
+    ...staticPages,
+    ...realisations.map(r => ({
+      url: `/realisations/${r.slug}/`,
+      changefreq: 'monthly',
+      priority: '0.6',
+    })),
+  ];
+
   const urls = pages
     .map(
       ({ url, changefreq, priority }) => `
